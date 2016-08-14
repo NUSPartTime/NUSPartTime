@@ -4,6 +4,26 @@ window.fbAsyncInit = function() {
         xfbml: true,
         version: 'v2.7'
     });
+
+    FB.getLoginStatus(function(response) {
+        if (response.status === 'connected') {
+            FB.api('/me', {
+                fields: 'name'
+            }, function(response) {
+                document.getElementById("welcome_message").innerHTML = "Welcome " + response.name;
+                console.log(response);
+            });
+        }
+    });
+
+    FB.Event.subscribe("auth.login", function(response){
+      location.reload();
+    });
+
+    FB.Event.subscribe("auth.logout", function(response){
+      location.reload();
+    });
+
 };
 
 (function(d, s, id) {
