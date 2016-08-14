@@ -11,17 +11,17 @@ window.fbAsyncInit = function() {
                 fields: 'name'
             }, function(response) {
                 document.getElementById("welcome_message").innerHTML = "Welcome " + response.name;
-                console.log(response);
             });
         }
     });
 
-    FB.Event.subscribe("auth.login", function(response){
-      location.reload();
+    FB.Event.subscribe("auth.login", function(response) {
+        window.location = window.location + '?id=' + FB.getAuthResponse().userID;
+
     });
 
-    FB.Event.subscribe("auth.logout", function(response){
-      location.reload();
+    FB.Event.subscribe("auth.logout", function(response) {
+        location.reload();
     });
 
 };
