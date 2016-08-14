@@ -1,9 +1,31 @@
 extends layout
 
 block content
+  script(type='text/javascript').
+    function check_fb_user() {
+      FB.getLoginStatus(function(response) {
+        if (response.status === 'connected') {
+          // the user is logged in and has authenticated your
+          // app, and response.authResponse supplies
+          // the user's ID, a valid access token, a signed
+          // request, and the time the access token 
+          // and signed request each expire
+          var uid = response.authResponse.userID;
+          var accessToken = response.authResponse.accessToken;
+          console.log(uid);
+        } else if (response.status === 'not_authorized') {
+          // the user is logged in to Facebook, 
+          // but has not authenticated your app
+          console.log("not authorized");
+        } else {
+          // the user isn't logged in to Facebook.
+          console.log("not logged in");
+        }
+       });
+    }
   h1= title
   p Welcome to #{title}
-  div(class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false")
+  div(class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="true" onlogin="check_fb_user()")
   br
   a(href= "company")  For Companies 
   br
