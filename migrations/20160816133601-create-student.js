@@ -6,7 +6,9 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.BIGINT
+        type: Sequelize.BIGINT,
+        references: 'Users',
+        referenceKey: 'id'
       },
       matric: {
         type: Sequelize.STRING

@@ -10,7 +10,9 @@ module.exports = {
       },
       companyId: {
         allowNull: false,
-        type: Sequelize.BIGINT
+        type: Sequelize.BIGINT,
+        references: 'Companies',
+        referenceKey: 'id'
       },
       title: {
         type: Sequelize.STRING
