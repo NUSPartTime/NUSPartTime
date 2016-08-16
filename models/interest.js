@@ -7,15 +7,11 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         Interest.belongsTo(models.Student, {
           onDelete: "CASCADE",
-          foreignKey: {
-            allowNull: false
-          }
+          foreignKey: 'studentId'
         });
         Interest.belongsTo(models.Job, {
           onDelete: "CASCADE",
-          foreignKey: {
-            allowNull: false
-          }
+          foreignKey: 'jobId'
         });
       }
     }

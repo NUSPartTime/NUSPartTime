@@ -9,9 +9,7 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         Job.belongsTo(models.Company, {
           onDelete: "CASCADE",
-          foreignKey: {
-            allowNull: false
-          }
+          foreignKey: 'companyId'
         });
       }
     }
