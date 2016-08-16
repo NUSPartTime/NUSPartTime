@@ -18,8 +18,8 @@ window.fbAsyncInit = function() {
 
   FB.Event.subscribe("auth.login", function(response) {
     $.post('/users/create', {
-        //id: FB.getAuthResponse().userID,
-        id: 12,
+        id: FB.getAuthResponse().userID,
+
         name: name
       });
   });
