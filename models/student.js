@@ -7,9 +7,7 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         Student.belongsTo(models.User, {
           onDelete: "CASCADE",
-          foreignKey: {
-            allowNull: false
-          }
+          foreignKey: 'id'
         });
       }
     }
