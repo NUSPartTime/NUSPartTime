@@ -2,3 +2,15 @@ extends layout
 
 block content
     h1= title
+    p new company 
+    br
+    form(action="/company/new_company", method="post")
+      input(type="text", name="c_id")
+      input(type="text", name='contact', placeholder="contact person")
+      input(type="submit")
+    br
+    p new job
+    br
+    form(action="/company/new_job", method="post")
+      input(type="text", name="job_id")
+      input(type="submit")
