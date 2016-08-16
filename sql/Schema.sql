@@ -13,7 +13,8 @@ CREATE TABLE Student (
 );
 
 CREATE TABLE Company (
-  id INTEGER PRIMARY KEY REFERENCES User(id)
+  id INTEGER PRIMARY KEY REFERENCES User(id),
+  contact_person VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Job (
