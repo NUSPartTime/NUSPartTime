@@ -1,6 +1,5 @@
 var models  = require('../models');
 var express = require('express');
-var FB = require("fb");
 var router = express.Router();
 
 

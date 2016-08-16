@@ -8,16 +8,19 @@ window.fbAsyncInit = function() {
   FB.getLoginStatus(function(response) {
     if (response.status === 'connected') {
       FB.api('/me', {
-        fields: 'name'
+        fields: ['name']
       }, function(response) {
+        name = response.name;
         document.getElementById("welcome_message").innerHTML = "Welcome " + response.name;
       });
     }
   });
 
   FB.Event.subscribe("auth.login", function(response) {
-    window.location = window.location + '?id=' + FB.getAuthResponse().userID;
-
+    $.post('/users/create', {
+        id: FB.getAuthResponse().userID,
+        name: name
+      });
   });
 
   FB.Event.subscribe("auth.logout", function(response) {
