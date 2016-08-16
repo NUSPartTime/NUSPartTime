@@ -10,11 +10,15 @@ module.exports = {
       },
       studentId: {
         allowNull: false,
-        type: Sequelize.BIGINT
+        type: Sequelize.BIGINT,
+        references: "Students",
+        referenceKey: 'id'
       },
       jobId: {
         allowNull: false,
-        type: Sequelize.BIGINT
+        type: Sequelize.INTEGER,
+        references: 'Jobs',
+        referenceKey: 'id'
       },
       status: {
         type: Sequelize.INTEGER
