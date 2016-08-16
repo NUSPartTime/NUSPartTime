@@ -1,18 +1,20 @@
 'use strict';
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    return queryInterface.createTable('Jobs', {
+    return queryInterface.createTable('Interests', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      title: {
-        type: Sequelize.STRING
+      studentId: {
+        allowNull: false,
+        type: Sequelize.BIGINT
       },
-      description: {
-        type: Sequelize.TEXT
+      jobId: {
+        allowNull: false,
+        type: Sequelize.BIGINT
       },
       status: {
         type: Sequelize.INTEGER
@@ -28,6 +30,6 @@ module.exports = {
     });
   },
   down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable('Jobs');
+    return queryInterface.dropTable('Interests');
   }
 };
