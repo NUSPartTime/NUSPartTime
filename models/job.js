@@ -8,7 +8,13 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        Job.belongsTo(models.Company, {
+          onDelete: "CASCADE",
+          onUpdate: "CASCADE",
+          foreignKey: {
+            allowNull: false
+          }
+        });
       }
     }
   });
