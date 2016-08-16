@@ -9,8 +9,6 @@ router.post('/create', function(req, res) {
       id: req.body.id
     }
   }).then(function(result){
-    console.log(result);
-
     if(result == null){
       models.User.create({
         id: req.body.id,
