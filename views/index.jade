@@ -1,13 +1,32 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  h3= status
-  div(class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="true")
-  br
-  p(id="welcome_message")
-  br
-  a(href= "company")  For Companies 
-  br
-  a(href= "student")  For Students
+
+  //- background image
+  div(class="background-container")
+    img(src="../images/background.jpg")
+  
+  //- header, include logo and login button
+  div(class="main-header-container")
+    div(class="logo")
+      img(src="../images/logo.png")
+    div(class="login-button" onclick="fb_login();")
+      img(src="../images/facebook.svg")
+      p Log in
+
+  //- content for students
+  div(class="student-button")
+    a(href="") Grab a Job!
+
+  div(class="recruiter-button")
+    a(href="") Post a Job!
+
+  //- p Welcome to #{title}
+  //- h3= status
+  //- div(class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="true")
+  //- br
+  //- p(id="welcome_message")
+  //- br
+  //- a(href= "company")  For Companies 
+  //- br
+  //- a(href= "student")  For Students
