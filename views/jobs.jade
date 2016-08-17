@@ -3,6 +3,11 @@ extends layout
 block content
   h1= title
 
+  //- div(class="sidebar") 
+    each category in categories
+      button
+        = category
+
   ul
   each job in jobs
     li
