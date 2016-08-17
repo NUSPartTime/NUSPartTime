@@ -4,10 +4,11 @@ var router = express.Router();
 
 /* GET student page. */
 router.get('/', function(req, res) {
-  models.Student.findAll().then(function(students) {
-    res.render('student', {
-      title: 'Student\'s page',
-      students: students
+  models.Job.findAll().then(function(jobs) {
+    //res.render('view name',{defining view attributes})
+    res.render('jobs', {
+      title: 'Jobs Avaiable',
+      jobs: jobs
     });
   });
 });

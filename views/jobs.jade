@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+
+  ul
+  each job in jobs
+    li
+      = job.title
+      | &nbsp;
+      | (
+      a(href="/jobs/" + job.id + "/details") Details
+      | )

@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1= title
+
+  ul
+  each job in jobs
+    li
+      = job.id
+      | &nbsp;
+      = job.title
+      | &nbsp;
+      = job.description
+      | &nbsp;
+      = job.status
+      | &nbsp;
+      = job.companyId
+      | &nbsp;
+      
