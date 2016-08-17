@@ -1,0 +1,35 @@
+extends layout
+
+block content
+  
+  //- header
+  include header.jade
+
+  div(class="container")
+    //- title need to be defined
+    //- can be edit/new
+    h2=title
+    
+    div(class="panel panel-default")
+      div(class="panel-heading")
+        h4 Job Details
+      div(class="panel-body")
+        form(action="", method="post")
+          div(class="form-group")
+            label Company ID
+            input(type="text", name="company_id", class="form-control")
+          
+          div(class="form-group")
+            label Job Title
+            input(type="text", name="title", class="form-control")
+
+          div(class="form-group")
+            label Status
+            input(type="text", name="status", class="form-control")
+
+          div(class="form-group")
+            label Description
+            textarea(name="description", class="form-control", rows="4")
+
+          button(type="submit" class="btn btn-primary") Create!
+
