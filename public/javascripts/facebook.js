@@ -11,6 +11,7 @@ window.fbAsyncInit = function() {
                 fields: 'name'
             }, function(response) {
                 document.getElementById("welcome_message").innerHTML = "Welcome " + response.name;
+                $(".login-button").text("Log out")
                 console.log(response);
             });
         }
@@ -26,14 +27,31 @@ window.fbAsyncInit = function() {
 
 };
 
+/**
+ * This function aims at allowing users to log in and log out
+ * This function will check user's login status first
+ */
 function fb_login() {
+
+    // checkt login status first
+    FB.getLoginStatus(function(response) {
+        console.log(response.status)
+        if (response.status === 'connected') {
+            FB.logout(function(response) {
+                console.log(response);
+            });
+        }
+    });
+
     FB.login(function(response) {
         if (response.authResponse) {
             
-            console.log('Welcome!  Fetching your information.... ');
+            // console.log('Welcome!  Fetching your information.... ');
 
             access_token = response.authResponse.accessToken; //get access token
             user_id = response.authResponse.userID; //get FB UID
+
+            $(".login-button p").text("Log out");
 
             FB.api('/me', function(response) {
                 user_email = response.email; //get user email

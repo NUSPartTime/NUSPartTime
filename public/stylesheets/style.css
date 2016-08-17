@@ -85,12 +85,13 @@ a {
 
 .recruiter-button {
   position: absolute;
-  top: 450px;
+  bottom: 450px;
   right: 100px;
   height: 50px;
   width: 150px;
   border: solid 2px;
   border-color: #353535;
+  opacity: .7;
 }
 
 .recruiter-button a {
@@ -142,6 +143,15 @@ a {
     right: 100px;
     top: 50px;
   }
+
+  /*for main page content*/
+  .student-button {
+    top: 450px;
+  }
+
+  .recruiter-button {
+    top: 550px;
+  }
 }
 
 @media (min-width: 1440px) {
@@ -159,6 +169,15 @@ a {
   .main-header-container .login-button {
     right: 100px;
     top: 70px;
+  }
+
+  /*for main page content*/
+  .student-button {
+    top: 600px;
+  }
+
+  .recruiter-button {
+    top: 75vh;
   }
 }
 
