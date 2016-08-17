@@ -1,14 +1,15 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var Company = sequelize.define('Company', {
-    contact_person: DataTypes.STRING
+    name: DataTypes.STRING,
+    address: DataTypes.STRING,
+    email: DataTypes.STRING,
+    description: DataTypes.TEXT,
+    registerDate: DataTypes.DATE
   }, {
     classMethods: {
       associate: function(models) {
-        Company.belongsTo(models.User, {
-          onDelete: "CASCADE",
-          foreignKey: 'id'
-        });
+        
       }
     }
   });

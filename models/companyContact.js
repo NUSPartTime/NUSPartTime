@@ -1,22 +1,22 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var Interest = sequelize.define('Interest', {
-    status: DataTypes.INTEGER
+  var CompanyContact = sequelize.define('CompanyContact', {
+
   }, {
     classMethods: {
       associate: function(models) {
-        Interest.belongsTo(models.Student, {
+        CompanyContact.belongsTo(models.Employer, {
           onDelete: "CASCADE",
           onUpdate: "CASCADE",
-          foreignKey: 'studentId'
+          foreignKey: 'employerId'
         });
-        Interest.belongsTo(models.Job, {
+        CompanyContact.belongsTo(models.Company, {
           onDelete: "CASCADE",
           onUpdate: "CASCADE",
-          foreignKey: 'jobId'
+          foreignKey: 'companyId'
         });
       }
     }
   });
-  return Interest;
+  return CompanyContact;
 };

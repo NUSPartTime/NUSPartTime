@@ -4,17 +4,40 @@ CREATE TABLE User (
   address VARCHAR(255),
   phone VARCHAR(255),
   email VARCHAR(255),
-  description TEXT
+  description TEXT,
+  registerDate DATE
 );
 
 CREATE TABLE Student (
-  id INTEGER PRIMARY KEY REFERENCES User(id),
+  id INTEGER PRIMARY KEY REFERENCES User(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   matric VARCHAR(255) NOT NULL
 );
 
+CREATE TABLE Employer (
+  id INTEGER PRIMARY KEY REFERENCES User(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
 CREATE TABLE Company (
-  id INTEGER PRIMARY KEY REFERENCES User(id),
-  contact_person VARCHAR(255) NOT NULL
+  id INTEGER PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  address VARCHAR(255),
+  email VARCHAR(255),
+  description TEXT,
+  registerDate DATE
+);
+
+CREATE TABLE CompanyContact (
+  id INTEGER PRIMARY KEY,
+  company_id INTEGER REFERENCES Company(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  employer_id INTEGER REFERENCES Employer(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 );
 
 CREATE TABLE Job (
@@ -22,7 +45,10 @@ CREATE TABLE Job (
   company_id INTEGER,
   title VARCHAR(255) ,
   description TEXT,
-  status		int,
+  status INTEGER,
+  salary INTEGER,
+  applicationDeadline DATE,
+  deadline DATE,
   FOREIGN KEY (company_id) REFERENCES Company(id)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE
@@ -33,6 +59,10 @@ CREATE TABLE Interest (
   student_id INTEGER,
   job_id INTEGER,
   status INTEGER,
-  FOREIGN KEY (student_id) REFERENCES Student(id) on DELETE CASCADE,
-  FOREIGN KEY (student_id) REFERENCES Job(id) on DELETE CASCADE
+  FOREIGN KEY (student_id) REFERENCES Student(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  FOREIGN KEY (job_id) REFERENCES Job(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 );
