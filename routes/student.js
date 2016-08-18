@@ -4,12 +4,19 @@ var router = express.Router();
 
 /* GET student page. */
 router.get('/', function(req, res) {
-  models.Job.findAll().then(function(jobs) {
-    //res.render('view name',{defining view attributes})
-    res.render('jobs', {
-      title: 'Jobs Avaiable',
-      categories: ['front-end', 'back-end'],
-      jobs: jobs
+  // models.sequelize.Promise.all([
+  //   models.Category.findAll(),
+  //   models.MenuItems.Job.findAll()
+  // ]).speard(function(categories, jobs) {
+  // });
+  
+  models.Category.findAll().then(function(all_cats) {
+    models.Job.findAll().then(function(all_jobs) {
+      res.render('jobs', {
+        title: 'Jobs Avaiable',
+        categories: all_cats,
+        jobs: all_jobs
+      });
     });
   });
 });

@@ -1,18 +1,20 @@
 extends layout
 
 block content
-  h1= title
+  
+  div(id="job_content")
+    h1= title
 
-  div(class="sidebar") 
-    each category in categories
-      button
-        = category
+    div(class="sidebar") 
+      each category in categories
+        button
+          = category.name
 
-  ul
-  each job in jobs
-    li
-      = job.title
-      | &nbsp;
-      | (
-      a(href="/jobs/" + job.id + "/details") Details
-      | )
+    ul
+    each job in jobs
+      li
+        = job.title
+        | &nbsp;
+        | (
+        a(href="/jobs/" + job.id + "/details") Details
+        | )

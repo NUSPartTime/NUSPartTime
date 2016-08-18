@@ -6,3 +6,16 @@ body {
 a {
   color: #00B7FF;
 }
+
+.sidebar {
+	position: absolute;
+    top: 0; 
+    bottom: 0; 
+    left: 0;
+    width: 200px;
+    background: #000;
+}
+
+#job_content {
+	margin-left: 200px;
+}
