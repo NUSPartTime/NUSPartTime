@@ -4,7 +4,9 @@ var router = express.Router();
 
 /* GET student page. */
 router.get('/', function(req, res) {
-  models.Job.findAll().then(
+  models.Job.findAll({
+    include: [ models.JobCategory ]
+  }).then(
     function(jobs) {
       models.Category.findAll().then(
         function(categories) {

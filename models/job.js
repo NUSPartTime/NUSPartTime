@@ -15,6 +15,7 @@ module.exports = function(sequelize, DataTypes) {
           onUpdate: "CASCADE",
           foreignKey: 'companyId'
         });
+        Job.hasMany(models.JobCategory);
       }
     }
   });
