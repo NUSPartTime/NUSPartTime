@@ -10,7 +10,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       employer_id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.BIGINT,
         references: 'Employers',
         referenceKey: 'id'
       },

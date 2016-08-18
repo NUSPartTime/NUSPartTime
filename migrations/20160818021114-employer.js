@@ -4,7 +4,9 @@ module.exports = {
   up: function (queryInterface, Sequelize) {
     return queryInterface.createTable('Employers', {
       id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.BIGINT,
+        primaryKey: true,
+        allowNull: false,
         references: 'Users',
         referenceKey: 'id'
       },
