@@ -8,7 +8,7 @@ router.get('/', function(req, res) {
     //res.render('view name',{defining view attributes})
     res.render('jobs', {
       title: 'Jobs Avaiable',
-      // categories: ['front-end', 'back-end'],
+      categories: ['front-end', 'back-end'],
       jobs: jobs
     });
   });
