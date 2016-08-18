@@ -2,13 +2,11 @@
 
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    return queryInterface.createTable('Student', {
+    return queryInterface.createTable('Students', {
       id: {
         type: Sequelize.INTEGER,
-        references: { 
-          model: 'User', 
-          key: 'id' 
-        }
+        references: 'Users',
+        referenceKey: 'id'
       },
       matric: {
         type: Sequelize.STRING
@@ -24,6 +22,6 @@ module.exports = {
     });
   },
   down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable('Student');
+    return queryInterface.dropTable('Students');
   }
 };
