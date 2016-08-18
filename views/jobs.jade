@@ -1,8 +1,7 @@
 extends layout
 
 block content
-  div(class="header")
-    div(class="logo") NUS PARTIME
+  include ./includes/student-view-head.jade
 
   ul(class="list-group side-bar") 
       each category in categories
@@ -17,7 +16,4 @@ block content
         div(class="list-group-item")
           h4(class="list-group-item-heading")
             = job.title
-              | &nbsp;
-              | (
-              a(href="/jobs/" + job.id + "/details") Details
-              | )
+          a(href="/jobs/" + job.id + "/details") Details

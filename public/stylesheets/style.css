@@ -8,19 +8,19 @@ a {
 }
 
 .header {
-  margin: 0px 50px;
   width: 100%;
   height: 50px;
   z-index: 99;
 }
 
 .side-bar {
-  margin-top: 100px;
-  margin-left: -250px;
+  margin-top: 40px;
+  /*margin-left: -250px;*/
+  /*left: 250px;*/
+  /*position: fixed;*/
+  float: left;
   padding-top: 50px;
   z-index: 1000;
-  position: fixed;
-  left: 250px;
   width: 200px;
   height: 100%;
   overflow-y: auto;
@@ -30,7 +30,9 @@ a {
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
-
+.side-bar > button {
+  border: 0;
+}
 .side-bar > .list-group-item {
   width: 180px;
 }
@@ -40,7 +42,8 @@ button:focus {
 }
 
 #job-content {
-	margin-left: 200px;
+  margin-right: 100px;
+	margin-left: 300px;
 }
 
 .list-group-item {
