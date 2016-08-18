@@ -1,20 +1,23 @@
 extends layout
 
 block content
-  
-  div(id="job_content")
-    h1= title
+  div(class="header")
+    div(class="logo") NUS PARTIME
 
-    div(class="sidebar") 
+  ul(class="list-group side-bar") 
       each category in categories
-        button
+        button(type="button" class="list-group-item")
           = category.name
+  
+  div(id="job-content")
+    h1(class="page-header")= title
 
-    ul
-    each job in jobs
-      li
-        = job.title
-        | &nbsp;
-        | (
-        a(href="/jobs/" + job.id + "/details") Details
-        | )
+    div(class="list-group")
+      each job in jobs
+        div(class="list-group-item")
+          h4(class="list-group-item-heading")
+            = job.title
+              | &nbsp;
+              | (
+              a(href="/jobs/" + job.id + "/details") Details
+              | )

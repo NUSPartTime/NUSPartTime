@@ -7,15 +7,42 @@ a {
   color: #00B7FF;
 }
 
-.sidebar {
-	position: absolute;
-    top: 0; 
-    bottom: 0; 
-    left: 0;
-    width: 200px;
-    background: #000;
+.header {
+  margin: 0px 50px;
+  width: 100%;
+  height: 50px;
+  z-index: 99;
 }
 
-#job_content {
+.side-bar {
+  margin-top: 100px;
+  margin-left: -250px;
+  padding-top: 50px;
+  z-index: 1000;
+  position: fixed;
+  left: 250px;
+  width: 200px;
+  height: 100%;
+  overflow-y: auto;
+  background: #FFF;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.side-bar > .list-group-item {
+  width: 180px;
+}
+
+button:focus {
+  outline-color: #ddd !important;
+}
+
+#job-content {
 	margin-left: 200px;
+}
+
+.list-group-item {
+  margin: 20px;
 }
