@@ -9,7 +9,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      company_id: {
+      companyId: {
         type: Sequelize.INTEGER,
         references: 'Companies',
         referenceKey: 'id'
@@ -26,7 +26,7 @@ module.exports = {
       description: {
         type: Sequelize.TEXT
       },
-      appicationDeadline: {
+      applicationDeadline: {
         type: Sequelize.DATE
       },
       deadline: {

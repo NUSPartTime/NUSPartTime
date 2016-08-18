@@ -9,12 +9,12 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      student_id: {
+      studentId: {
         type: Sequelize.BIGINT,
         references: 'Students',
         referenceKey: 'id'
       },
-      job_id: {
+      jobId: {
         type: Sequelize.INTEGER,
         references: 'Jobs',
         referenceKey: 'id'
