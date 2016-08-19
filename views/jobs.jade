@@ -3,17 +3,23 @@ extends layout
 block content
   include ./includes/student-view-head.jade
 
+  script.
+    var toggle_job_content = function(job_blk_id) {
+      console.log(job_blk_id);
+    }
+
   ul(class="list-group side-bar") 
-      each category in categories
-        button(type="button" class="list-group-item")
-          = category.name
+      each cat_job in cat_job_array
+        button(type="button" class="list-group-item" onclick='toggle_job_content("#{cat_job.category}")') Click
+          = cat_job.category
   
   div(id="job-content")
     h1(class="page-header")= title
 
     div(class="list-group")
-      each job in jobs
-        div(class="list-group-item")
-          h4(class="list-group-item-heading")
-            = job.title
-          a(href="/jobs/" + job.id + "/details") Details
+      each cat_job in cat_job_array
+        each job in cat_job.jobs
+          div(class="list-group-item")
+            h4(class="list-group-item-heading")
+              = job.title
+            a(href="/jobs/" + job.id + "/details") Details
