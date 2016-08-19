@@ -2,8 +2,11 @@
 module.exports = function(sequelize, DataTypes) {
   var Job = sequelize.define('Job', {
     title: DataTypes.STRING,
+    salary: DataTypes.INTEGER,
     description: DataTypes.TEXT,
-    status: DataTypes.INTEGER
+    status: DataTypes.INTEGER,
+    applicationDeadline: DataTypes.DATE,
+    deadline: DataTypes.DATE
   }, {
     classMethods: {
       associate: function(models) {
@@ -12,6 +15,7 @@ module.exports = function(sequelize, DataTypes) {
           onUpdate: "CASCADE",
           foreignKey: 'companyId'
         });
+        Job.hasMany(models.JobCategory);
       }
     }
   });

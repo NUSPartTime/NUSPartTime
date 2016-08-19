@@ -7,6 +7,7 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         Student.belongsTo(models.User, {
           onDelete: "CASCADE",
+          onUpdate: "CASCADE",
           foreignKey: 'id'
         });
       }

@@ -1,5 +1,7 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 0;
+  margin: 0;
 }
 
 a {
@@ -13,4 +15,219 @@ a {
 
 .navbar-brand img {
   height: 30px;
+}
+
+/* for background image */
+.background-container {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  z-index: -1;
+}
+
+
+.header {
+  width: 100%;
+  height: 50px;
+  z-index: 99;
+}
+
+/* for main page header */
+.main-header-container {
+  position: absolute;
+  width: 100%
+}
+
+.main-header-container .logo {
+  position: absolute;
+  height: 100px;
+  width: 500px;
+  padding: 30px 0px 0px 50px;
+}
+
+.main-header-container .logo img {
+  height: 100%;
+}
+
+.main-header-container .login-button {
+  position: absolute;
+  display: inline-flex;
+  height: 40px;
+  width: 150px;
+  border-radius: 20px;
+  border: solid 1px;
+  border-color: #fff;
+  background-color: #353535;
+  opacity: .7;
+}
+
+.main-header-container .login-button:hover {
+  opacity: 1;
+}
+
+.main-header-container .login-button img {
+  height: 36px;
+  padding: 2px 0px 0px 20px;
+}
+
+.main-header-container .login-button p {
+  font-size: 14px;
+  margin-top: 11px;
+  padding-left: 20px;
+  color: #fff;
+}
+.side-bar {
+  margin-top: 40px;
+  /*margin-left: -250px;*/
+  /*left: 250px;*/
+  /*position: fixed;*/
+  float: left;
+  padding-top: 50px;
+  z-index: 1000;
+  width: 200px;
+  height: 100%;
+  overflow-y: auto;
+  background: #FFF;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+.side-bar > button {
+  border: 0;
+}
+.side-bar > .list-group-item {
+  width: 180px;
+}
+
+button:focus {
+  outline-color: #ddd !important;
+}
+
+#job-content {
+  margin-right: 100px;
+  margin-left: 300px;
+}
+
+.list-group-item {
+  margin: 20px;
+}
+
+/*for main page content*/
+.student-button {
+  position: absolute;
+  top: 400px;
+  left: 9%;
+  height: 50px;
+  width: 150px;
+  border: solid 2px;
+  border-color: #fff;
+}
+
+.student-button a {
+  position: relative;
+  left: 15px;
+  top: 15px;
+  color: #fff;
+  font-family: Consolas;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.recruiter-button {
+  position: absolute;
+  bottom: 450px;
+  right: 100px;
+  height: 50px;
+  width: 150px;
+  border: solid 2px;
+  border-color: #353535;
+  opacity: .7;
+}
+
+.recruiter-button a {
+  position: relative;
+  left: 15px;
+  top: 15px;
+  color: #353535;
+  font-family: Consolas;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+/*for responsive design*/
+@media (min-width: 768px) {
+
+  /*background image*/
+  .background-container img {
+    width: 100%;
+  }
+
+  /*header*/
+  .main-header-container {
+    height: 100px;
+  }
+
+  .main-header-container .logo {
+    height: 80px;
+    padding: 20px 0px 0px 40px;
+  }
+
+  .main-header-container .login-button {
+    right: 50px;
+    top: 25px;
+  }
+}
+
+@media (min-width: 1024px) {
+  /*header*/
+  .main-header-container {
+    height: 130px;
+  }
+
+  .main-header-container .logo {
+    height: 100px;
+    padding: 30px 0px 0px 50px;
+  }
+
+  .main-header-container .login-button {
+    right: 100px;
+    top: 50px;
+  }
+
+  /*for main page content*/
+  .student-button {
+    top: 450px;
+  }
+
+  .recruiter-button {
+    top: 550px;
+  }
+}
+
+@media (min-width: 1440px) {
+
+  /*header*/
+  .main-header-container {
+    height: 170px;
+  }
+
+  .main-header-container .logo {
+    height: 130px;
+    padding: 40px 0px 0px 70px;
+  }
+
+  .main-header-container .login-button {
+    right: 100px;
+    top: 70px;
+  }
+
+  /*for main page content*/
+  .student-button {
+    top: 600px;
+  }
+
+  .recruiter-button {
+    top: 75vh;
+  }
 }
