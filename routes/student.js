@@ -9,19 +9,23 @@ router.get('/', function(req, res) {
     models.Job.findAll({
       include: [models.JobCategory]
     })
-  ]).spread(function(categories, jobs) {
+  ]).spread(function(all_categories, all_jobs) {
     var cat_job_array = [];
-    for (var category of categories) {
-      var tmp_jobs = [];
-      for (var job of jobs) {
+    for (var category of all_categories) {
+      var jobs = [];
+      for (var job of all_jobs) {
         if (job.JobCategories[0].categoryId == category.id) {
-          tmp_jobs.push(job);
+          jobs.push(job);
         }
       }
-      cat_job_array.push({category: category.name, jobs: tmp_jobs});
+      cat_job_array.push({
+        category: category.name,
+        category_html_class: category.name.replace(/ /g, ""),
+        jobs: jobs
+      });
     }
     console.log(cat_job_array);
-    
+
     res.render('jobs', {
       title: 'Jobs Avaiable',
       cat_job_array: cat_job_array

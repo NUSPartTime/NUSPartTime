@@ -30,8 +30,8 @@ insert into CompanyContacts values
 
 insert into Jobs values
 -- id, company_id, title, description, status, salary, applicationDeadline, deadline
-(1, "Front-end developer", 100, "GLHF", 1, "2016-09-18", "2016-11-18", "2016-08-18", "2016-08-18", 1),
-(2, "Backe-end developer", 200, "GLHF :)", 1, "2016-10-18", "2016-12-18", "2016-08-18", "2016-08-18", 1)
+(1, "Front-end AngularJS developer", 100, "GLHF", 1, "2016-09-18", "2016-11-18", "2016-08-18", "2016-08-18", 1),
+(2, "Back-end JavaEE developer", 200, "GLHF :)", 1, "2016-10-18", "2016-12-18", "2016-08-18", "2016-08-18", 1)
 ;
 
 insert into StudentJobs values
@@ -43,7 +43,7 @@ insert into StudentJobs values
 insert into Categories values
 -- id, name
 (1, "Front-end developer", "2016-08-18", "2016-08-18"),
-(2, "Backe-end developer", "2016-08-18", "2016-08-18")
+(2, "Back-end developer", "2016-08-18", "2016-08-18")
 ;
 
 insert into JobCategories values
