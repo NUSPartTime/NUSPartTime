@@ -3,19 +3,12 @@ extends layout
 block content
   include ./includes/student-view-head.jade
   
-  h1= title
+  div(class="container")
+    h1(class="page-header")= title
 
-  ul
-  each job in jobs
-    li
-      = job.id
-      | &nbsp;
-      = job.title
-      | &nbsp;
-      = job.description
-      | &nbsp;
-      = job.status
-      | &nbsp;
-      = job.companyId
-      | &nbsp;
-      
+    ul
+    each job in jobs
+      p= job.title
+      div
+        p
+          = job.description
