@@ -8,7 +8,15 @@ a {
   color: #00B7FF;
 }
 
-<<<<<<< HEAD
+/*for header*/
+.navbar-header a {
+  padding-top: 10px;
+}
+
+.navbar-brand img {
+  height: 30px;
+}
+
 /* for background image */
 .background-container {
   position: absolute;
