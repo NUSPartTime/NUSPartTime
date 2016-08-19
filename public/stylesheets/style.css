@@ -8,6 +8,7 @@ a {
   color: #00B7FF;
 }
 
+<<<<<<< HEAD
 /* for background image */
 .background-container {
   position: absolute;
@@ -16,6 +17,12 @@ a {
   z-index: -1;
 }
 
+
+.header {
+  width: 100%;
+  height: 50px;
+  z-index: 99;
+}
 
 /* for main page header */
 .main-header-container {
@@ -60,6 +67,42 @@ a {
   margin-top: 11px;
   padding-left: 20px;
   color: #fff;
+}
+.side-bar {
+  margin-top: 40px;
+  /*margin-left: -250px;*/
+  /*left: 250px;*/
+  /*position: fixed;*/
+  float: left;
+  padding-top: 50px;
+  z-index: 1000;
+  width: 200px;
+  height: 100%;
+  overflow-y: auto;
+  background: #FFF;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+.side-bar > button {
+  border: 0;
+}
+.side-bar > .list-group-item {
+  width: 180px;
+}
+
+button:focus {
+  outline-color: #ddd !important;
+}
+
+#job-content {
+  margin-right: 100px;
+  margin-left: 300px;
+}
+
+.list-group-item {
+  margin: 20px;
 }
 
 /*for main page content*/
@@ -180,4 +223,3 @@ a {
     top: 75vh;
   }
 }
-

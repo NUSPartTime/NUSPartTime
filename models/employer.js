@@ -1,11 +1,11 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var Student = sequelize.define('Student', {
-    matric: DataTypes.STRING
+  var Employer = sequelize.define('Employer', {
+
   }, {
     classMethods: {
       associate: function(models) {
-        Student.belongsTo(models.User, {
+        Employer.belongsTo(models.User, {
           onDelete: "CASCADE",
           onUpdate: "CASCADE",
           foreignKey: 'id'
@@ -13,5 +13,5 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-  return Student;
+  return Employer;
 };

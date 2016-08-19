@@ -4,11 +4,24 @@ var router = express.Router();
 
 /* POST user creation. */
 router.post('/create', function(req, res) {
-  models.User.create({
-    username: req.body.username
-  }).then(function() {
-    res.redirect('/');
+  models.User.findOne({
+    where: {
+      id: req.body.id
+    }
+  }).then(function(result){
+    if(result == null){
+      models.User.create({
+        id: req.body.id,
+        name: req.body.name
+      }).then(function() {
+        res.redirect('/');
+      });
+    }
   });
+
+
+
+
 });
 
 /* GET user destroyed. */
