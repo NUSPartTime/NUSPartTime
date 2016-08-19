@@ -4,16 +4,20 @@ var router = express.Router();
 
 /* GET student page. */
 router.get('/', function(req, res) {
-  models.sequelize.Promise.all([
-    models.Category.findAll(),
-    models.Job.findAll()
-  ]).spread(function(categories, jobs) {
-    res.render('jobs', {
-        title: 'Jobs Avaiable',
-        categories: categories,
-        jobs: jobs
+  models.Job.findAll({
+    include: [ models.JobCategory ]
+  }).then(
+    function(jobs) {
+      models.Category.findAll().then(
+        function(categories) {
+          res.render('jobs', {
+            title: 'Jobs Avaiable',
+            categories: categories,
+            jobs: jobs
+          });
       });
-  });
+    }
+  );
 });
 
 /* POST student creation */

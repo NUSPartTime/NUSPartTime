@@ -2,26 +2,22 @@
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
-    return queryInterface.createTable('CompanyContact', {
+    return queryInterface.createTable('CompanyContacts', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      employer_id: {
-        type: Sequelize.INTEGER,
-        references: { 
-          model: 'Employer', 
-          key: 'id' 
-        }
+      employerId: {
+        type: Sequelize.BIGINT,
+        references: 'Employers',
+        referenceKey: 'id'
       },
-      company_id: {
+      companyId: {
         type: Sequelize.INTEGER,
-        references: { 
-          model: 'Company', 
-          key: 'id' 
-        }
+        references: 'Companies',
+        referenceKey: 'id'
       },
       createdAt: {
         allowNull: false,
@@ -35,6 +31,6 @@ module.exports = {
   },
 
   down: function (queryInterface, Sequelize) {
-    return queryInterface.dropTable('CompanyContact');
+    return queryInterface.dropTable('CompanyContacts');
   }
 };

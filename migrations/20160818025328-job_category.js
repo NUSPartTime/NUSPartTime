@@ -2,26 +2,22 @@
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
-    return queryInterface.createTable('JobCategory', {
+    return queryInterface.createTable('JobCategories', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      job_id: {
+      jobId: {
         type: Sequelize.INTEGER,
-        references: { 
-          model: 'Job', 
-          key: 'id' 
-        }
+        references: 'Jobs',
+        referenceKey: 'id'
       },
-      category_id: {
+      categoryId: {
         type: Sequelize.INTEGER,
-        references: { 
-          model: 'Category', 
-          key: 'id' 
-        }
+        references: 'Categories',
+        referenceKey: 'id'
       },
       createdAt: {
         allowNull: false,
@@ -35,6 +31,6 @@ module.exports = {
   },
 
   down: function (queryInterface, Sequelize) {
-    return queryInterface.dropTable('JobCategory');
+    return queryInterface.dropTable('JobCategories');
   }
 };

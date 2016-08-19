@@ -2,19 +2,17 @@
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
-    return queryInterface.createTable('Job', {
+    return queryInterface.createTable('Jobs', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      company_id: {
+      companyId: {
         type: Sequelize.INTEGER,
-        references: { 
-          model: 'Company', 
-          key: 'id' 
-        }
+        references: 'Companies',
+        referenceKey: 'id'
       },
       title: {
         type: Sequelize.STRING
@@ -28,7 +26,7 @@ module.exports = {
       description: {
         type: Sequelize.TEXT
       },
-      appicationDeadline: {
+      applicationDeadline: {
         type: Sequelize.DATE
       },
       deadline: {
@@ -46,6 +44,6 @@ module.exports = {
   },
 
   down: function (queryInterface, Sequelize) {
-    return queryInterface.dropTable('Job');
+    return queryInterface.dropTable('Jobs');
   }
 };
