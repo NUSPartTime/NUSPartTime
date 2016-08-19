@@ -24,20 +24,20 @@ insert into Companies values
 ;
 
 insert into CompanyContacts values
--- id, company_id, employer_id
-(1, "2016-08-18", "2016-08-18", 2, 1)
+-- id, employer_id, company_id
+(1, 2, 1, "2016-08-18", "2016-08-18")
 ;
 
 insert into Jobs values
 -- id, company_id, title, description, status, salary, applicationDeadline, deadline
-(1, "Front-end AngularJS developer", 100, "GLHF", 1, "2016-09-18", "2016-11-18", "2016-08-18", "2016-08-18", 1),
-(2, "Back-end JavaEE developer", 200, "GLHF :)", 1, "2016-10-18", "2016-12-18", "2016-08-18", "2016-08-18", 1)
+(1, 1, "Front-end AngularJS developer", 1, 100, "GLHF", "2016-09-18", "2016-11-18", "2016-08-18", "2016-08-18"),
+(2, 1, "Back-end JavaEE developer", 1, 200, "GLHF :)", "2016-10-18", "2016-12-18", "2016-08-18", "2016-08-18")
 ;
 
 insert into StudentJobs values
 -- id, student_id, job_id, status
-(1, 1, "2016-08-18", "2016-08-18", 4, 1),
-(2, 0, "2016-08-18", "2016-08-18", 1, 1)
+(1, 4, 1, 1, "2016-08-18", "2016-08-18"),
+(2, 1, 2, 0, "2016-08-18", "2016-08-18")
 ;
 
 insert into Categories values
@@ -47,7 +47,7 @@ insert into Categories values
 ;
 
 insert into JobCategories values
--- id, name
-(1, "2016-08-18", "2016-08-18", 1, 1),
-(2, "2016-08-18", "2016-08-18", 2, 2)
+-- id, jobId, categoryId, name
+(1, 1, 1, "2016-08-18", "2016-08-18"),
+(2, 2, 2, "2016-08-18", "2016-08-18")
 ;
