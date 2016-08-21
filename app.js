@@ -8,7 +8,7 @@ var _ = require("underscore");
 var sequelize = require("sequelize");
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var studentDetail = require('./routes/studentDetail');
 var student = require('./routes/student');
 var company = require('./routes/company');
 var jobs = require('./routes/jobs');
@@ -28,7 +28,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/studentDetail', studentDetail);
 app.use('/company', company);
 app.use('/student', student);
 app.use('/jobs', jobs);
