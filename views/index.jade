@@ -5,15 +5,23 @@ block content
     var student_registration = function(user_id) {
       console.log("creating student!");
       console.log(user_id);
-      //- $.post('/userManagement/create_student', {
-      //-   id: user_id
-      //- });
+      $.post('/userManagement/create_student', {
+        id: user_id
+      }).done(function (data, textStatus) {
+        if (typeof data.redirect == 'string') {
+          window.location = data.redirect;
+        }
+      });
     };
     var company_registration = function(user_id) {
       console.log("creating company!");
-      //- $.post('/userManagement/create_company', {
-      //-   id: user_id
-      //- });
+      $.post('/userManagement/create_company', {
+        id: user_id
+      }).done(function (data, textStatus) {
+        if (typeof data.redirect == 'string') {
+          window.location = data.redirect;
+        }
+      });
     };
 
   //- background image
