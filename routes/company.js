@@ -8,15 +8,10 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/new_company', function(req, res){
-  models.User.create({
-    id: req.body.c_id,
-
-  });
-
   models.Company.create({
-    id: req.body.c_id,
-    contact_person: req.body.contact,
-    UserId: req.body.c_id
+    name: req.body.name,
+    phone: req.body.contact,
+    email: req.body.email
   }).then(function(){
     res.redirect('/company');
   });
