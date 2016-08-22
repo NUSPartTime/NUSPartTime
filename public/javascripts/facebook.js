@@ -19,9 +19,11 @@ function fb_toggle() {
     if (response.status === 'connected') {
       FB.logout(function(response) {
         console.log("logged out from FB");
-
-        $.post('/userManagement/logout', {}).done(function() {
-          location.reload();
+        
+        $.post('/userManagement/logout', {}).done(function (data, textStatus) {
+          if (typeof data.redirect == 'string') {
+            window.location = data.redirect;
+          }
         });
       });
     } else {
@@ -29,18 +31,17 @@ function fb_toggle() {
         if (response.authResponse) {
           console.log("logged in from FB");
 
-          access_token = response.authResponse.accessToken; //get access token
-          user_id = response.authResponse.userID; //get FB UID
+          // access_token = response.authResponse.accessToken; //get access token
+          // user_id = response.authResponse.userID; //get FB UID
           
-          FB.api('/me', function(response) {
-            console.log(response);
-            $.post('/userManagement/create_user', {
-              id: response.id,
-              name: response.name
-            }).done(function() {
-              location.reload();
-            });             
-          });
+          $.post('/userManagement/create_user', {
+            id: FB.getAuthResponse().userID,
+            name: FB.getAuthResponse().name
+          }).done(function (data, textStatus) {
+            if (typeof data.redirect == 'string') {
+              window.location = data.redirect;
+            }
+          });    
         } else {
           //user hit cancel button
           console.log('User cancelled login or did not fully authorize.');

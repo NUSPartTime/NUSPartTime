@@ -30,7 +30,6 @@ router.post('/create_user', function(req, res) {
       }).then(function() {
         console.log("user created successfully");
         req.session.user_id = user_id;
-        res.redirect('/');
       });
     } else {
       console.log("user logged in!");
@@ -43,7 +42,7 @@ router.post('/create_user', function(req, res) {
         if (employer != null) {
           req.session.is_employer = true;
         }
-        res.redirect('/student');
+        res.send({redirect: '/student'});
       } else if (employer != null) {
         // direct to company page
         req.session.user_id = user_id;
@@ -54,7 +53,7 @@ router.post('/create_user', function(req, res) {
       } else {
         // user has not register as student or emplyer
         req.session.user_id = user_id;
-        res.redirect('/');
+        res.send({redirect: '/'});
       }
     }
   });
@@ -66,19 +65,22 @@ router.post('/logout', function(req, res) {
     if(err) {
       console.log(err);
     } else {
-      console.log("session key destroyed, now redirect to index page");
-      res.redirect('/');
+      console.log("session key destroyed");
     }
   });
 });
 
 router.post('/create_student', function(req, res) {
   console.log("Creating student with id : " + req.body.id);
-  res.redirect('/student');
+  res.send({redirect: '/student'});
 });
 
 router.post('/create_company', function(req, res) {
-  res.redirect('/company');
+  console.log("Creating company");
+  /*
+    Stub
+  */
+  res.send({redirect: '/company'});
 });
 
 /* GET user destroyed. */
