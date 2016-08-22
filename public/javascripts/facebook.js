@@ -19,7 +19,7 @@ window.fbAsyncInit = function() {
 
   FB.Event.subscribe("auth.login", function(response) {
     console.log("fb login");
-    $.post('/userCreation/create', {
+    $.post('/userManagement/create_user', {
       id: FB.getAuthResponse().userID,
       name: FB.getAuthResponse().name
     });
@@ -27,7 +27,8 @@ window.fbAsyncInit = function() {
 
   FB.Event.subscribe("auth.logout", function(response) {
     console.log("fb logout");
-    location.reload();
+    $.post('/userManagement/logout', {});
+    // location.reload();
   });
 
 };
@@ -36,36 +37,37 @@ window.fbAsyncInit = function() {
  * This function aims at allowing users to log in and log out
  * This function will check user's login status first
  */
-function fb_login() {
-    // checkt login status first
-    FB.getLoginStatus(function(response) {
+function fb_toggle() {
+  // checkt login status first
+  FB.getLoginStatus(function(response) {
+    console.log(response);
+    if (response.status === 'connected') {
+      FB.logout(function(response) {
+        $(".login-button p").text("Log in");
         console.log(response);
-        if (response.status === 'connected') {
-            FB.logout(function(response) {
-                console.log(response);
-            });
-        }
-    });
-
-    FB.login(function(response) {
+      });
+    } else {
+      FB.login(function(response) {
         if (response.authResponse) {
-            // console.log('Welcome!  Fetching your information.... ');
-            access_token = response.authResponse.accessToken; //get access token
-            user_id = response.authResponse.userID; //get FB UID
+          // console.log('Welcome!  Fetching your information.... ');
+          access_token = response.authResponse.accessToken; //get access token
+          user_id = response.authResponse.userID; //get FB UID
 
-            $(".login-button p").text("Log out");
+          $(".login-button p").text("Log out");
 
-            FB.api('/me', function(response) {
-                user_email = response.email; //get user email
-                // you can store this data into your database             
-            });
+          FB.api('/me', function(response) {
+            user_email = response.email; //get user email
+            // you can store this data into your database             
+          });
         } else {
-            //user hit cancel button
-            console.log('User cancelled login or did not fully authorize.');
+          //user hit cancel button
+          console.log('User cancelled login or did not fully authorize.');
         }
-    }, {
+      }, {
         scope: 'public_profile, email'
-    });
+      });
+    }
+  });
 }
 
 (function(d, s, id) {

@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 
 /* POST user creation. */
-router.post('/create', function(req, res) {
+router.post('/create_user', function(req, res) {
   var user_id = req.body.id;
   models.sequelize.Promise.all([
     models.User.findOne({
@@ -33,6 +33,7 @@ router.post('/create', function(req, res) {
         res.redirect('/');
       });
     } else {
+      console.log("user logged in!");
       req.session.user_id = user_id;
       req.session.is_student = false;
       req.session.is_employer = false;
@@ -42,7 +43,7 @@ router.post('/create', function(req, res) {
         if (employer != null) {
           req.session.is_employer = true;
         }
-        res.redirect('student');
+        res.redirect('/student');
       } else if (employer != null) {
         // direct to company page
         req.session.user_id = user_id;
@@ -59,8 +60,23 @@ router.post('/create', function(req, res) {
   });
 });
 
-router.post('/create', function(req, res) {
-  
+router.post('/logout', function(req, res) {
+  req.session.destroy(function(err) {
+    if(err) {
+      console.log(err);
+    } else {
+      res.redirect('/');
+    }
+  });
+});
+
+router.post('/create_student', function(req, res) {
+  console.log("Creating student with id : " + req.body.id);
+  res.redirect('/student');
+});
+
+router.post('/create_company', function(req, res) {
+  res.redirect('/company');
 });
 
 /* GET user destroyed. */
