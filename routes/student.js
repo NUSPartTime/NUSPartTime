@@ -4,6 +4,8 @@ var router = express.Router();
 
 /* GET student page. */
 router.get('/', function(req, res) {
+  console.log(req.session.user_id);
+
   models.sequelize.Promise.all([
     models.Category.findAll(),
     models.Job.findAll({

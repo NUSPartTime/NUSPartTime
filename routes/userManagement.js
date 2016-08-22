@@ -61,10 +61,12 @@ router.post('/create_user', function(req, res) {
 });
 
 router.post('/logout', function(req, res) {
+  console.log("destroying the session key to log user out");
   req.session.destroy(function(err) {
     if(err) {
       console.log(err);
     } else {
+      console.log("session key destroyed, now redirect to index page");
       res.redirect('/');
     }
   });

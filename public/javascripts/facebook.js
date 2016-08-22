@@ -2,35 +2,9 @@ window.fbAsyncInit = function() {
   FB.init({
     appId: '833829723419057',
     xfbml: true,
+    cookie: true,
     version: 'v2.7'
   });
-
-  FB.getLoginStatus(function(response) {
-    if (response.status === 'connected') {
-      FB.api('/me', {
-        fields: ['name']
-      }, function(response) {
-        name = response.name;
-        document.getElementById("welcome_message").innerHTML = "Welcome " + response.name;
-        $(".login-button").text("Log out");
-      });
-    }
-  });
-
-  FB.Event.subscribe("auth.login", function(response) {
-    console.log("fb login");
-    $.post('/userManagement/create_user', {
-      id: FB.getAuthResponse().userID,
-      name: FB.getAuthResponse().name
-    });
-  });
-
-  FB.Event.subscribe("auth.logout", function(response) {
-    console.log("fb logout");
-    $.post('/userManagement/logout', {});
-    // location.reload();
-  });
-
 };
 
 /**
@@ -41,23 +15,31 @@ function fb_toggle() {
   // checkt login status first
   FB.getLoginStatus(function(response) {
     console.log(response);
+
     if (response.status === 'connected') {
       FB.logout(function(response) {
-        $(".login-button p").text("Log in");
-        console.log(response);
+        console.log("logged out from FB");
+
+        $.post('/userManagement/logout', {}).done(function() {
+          location.reload();
+        });
       });
     } else {
       FB.login(function(response) {
         if (response.authResponse) {
-          // console.log('Welcome!  Fetching your information.... ');
+          console.log("logged in from FB");
+
           access_token = response.authResponse.accessToken; //get access token
           user_id = response.authResponse.userID; //get FB UID
-
-          $(".login-button p").text("Log out");
-
+          
           FB.api('/me', function(response) {
-            user_email = response.email; //get user email
-            // you can store this data into your database             
+            console.log(response);
+            $.post('/userManagement/create_user', {
+              id: response.id,
+              name: response.name
+            }).done(function() {
+              location.reload();
+            });             
           });
         } else {
           //user hit cancel button
