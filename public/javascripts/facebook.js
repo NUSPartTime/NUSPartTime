@@ -18,13 +18,15 @@ window.fbAsyncInit = function() {
   });
 
   FB.Event.subscribe("auth.login", function(response) {
-    $.post('/users/create', {
-        id: FB.getAuthResponse().userID,
-        name: name
-      });
+    console.log("fb login");
+    $.post('/userCreation/create', {
+      id: FB.getAuthResponse().userID,
+      name: FB.getAuthResponse().name
+    });
   });
 
   FB.Event.subscribe("auth.logout", function(response) {
+    console.log("fb logout");
     location.reload();
   });
 
@@ -35,10 +37,9 @@ window.fbAsyncInit = function() {
  * This function will check user's login status first
  */
 function fb_login() {
-
     // checkt login status first
     FB.getLoginStatus(function(response) {
-        console.log(response.status)
+        console.log(response);
         if (response.status === 'connected') {
             FB.logout(function(response) {
                 console.log(response);
@@ -48,9 +49,7 @@ function fb_login() {
 
     FB.login(function(response) {
         if (response.authResponse) {
-            
             // console.log('Welcome!  Fetching your information.... ');
-
             access_token = response.authResponse.accessToken; //get access token
             user_id = response.authResponse.userID; //get FB UID
 
@@ -60,13 +59,10 @@ function fb_login() {
                 user_email = response.email; //get user email
                 // you can store this data into your database             
             });
-
         } else {
             //user hit cancel button
             console.log('User cancelled login or did not fully authorize.');
-
         }
-    
     }, {
         scope: 'public_profile, email'
     });

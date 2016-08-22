@@ -9,8 +9,9 @@ var _ = require("underscore");
 var sequelize = require("sequelize");
 
 var routes = require('./routes/index');
-var studentDetail = require('./routes/studentDetail');
+var userCreation = require('./routes/userCreation');
 var student = require('./routes/student');
+var studentDetail = require('./routes/studentDetail');
 var company = require('./routes/company');
 var jobs = require('./routes/jobs');
 
@@ -34,6 +35,7 @@ app.use(session({
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
+app.use('/userCreation', userCreation);
 app.use('/studentDetail', studentDetail);
 app.use('/company', company);
 app.use('/student', student);
