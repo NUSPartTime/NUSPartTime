@@ -1,8 +1,10 @@
 extends layout
 
 block content
-  h1= title
-
+  if (is_authorized)
+    h1= title
+  else
+    h1 Please Login first
   //- h2 Creating a new student
   //- form(action="/student/create", method="post")
   //-   input(type="text", name="s_id")

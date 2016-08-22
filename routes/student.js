@@ -33,29 +33,4 @@ router.get('/', function(req, res) {
   });
 });
 
-/* POST student creation */
-router.post('/create', function(req, res) {
-  models.User.create({
-    id: req.body.s_id
-  });
-
-  models.Student.create({
-  	id: req.body.s_id,
-  	UserId: req.body.s_id
-  }).then(function() {
-    res.redirect('/student');
-  });
-});
-
-/* GET student destroyed */
-router.get('/:student_id/destroy', function(req, res) {
-  models.Student.destroy({
-    where: {
-      id: req.params.student_id
-    }
-  }).then(function() {
-    res.redirect('/student');
-  });
-});
-
 module.exports = router;

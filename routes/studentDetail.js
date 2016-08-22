@@ -33,6 +33,14 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res) {
+  var is_authorized = false;
+  var sess = req.session;
+  if (sess.email) {
+    is_authorized = true;
+  } else {
+    
+  }
+
   res.render('student_detail', {
     title: 'Your Personal Information',
   });
