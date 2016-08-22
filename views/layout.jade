@@ -4,12 +4,13 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet/less', href='/stylesheets/index-page.less')
     link(rel='stylesheet/less', href='/stylesheets/student-page.less')
 
-    script(src="/javascripts/jquery.min.js")
+    script(src="/javascripts/vendor/jquery.min.js")
+    script(src="/javascripts/vendor/bootstrap.min.js")
+    script(src="/javascripts/vendor/less-2.7.1.min.js")
     script(src="/javascripts/facebook.js")
-    script(src="/javascripts/bootstrap.min.js")
     script(src="/javascripts/layout.js")
-    script(src="/javascripts/less-2.7.1.min.js")
   body
     block content

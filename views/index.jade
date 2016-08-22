@@ -21,6 +21,15 @@ block content
   div(class="recruiter-button")
     a(href="company") Post a Job!
 
-  //- p Welcome to #{title}
-  //- h3= status
-  //- div(class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="true")
+  div(class="container container-table")
+    div(class="row vertical-center-row")
+      div(class="text-center col-md-4 col-md-offset-4" id="register-pop-up")
+        h2 Register As: 
+        //- button(onclick="student_register()";) Student
+        //- button(onclick="company_register()";) Company
+
+  if (show_register_window)
+    div
+      h2 Register As: 
+      button Student
+      button Company
