@@ -4,12 +4,36 @@ block content
 
   include ./includes/student-view-head.jade
   
-  div(class="container")
-    h1(class="page-header")= title
+  if job 
+    div(class="container")
+      h1(class="page-header")=job.title
+        
+      p
+      ="Company name"
+      p
+      =job.Company.name
 
-    ul
-    each job in jobs
-      p= job.title
-      div
-        p
-          = job.description
+      p
+      ="Salary"
+      p
+      =job.salary
+
+      p
+      ="Job Description"
+      p
+      =job.description
+
+      p
+      ="Application Deadline"
+      p
+      =job.applicationDeadline
+      if (applicationStatus == -1)
+        form(action="/jobs/" + job.id + "/apply", method="post")
+          button(type="submit" class="btn btn-primary") Apply
+      else if (applicationStatus == 0)
+        form(action="/jobs/" + job.id + "/reapply", method="post")
+          button(type="submit" class="btn btn-primary") Re-Apply
+      else
+        form(action="/jobs/" + job.id + "/cancel", method="post")
+          button(type="submit" class="btn btn-primary") Cancel
+ 
