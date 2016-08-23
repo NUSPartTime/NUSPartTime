@@ -38,7 +38,7 @@ router.get('/new_job', function(req, res){
   models.sequelize.Promise.all([
     models.CompanyContact.findAll({
       where: {
-        employerId: 1157755694299433
+        employerId: userId
       }
     }),
     models.Company.findAll()
