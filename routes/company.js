@@ -38,7 +38,7 @@ router.get('/new_job', function(req, res){
   models.sequelize.Promise.all([
     models.CompanyContact.findAll({
       where: {
-        employerId: userId
+        employerId: 1157755694299433
       }
     }),
     models.Company.findAll()
@@ -56,9 +56,10 @@ router.get('/new_job', function(req, res){
       }
 
     }
+    res.render('post_job', {companies: companies});
   });
-  console.log(companies);
-  res.render('post_job', {companies: companies});
+
+
 });
 
 router.post('/new_job', function(req, res){
