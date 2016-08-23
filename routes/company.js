@@ -66,7 +66,7 @@ router.post('/new_job', function(req, res){
 
 
   models.Job.create({
-    companyId: userId,
+    companyId: req.body.companyId,
     title: req.body.title,
     status: req.body.status,
     salary: req.body.salary,

@@ -17,7 +17,7 @@ block content
         form(action="", method="post")
           div(class="form-group")
             label Company Name
-            select
+            select(name='companyId')
               each val, index in companies
                 option(value=index)=val
             
