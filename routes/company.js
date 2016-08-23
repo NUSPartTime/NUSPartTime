@@ -3,8 +3,12 @@ var models  = require('../models');
 var router = express.Router();
 
 /* GET company page. */
-router.get('/', function(req, res, next) {
-  res.render('company', { title: 'Ready to Hire?' });
+router.get('/', function(req, res){
+  res.render('company');
+});
+
+router.get('/new_company', function(req, res, next) {
+  res.render('new_company', { title: 'Ready to Hire?' });
 });
 
 router.post('/new_company', function(req, res){
@@ -17,9 +21,18 @@ router.post('/new_company', function(req, res){
   });
 });
 
+router.get('/new_job', function(req, res){
+  res.render('post_job');
+});
+
 router.post('/new_job', function(req, res){
   models.Job.create({
-    id: req.body.job_id
+    title: req.body.title,
+    status: req.body.status,
+    salary: req.body.salary,
+    description: req.body.description,
+    applicationDeadline: req.body.application_deadline,
+    deadline: req.body.deadline
   }).then(function(){
     res.redirect('/company');
   });

@@ -1,0 +1,28 @@
+extends layout
+
+block content
+
+  //- header
+  include header.jade
+
+  div(class="container")
+    h2 New Recruitor Registoration
+
+    div(class="col-md-6")
+      div(class="panel panel-default")
+        div(class="panel-heading")
+          h4 I am from a company
+        div(class="panel-body")
+          form(action="/company/new_company", method="post")
+            div(class="form-group")
+              label Company Name
+              input(type="text", name="name", class="form-control")
+
+            div(class="form-group")
+              label Contact Number
+              input(type="text", name="contact", class="form-control")
+
+            div(class="form-group")
+              label Email
+              input(type="email", name="email", class="form-control")
+            button(type="submit" class="btn btn-primary") Register
