@@ -16,9 +16,11 @@ block content
       div(class="panel-body")
         form(action="", method="post")
           div(class="form-group")
-            label Company ID
-            input(type="text", name="company_id", class="form-control")
-          
+            label Company Name
+            select
+              each val, index in companies
+                option(value=index) =val
+            
           div(class="form-group")
             label Job Title
             input(type="text", name="title", class="form-control")

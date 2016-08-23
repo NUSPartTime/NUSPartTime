@@ -4,6 +4,8 @@ var router = express.Router();
 
 /* GET company page. */
 router.get('/', function(req, res){
+  var sess = req.session;
+  var userId = sess.user_id;
   res.render('company');
 });
 
@@ -12,21 +14,58 @@ router.get('/new_company', function(req, res, next) {
 });
 
 router.post('/new_company', function(req, res){
-  models.Company.create({
-    name: req.body.name,
-    phone: req.body.contact,
-    email: req.body.email
+  var Employer = require('../models/employer');
+  var Company = require('../models/company');
+  models.CompanyContact.create({
+    Employer:{
+      id: req.session.user_id
+    },
+    Company:{
+      name: req.body.name,
+      phone: req.body.contact,
+      email: req.body.email
+    }
+  },{
+    include: [models.Employer, models.Company]
   }).then(function(){
     res.redirect('/company');
   });
 });
 
 router.get('/new_job', function(req, res){
-  res.render('post_job');
+  var userId = req.session.user_id;
+  var companies = {};
+  models.sequelize.Promise.all([
+    models.CompanyContact.findAll({
+      where: {
+        employerId: userId
+      }
+    }),
+    models.Company.findAll()
+  ]).spread(function(all_companyContact, all_company){
+    if(all_companyContact == null){
+      console.log('company does not exist');
+    }else{
+
+      for(var contact of all_companyContact){
+        for(var company of all_company){
+          if(company.id == contact.companyId){
+            companies[company.id] = company.name;
+          }
+        }
+      }
+
+    }
+  });
+  console.log(companies);
+  res.render('post_job', {companies: companies});
 });
 
 router.post('/new_job', function(req, res){
+
+
   models.Job.create({
+    companyId: userId,
     title: req.body.title,
     status: req.body.status,
     salary: req.body.salary,
