@@ -35,14 +35,16 @@ router.post('/new_company', function(req, res){
 router.get('/new_job', function(req, res){
   var userId = req.session.user_id;
   var companies = {};
+  var categories = {};
   models.sequelize.Promise.all([
     models.CompanyContact.findAll({
       where: {
         employerId: userId
       }
     }),
-    models.Company.findAll()
-  ]).spread(function(all_companyContact, all_company){
+    models.Company.findAll(),
+    models.Category.findAll()
+  ]).spread(function(all_companyContact, all_company, all_categories){
     if(all_companyContact == null){
       console.log('company does not exist');
     }else{
@@ -55,24 +57,33 @@ router.get('/new_job', function(req, res){
         }
       }
 
+      for(var category of all_categories){
+        categories[category.id] = category.name;
+      }
+
     }
-    res.render('post_job', {companies: companies});
+    res.render('post_job', {companies: companies, categories: categories});
   });
 
 
 });
 
 router.post('/new_job', function(req, res){
+  var Job = models.Job;
+  models.JobCategory.create({
+    Job: {
+      companyId: req.body.companyId,
+      title: req.body.title,
+      status: req.body.status,
+      salary: req.body.salary,
+      description: req.body.description,
+      applicationDeadline: req.body.application_deadline,
+      deadline: req.body.deadline
+    },
+    categoryId: req.body.categoryId
 
-
-  models.Job.create({
-    companyId: req.body.companyId,
-    title: req.body.title,
-    status: req.body.status,
-    salary: req.body.salary,
-    description: req.body.description,
-    applicationDeadline: req.body.application_deadline,
-    deadline: req.body.deadline
+  },{
+    include: [models.Job]
   }).then(function(){
     res.redirect('/company');
   });

@@ -22,6 +22,12 @@ block content
                 option(value=index)=val
             
           div(class="form-group")
+            label Job Category
+            select(name='categoryId')
+              each val, index in categories
+                option(value=index)=val
+                
+          div(class="form-group")
             label Job Title
             input(type="text", name="title", class="form-control")
             
