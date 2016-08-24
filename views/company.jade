@@ -1,45 +1,14 @@
 extends layout
 
 block content
-  
+
   //- header
   include header.jade
-  
-  div(class="container")
-    h2 New Recruitor Registoration
+  div 
+    a(href="/company/new_job") post a new job
+
     
-    div(class="col-md-6")
-      div(class="panel panel-default")
-        div(class="panel-heading")
-          h4 I am a Professor
-        div(class="panel-body")
-          form(action="", method="post")
-            div(class="form-group")
-              label Person Name
-              input(type="text", name="name", class="form-control")
-            
-            div(class="form-group")
-              label Email Address
-              input(type="text", name="email", class="form-control")
+  div
+    a(href="/company/new_company") add a new company
 
-            div(class="form-group")
-              label Contact Number
-              input(type="text", name="contact", class="form-control")
-
-            button(type="submit" class="btn btn-primary") Register
-
-    div(class="col-md-6")
-      div(class="panel panel-default")
-        div(class="panel-heading")
-          h4 I am from a company
-        div(class="panel-body")
-          form(action="/company/new_company", method="post")
-            div(class="form-group")
-              label Company ID
-              input(type="text", name="c_id", class="form-control")
-            
-            div(class="form-group")
-              label Contact Person
-              input(type="text", name="contact", class="form-control")
-
-            button(type="submit" class="btn btn-primary") Register
+  h1 Company index page

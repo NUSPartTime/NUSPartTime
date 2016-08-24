@@ -16,12 +16,18 @@ block content
       div(class="panel-body")
         form(action="", method="post")
           div(class="form-group")
-            label Company ID
-            input(type="text", name="company_id", class="form-control")
-          
+            label Company Name
+            select(name='companyId')
+              each val, index in companies
+                option(value=index)=val
+            
           div(class="form-group")
             label Job Title
             input(type="text", name="title", class="form-control")
+            
+          div(class="form-group")
+            label Salary
+            input(type="number", name="salary", class="form-control", placeholder="SGD")
 
           div(class="form-group")
             label Status
@@ -30,5 +36,13 @@ block content
           div(class="form-group")
             label Description
             textarea(name="description", class="form-control", rows="4")
+            
+          div(class="form-group")
+            label Application Deadline
+            input(type="date", name="application_deadline", class="form-control")
+            
+          div(class="form-group")
+            label Deadline
+            input(type="date", name="deadline", class="form-control")
 
           button(type="submit" class="btn btn-primary") Create!
