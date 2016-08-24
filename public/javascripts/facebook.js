@@ -19,7 +19,7 @@ function fb_toggle() {
     if (response.status === 'connected') {
       FB.logout(function(response) {
         console.log("logged out from FB");
-        
+
         $.post('/userManagement/logout', {}).done(function (data, textStatus) {
           if (typeof data.redirect == 'string') {
             window.location = data.redirect;
@@ -30,10 +30,9 @@ function fb_toggle() {
       FB.login(function(response) {
         if (response.authResponse) {
           console.log("logged in from FB");
-
           // access_token = response.authResponse.accessToken; //get access token
           // user_id = response.authResponse.userID; //get FB UID
-          
+
           $.post('/userManagement/create_user', {
             id: FB.getAuthResponse().userID,
             name: FB.getAuthResponse().name
@@ -41,7 +40,7 @@ function fb_toggle() {
             if (typeof data.redirect == 'string') {
               window.location = data.redirect;
             }
-          });    
+          });
         } else {
           //user hit cancel button
           console.log('User cancelled login or did not fully authorize.');
