@@ -1,0 +1,87 @@
+extends layout
+
+block content
+  include header
+
+  script.
+    $(document).ready(function() {
+      var deadline = $.format.date($('.deadline-info').text(), "yyyy-MM-dd");
+      $('.deadline-input').val(deadline);
+
+      $('.edit-input').addClass("hidden");
+
+      $('.job-edit-btn').on('click', function() {
+        $('.edit-input, .job-cancel-btn, .job-submit-btn').removeClass("hidden");
+        $('.info, .job-edit-btn').addClass("hidden");
+      });
+
+      $('.job-cancel-btn').on('click', function() {
+        $('.edit-input, .job-cancel-btn, .job-submit-btn').addClass("hidden");
+        $('.info, .job-edit-btn').removeClass("hidden");
+      });
+    });
+  
+  if job
+    form(action="edit", method="post")
+      div(class="container")
+        h1(class="page-header info")=job.title
+        div(class="form-group edit-input")
+          input(type="text", name="title", class="form-control" value=job.title)
+          hr
+        p
+        ="Company name"
+        div(class="form-group edit-input")
+          select(name='companyId')
+            each val, index in companies
+              if index == job.companyId
+                option(value=index selected="selected")=val
+              else
+                option(value=index)=val
+        div(class="info")
+          p
+          =job.Company.name
+        
+        p
+        ="Salary"
+
+        div(class="form-group edit-input")
+          input(type="number", name="salary", class="form-control", value=job.salary)
+        
+        div(class="info")
+          p
+          =job.salary
+
+        p
+        ="Job Description"
+        
+        div(class="form-group edit-input")
+          textarea(name="description", class="form-control", rows="4")=job.description
+        
+        div(class="info")
+          p
+          =job.description
+
+        p
+        ="Application Deadline"
+        
+        //- TODO: to implement displaying the correct date
+        div(class="form-group edit-input")
+          input(type="date", name="application_deadline", class="form-control deadline-input")
+        
+        div(class="info deadline-info")
+          p
+          =job.applicationDeadline
+        
+        button(type="button" class="btn btn-warning job-edit-btn") Edit
+        button(type="button" class="btn btn-danger job-cancel-btn hidden") Cancel
+        button(type="submit" class="btn btn-primary job-submit-btn hidden") Update
+
+        div(id="applicant-content")
+          h1(class="page-header")= title
+
+          div(class="list-group")
+            each student in students
+              tr
+                //- Since students do not have name yet, use matric now
+                td=student.matric
+
