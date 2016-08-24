@@ -21,19 +21,19 @@ router.post('/new_company', function(req, res){
     where: {
       id: req.session.user_id
     }
-  });
-
-  models.CompanyContact.create({
-    employerId: req.session.user_id,
-    Company:{
-      name: req.body.name,
-      phone: req.body.contact,
-      email: req.body.email
-    }
-  },{
-    include: [models.Company]
-  }).then(function(){
-    res.redirect('/company');
+  }).then(function() {
+    models.CompanyContact.create({
+      employerId: req.session.user_id,
+      Company:{
+        name: req.body.name,
+        phone: req.body.contact,
+        email: req.body.email
+      }
+    },{
+      include: [models.Company]
+    }).then(function(){
+      res.redirect('/company');
+    });
   });
 });
 
@@ -73,6 +73,7 @@ router.get('/new_job', function(req, res){
 
 });
 
+// need to add default value for some of the fields
 router.post('/new_job', function(req, res){
   var Job = models.Job;
   models.JobCategory.create({
