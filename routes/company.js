@@ -4,9 +4,11 @@ var router = express.Router();
 
 /* GET company page. */
 router.get('/', function(req, res){
+
   var sess = req.session;
+  console.log(sess)
   var userId = sess.user_id;
-  res.render('company');
+  res.render('company', { title: "My Posted Jobs" });
 });
 
 router.get('/new_company', function(req, res, next) {

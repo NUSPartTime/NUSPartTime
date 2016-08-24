@@ -2,6 +2,25 @@ var models  = require('../models');
 var express = require('express');
 var router = express.Router();
 
+router.get('/new_student', function(req, res, next) {
+  res.render('student_register', { title: 'Student Validation',
+                                   header: 'NUS Student Validation' });
+});
+
+router.post('/new_student/create', function(req, res) {
+  var user_id = req.session.user_id;
+  var matric_number = req.body.matric_number;
+
+  models.Student.create({
+    id: user_id,
+    matric: matric_number
+  }).then(function() {
+    console.log("Student created successfully");
+    req.session.user_id = user_id;
+    res.redirect('/student');
+  });
+});
+
 /* POST user creation. */
 router.post('/create_user', function(req, res) {
   var user_id = req.body.id;

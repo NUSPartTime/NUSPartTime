@@ -1,0 +1,17 @@
+extends layout
+
+block content
+
+  include header.jade
+  
+  div(class="container")
+    h2=header
+
+    div(class="panel panel-default")
+      div(class="panel-heading")
+        h4 Please Fill in Your Matric Number
+      div(class="panel-body")
+        form(action="create", method="post")
+          div(class="form-group")
+            input(type="text", name="matric_number", class="form-control")
+          button(type="submit" class="btn btn-primary") Register
