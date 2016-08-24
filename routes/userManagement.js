@@ -66,6 +66,7 @@ router.post('/create_user', function(req, res) {
         // direct to company page
         req.session.user_id = user_id;
         req.session.is_employer = true;
+        res.send({redirect: '/company'});
         /*
           stub
         */

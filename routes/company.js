@@ -6,7 +6,6 @@ var router = express.Router();
 router.get('/', function(req, res){
 
   var sess = req.session;
-  console.log(sess)
   var userId = sess.user_id;
   res.render('company', { title: "My Posted Jobs" });
 });
