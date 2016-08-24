@@ -14,19 +14,22 @@ router.get('/new_company', function(req, res, next) {
 });
 
 router.post('/new_company', function(req, res){
-  var Employer = require('../models/employer');
   var Company = require('../models/company');
-  models.CompanyContact.create({
-    Employer:{
+  models.Employer.findOrCreate({
+    where: {
       id: req.session.user_id
-    },
+    }
+  });
+
+  models.CompanyContact.create({
+    employerId: req.session.user_id,
     Company:{
       name: req.body.name,
       phone: req.body.contact,
       email: req.body.email
     }
   },{
-    include: [models.Employer, models.Company]
+    include: [models.Company]
   }).then(function(){
     res.redirect('/company');
   });
