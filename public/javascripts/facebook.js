@@ -5,6 +5,13 @@ window.fbAsyncInit = function() {
     cookie: true,
     version: 'v2.7'
   });
+
+  FB.getLoginStatus(function(response){
+    console.log(response);
+    if (response.status === 'connected') {
+      $("#fb-login-wrapper p").text("Log out");
+    }
+  });
 };
 
 /**
