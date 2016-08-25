@@ -9,7 +9,7 @@ router.get('/:job_id/details', function(req, res) {
     models.StudentJob.findAll({
       where: {
         jobId: req.params.job_id,
-        studentId: sess.user_id, 
+        studentId: sess.user_id,
       }
     }),
     models.Job.findAll({
@@ -35,8 +35,9 @@ router.get('/:job_id/details', function(req, res) {
 
     console.log(job.id);
     console.log(applicationStatus);
-
+    var identity = (req.session.is_employer) ? 'employer' : 'student';
     res.render('job', {
+      identity: identity,
       job: job,
       applicationStatus: applicationStatus
     });
@@ -58,7 +59,7 @@ router.get('/:job_id/view', function(req, res, next) {
     }),
     models.Job.findAll({
       where: {
-        
+
         // Also use job id to find the particular job
         id: req.params.job_id
       },
@@ -102,7 +103,7 @@ router.get('/:job_id/view', function(req, res, next) {
     }
 
     // we create an array to store all the students who have successfully apppied for this job
-    
+
   });
 });
 
@@ -112,7 +113,7 @@ router.post('/:job_id/edit', function(req, res) {
   models.sequelize.Promise.all([
     models.Job.findAll({
       where: {
-        
+
         // Also use job id to find the particular job
         id: req.params.job_id
       },
@@ -140,7 +141,7 @@ router.post('/:job_id/apply', function(req, res) {
   var sess = req.session;
   models.StudentJob.create({
     jobId: req.params.job_id,
-    studentId: sess.user_id, 
+    studentId: sess.user_id,
     status: 1
   }).then(function(){
     res.redirect('/jobs/' + req.params.job_id + '/details');
@@ -155,7 +156,7 @@ router.post('/:job_id/cancel', function(req, res){
   },{
     where: {
       jobId: req.params.job_id,
-      studentId: sess.user_id, 
+      studentId: sess.user_id,
     }
   }).then(function(){
     res.redirect('/jobs/' + req.params.job_id + '/details');
@@ -170,7 +171,7 @@ router.post('/:job_id/reapply', function(req, res){
   },{
     where: {
       jobId: req.params.job_id,
-      studentId: sess.user_id 
+      studentId: sess.user_id
     }
   }).then(function(){
     res.redirect('/jobs/' + req.params.job_id + '/details');
