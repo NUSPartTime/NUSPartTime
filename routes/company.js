@@ -7,7 +7,39 @@ router.get('/', function(req, res){
 
   var sess = req.session;
   var userId = sess.user_id;
-  res.render('company', { title: "My Posted Jobs" });
+
+  models.sequelize.Promise.all([
+    models.Job.findAll({
+      include: [models.Company]
+    }),
+    models.CompanyContact.findAll({
+      where: {
+        employerId: userId
+      },
+      include: [models.Company]
+    })
+  ]).spread(function(all_jobs, all_companyContact){
+    var cat_job_array = [];
+    for(var contact of all_companyContact){
+      var jobs = [];
+      for(var job of all_jobs){
+        if(job.Company.id == contact.companyId){
+          jobs.push(job);
+        }
+      }
+
+      cat_job_array.push({
+        category: contact.Company.name,
+        category_html_class: contact.Company.name.replace(/ /g, ""),
+        jobs: jobs
+      });
+    }
+
+      res.render('company',
+       { title: "My Posted Jobs" ,
+        cat_job_array: cat_job_array});
+  });
+
 });
 
 router.get('/new_company', function(req, res, next) {

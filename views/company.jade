@@ -30,17 +30,17 @@ block content
 
     ul(class="list-group side-bar") 
         button(type="button" class="list-group-item" id="all-jobs-button" onclick="show_all_jobs()") All
-        //- each cat_job in cat_job_array
-        //-   button(type="button" class="list-group-item" id="#{cat_job.category_html_class}" onclick='toggle_job_content("#{cat_job.category_html_class}")')
-        //-     = cat_job.category
+        each cat_job in cat_job_array
+          button(type="button" class="list-group-item" id="#{cat_job.category_html_class}" onclick='toggle_job_content("#{cat_job.category_html_class}")')
+            = cat_job.category
     
     div(id="job-content")
       h1(class="page-header")= title
 
       div(class="list-group")
-        //- each cat_job in cat_job_array
-        //-   each job in cat_job.jobs
-        //-     div(class="list-group-item category-job #{cat_job.category_html_class}")
-        //-       h4(class="list-group-item-heading")
-        //-         = job.title
-        //-       a(href="/jobs/" + job.id + "/details") Details
+        each cat_job in cat_job_array
+          each job in cat_job.jobs
+            div(class="list-group-item category-job #{cat_job.category_html_class}")
+              h4(class="list-group-item-heading")
+                = job.title
+              a(href="/jobs/" + job.id + "/details") Details
