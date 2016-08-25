@@ -29,8 +29,8 @@ router.get('/', function(req, res){
       }
 
       cat_job_array.push({
-        category: contact.Company.name,
-        category_html_class: contact.Company.name.replace(/ /g, ""),
+        company: contact.Company.name,
+        company_html_class: contact.Company.name.replace(/ /g, ""),
         jobs: jobs
       });
     }
