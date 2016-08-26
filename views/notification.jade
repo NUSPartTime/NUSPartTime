@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  if (is_authorized)
+    h1= title
+  else
+    h1 Please Smile first
+  //- h2 Creating a new student
+  //- form(action="/student/create", method="post")
+  //-   input(type="text", name="s_id")
+  //-   input(type="submit")
+
+  //- h2 Students
+
+  //- ul
+  //- each student in students
+  //-   li
+  //-     = student.id
+  //-     |  
+  //-     | (
+  //-     a(href="/student/" + student.id + "/destroy") Destroy
+  //-     | )
