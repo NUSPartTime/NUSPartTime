@@ -19,7 +19,7 @@ module.exports = {
         referenceKey: 'id'
       },
       status: {
-        type: Sequelize.INT
+        type: Sequelize.INTEGER
       },
       message: {
         type: Sequelize.TEXT

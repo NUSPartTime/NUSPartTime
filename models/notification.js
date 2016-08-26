@@ -1,8 +1,6 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var Notification = sequelize.define('Notification', {
-    userId: DataTypes.BIGINT,
-    jobId: DataTypes.INT,
     status: DataTypes.INT,
     message: DataTypes.TEXT
   }, {
