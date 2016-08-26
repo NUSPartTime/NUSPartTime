@@ -12,7 +12,8 @@ module.exports = function(sequelize, DataTypes) {
         });
         JobCategory.belongsTo(models.Job, {
           onDelete: "CASCADE",
-          onUpdate: "CASCADE"
+          onUpdate: "CASCADE",
+          foreignKey: 'jobId'
         });
       }
     }
