@@ -1,7 +1,7 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var Notification = sequelize.define('Notification', {
-    status: DataTypes.INT,
+    status: DataTypes.INTEGER,
     message: DataTypes.TEXT
   }, {
     classMethods: {
