@@ -14,6 +14,7 @@ var student = require('./routes/student');
 var studentDetail = require('./routes/studentDetail');
 var company = require('./routes/company');
 var jobs = require('./routes/jobs');
+var notification = require('./routes/notification');
 
 var app = express();
 
@@ -37,6 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/userManagement', userManagement);
 app.use('/studentDetail', studentDetail);
+app.use('/notification', notification);
 app.use('/company', company);
 app.use('/student', student);
 app.use('/jobs', jobs);
