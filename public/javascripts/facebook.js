@@ -10,6 +10,21 @@ window.fbAsyncInit = function() {
     console.log(response);
     if (response.status === 'connected') {
       $("#fb-login-wrapper p").text("Log out");
+
+      var userID = FB.getAuthResponse().userID;
+      $.post('/userManagement/update_session_user_id', {
+        id: userID
+      }).done(function (data, textStatus) {
+        if (data.need_redirect) {
+          $.post('/userManagement/create_user', {
+            id: userID
+          }).done(function (data, textStatus) {
+            if (typeof data.redirect == 'string') {
+              window.location = data.redirect;
+            }
+          });
+        }
+      });
     }
   });
 };
@@ -26,7 +41,7 @@ function fb_toggle() {
     if (response.status === 'connected') {
       FB.logout(function(response) {
         console.log("logged out from FB");
-
+        $("#fb-login-wrapper p").text("Log in");
         $.post('/userManagement/logout', {}).done(function (data, textStatus) {
           if (typeof data.redirect == 'string') {
             window.location = data.redirect;
