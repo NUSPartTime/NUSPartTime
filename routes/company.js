@@ -2,9 +2,15 @@ var express = require('express');
 var models  = require('../models');
 var router = express.Router();
 
-/* GET company page. */
-router.get('/', function(req, res){
+var auth = function(req, res, next) {
+  if (req.session && req.session.is_employer)
+    return next();
+  else
+    return res.sendStatus(401);
+};
 
+/* GET company page. */
+router.get('/', auth, function(req, res){
   var sess = req.session;
   var userId = sess.user_id;
 
@@ -42,11 +48,11 @@ router.get('/', function(req, res){
 
 });
 
-router.get('/new_company', function(req, res, next) {
+router.get('/new_company', auth,  function(req, res, next) {
   res.render('new_company', { title: 'Ready to Hire?' });
 });
 
-router.post('/new_company', function(req, res){
+router.post('/new_company', auth,  function(req, res){
   var Company = require('../models/company');
   models.Employer.findOrCreate({
     where: {
@@ -68,7 +74,7 @@ router.post('/new_company', function(req, res){
   });
 });
 
-router.get('/new_job', function(req, res){
+router.get('/new_job',  auth, function(req, res){
   var userId = req.session.user_id;
   var companies = {};
   var categories = {};
@@ -105,7 +111,7 @@ router.get('/new_job', function(req, res){
 });
 
 // need to add default value for some of the fields
-router.post('/new_job', function(req, res){
+router.post('/new_job', auth,  function(req, res){
   var Job = models.Job;
   models.JobCategory.create({
     Job: {
