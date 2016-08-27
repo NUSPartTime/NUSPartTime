@@ -21,6 +21,14 @@ router.post('/new_student/create', function(req, res) {
   });
 });
 
+/* Set session user id for first time loading main page */
+router.post('/update_session_user_id', function(req, res) {
+  if (req.session.user_id == undefined) {
+    req.session.user_id = req.body.id;
+    res.send({need_redirect: true});
+  }
+});
+
 /* POST user creation. */
 router.post('/create_user', function(req, res) {
   var user_id = req.body.id;
