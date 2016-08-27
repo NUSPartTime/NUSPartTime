@@ -41,7 +41,7 @@ function fb_toggle() {
     if (response.status === 'connected') {
       FB.logout(function(response) {
         console.log("logged out from FB");
-
+        $("#fb-login-wrapper p").text("Log in");
         $.post('/userManagement/logout', {}).done(function (data, textStatus) {
           if (typeof data.redirect == 'string') {
             window.location = data.redirect;
