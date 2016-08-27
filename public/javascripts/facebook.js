@@ -41,6 +41,7 @@ function fb_toggle() {
     if (response.status === 'connected') {
       FB.logout(function(response) {
         console.log("logged out from FB");
+        
         $("#fb-login-wrapper p").text("Log in");
         $.post('/userManagement/logout', {}).done(function (data, textStatus) {
           if (typeof data.redirect == 'string') {
@@ -52,8 +53,6 @@ function fb_toggle() {
       FB.login(function(response) {
         if (response.authResponse) {
           console.log("logged in from FB");
-          // access_token = response.authResponse.accessToken; //get access token
-          // user_id = response.authResponse.userID; //get FB UID
 
           $.post('/userManagement/create_user', {
             id: FB.getAuthResponse().userID,

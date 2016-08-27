@@ -25,6 +25,8 @@ router.post('/new_student/create', function(req, res) {
 router.post('/update_session_user_id', function(req, res) {
   if (req.session.user_id == undefined) {
     req.session.user_id = req.body.id;
+    req.session.is_student = false;
+    req.session.is_employer = false;
     res.send({need_redirect: true});
   }
 });

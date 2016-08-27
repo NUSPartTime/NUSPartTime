@@ -1,17 +1,26 @@
 doctype html
 html
   head
+    meta(charset='utf8')
+    base(href="/")
     title= title
+
+    script(src="/javascripts/vendor/jquery.min.js")
+    script(src="/javascripts/vendor/angular.js")
+    script(src="/javascripts/vendor/angular-route.js")
+    script(src="/javascripts/vendor/bootstrap.min.js")
+    script(src="/javascripts/vendor/jquery-dateFormat.js")
+
+    script(src="/javascripts/app.js")
+    //- script(src="/javascripts/facebook.js")
+    script(src="/javascripts/layout.js")
+
     link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet/less', href='/stylesheets/index-page.less')
     link(rel='stylesheet/less', href='/stylesheets/student-page.less')
-
-    script(src="/javascripts/vendor/jquery.min.js")
-    script(src="/javascripts/vendor/bootstrap.min.js")
     script(src="/javascripts/vendor/less-2.7.1.min.js")
-    script(src="/javascripts/facebook.js")
-    script(src="/javascripts/layout.js")
-    script(src="/javascripts/jquery-dateFormat.js")
-  body
-    block content
+
+  body(ng-app="nusPartimeApp")
+    div(ui-view="")
+        block content
