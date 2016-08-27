@@ -139,6 +139,34 @@ router.post('/:job_id/edit', function(req, res) {
 /* POST student job application */
 router.post('/:job_id/apply', function(req, res) {
   var sess = req.session;
+  models.sequelize.Promise.all([
+    models.Job.findAll({
+      where: {
+        id: req.params.job_id
+      },
+    }),
+    models.CompanyContact.findAll()
+  ]).spread(function(all_jobs, all_companyContacts) {
+    if(typeof(all_jobs[0]) != "undefined") {
+      var job = all_jobs[0];
+      var userId = null;
+      for(var companyContact of all_companyContacts) {
+        if (companyContact.companyId == job.companyId) {
+          userId = companyContact.employerId;
+          break;
+        }
+      }
+      if (typeof(userId) != "undefined") {
+        models.Notification.create({
+          userId: userId,
+          jobId: req.params.job_id,
+          status: 0,
+          message: "There's a new application."
+        });
+      }
+    }
+  });
+  
   models.StudentJob.create({
     jobId: req.params.job_id,
     studentId: sess.user_id,

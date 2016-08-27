@@ -8,5 +8,5 @@ block content
     li
       = notification.message
       if (notification.status == 0)
-        form(action="/notification/" + notification.id + "/read", method="post")
+        form(action="/notification/" + notification.id + "/read", method="post", style="display: inline")
           button(type="submit" class="btn btn-primary") Mark as read
