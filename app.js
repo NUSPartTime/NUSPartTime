@@ -10,16 +10,18 @@ var sequelize = require("sequelize");
 
 var routes = require('./routes/index');
 // var userManagement = require('./routes/userManagement');
+// var notification = require('./routes/notification');
 // var student = require('./routes/student');
 // var studentDetail = require('./routes/studentDetail');
 // var company = require('./routes/company');
 // var jobs = require('./routes/jobs');
-// var notification = require('./routes/notification');
 
 var app = module.exports = express();
 
+app.use(express.static(path.join(__dirname, '/public')));
+
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+// app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
@@ -33,45 +35,47 @@ app.use(session({
   resave: true,
   saveUninitialized: true
 }));
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 // app.use('/userManagement', userManagement);
-// app.use('/studentDetail', studentDetail);
 // app.use('/notification', notification);
 // app.use('/company', company);
+// app.use('/studentDetail', studentDetail);
 // app.use('/student', student);
 // app.use('/jobs', jobs);
 
+
+// app.get('*', function (req, res) {
+//     res.sendFile(path.join(__dirname, '/views/layout.jade'));
+// });
 // app.get('*', routes.index);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
+// app.use(function(req, res, next) {
+//   var err = new Error('Not Found');
+//   err.status = 404;
+//   next(err);
+// });
 
-// error handlers
+// // error handlers:
+// if (app.get('env') === 'development') {
+//   // development error handler: will print stacktrace
+//   app.use(function(err, req, res, next) {
+//     res.status(err.status || 500);
+//     res.render('error', {
+//       message: err.message,
+//       error: err
+//     });
+//   });
+// } else {
+//   // production error handler: no stacktraces leaked to user
+//   app.use(function(err, req, res, next) {
+//     res.status(err.status || 500);
+//     res.render('error', {
+//       message: err.message,
+//       error: {}
+//     });
+//   });
+// }
 
-// development error handler: will print stacktrace
-if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
-  });
-}
-
-// production error handler: no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
-});
-
-// module.exports = app;
+module.exports = app;
