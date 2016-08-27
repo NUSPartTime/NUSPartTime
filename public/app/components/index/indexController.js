@@ -1,27 +1,7 @@
 
 angular.module("nusPartimeApp").controller("indexController", ["$scope", "$location",
 	function($scope, $location) {
-		var student_registration = function(user_id) {
-			console.log("creating student!");
-			console.log(user_id);
-			$.post('/userManagement/create_student', {
-				id: user_id
-			}).done(function (data, textStatus) {
-				if (typeof data.redirect == 'string') {
-					window.location = data.redirect;
-				}
-			});
-		};
-		var company_registration = function(user_id) {
-			console.log("creating company!");
-			$.post('/userManagement/create_company', {
-				id: user_id
-			}).done(function (data, textStatus) {
-				if (typeof data.redirect == 'string') {
-					window.location = data.redirect;
-				}
-			});
-		};
+		$scope.fbLoginText = "Log Out";
 
 		$scope.directStudentPage = function() {
 			console.log("direct to student page");
@@ -34,6 +14,44 @@ angular.module("nusPartimeApp").controller("indexController", ["$scope", "$locat
 		}
 
 		$scope.fbToggle = function() {
-			console.log("hi");
+			FB.getLoginStatus(function(response) {
+				console.log(response);
+
+				if (response.status === 'connected') {
+					FB.logout(function(response) {
+						console.log("logged out from FB");
+
+						$scope.fbLoginText = "Log In";
+						$scope.$apply();
+						// $.post('/userManagement/logout', {}).done(function (data, textStatus) {
+						// 	if (typeof data.redirect == 'string') {
+						// 		window.location = data.redirect;
+						// 	}
+						// });
+					});
+				} else {
+					FB.login(function(response) {
+						if (response.authResponse) {
+							console.log("logged in from FB");
+
+							$scope.fbLoginText = "Log Out";
+							$scope.$apply();
+							// $.post('/userManagement/create_user', {
+							// 	id: FB.getAuthResponse().userID,
+							// 	name: FB.getAuthResponse().name
+							// }).done(function (data, textStatus) {
+							// 	if (typeof data.redirect == 'string') {
+							// 		window.location = data.redirect;
+							// 	}
+							// });
+						} else {
+							//user hit cancel button
+							console.log('User cancelled login or did not fully authorize.');
+						}
+					}, {
+						scope: 'public_profile, email'
+					});
+				}
+			});
 		}
 	}]);
