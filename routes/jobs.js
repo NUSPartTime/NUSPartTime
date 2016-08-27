@@ -113,7 +113,6 @@ router.post('/:job_id/edit', function(req, res) {
   models.sequelize.Promise.all([
     models.Job.findAll({
       where: {
-
         // Also use job id to find the particular job
         id: req.params.job_id
       },
@@ -157,11 +156,12 @@ router.post('/:job_id/apply', function(req, res) {
         }
       }
       if (typeof(userId) != "undefined") {
+        var message = "There's a new application for " + job.title;
         models.Notification.create({
           userId: userId,
           jobId: req.params.job_id,
           status: 0,
-          message: "There's a new application."
+          message: message
         });
       }
     }
