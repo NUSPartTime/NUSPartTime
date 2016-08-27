@@ -50,6 +50,12 @@ router.get('/:job_id/details', function(req, res) {
 /* This is for company to view job status */
 router.get('/:job_id/view', function(req, res, next) {
   var sess = req.session;
+
+  if(!sess.is_employer){
+    res.redirect('../'+req.params.job_id+'/details');
+  }
+
+
   var userId = sess.user_id;
   models.sequelize.Promise.all([
     models.StudentJob.findAll({
