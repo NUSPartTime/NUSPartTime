@@ -5,6 +5,11 @@ var router = express.Router();
 /* GET job with certain ID */
 router.get('/:job_id/details', function(req, res) {
   var sess = req.session;
+
+  if(sess.is_employer){
+    res.redirect('../'+req.params.job_id+'/view');
+  }
+
   models.sequelize.Promise.all([
     models.StudentJob.findAll({
       where: {
@@ -35,9 +40,7 @@ router.get('/:job_id/details', function(req, res) {
 
     console.log(job.id);
     console.log(applicationStatus);
-    var identity = (req.session.is_employer) ? 'employer' : 'student';
     res.render('job', {
-      identity: identity,
       job: job,
       applicationStatus: applicationStatus
     });
@@ -47,6 +50,12 @@ router.get('/:job_id/details', function(req, res) {
 /* This is for company to view job status */
 router.get('/:job_id/view', function(req, res, next) {
   var sess = req.session;
+
+  if(!sess.is_employer){
+    res.redirect('../'+req.params.job_id+'/details');
+  }
+
+
   var userId = sess.user_id;
   models.sequelize.Promise.all([
     models.StudentJob.findAll({
@@ -166,7 +175,7 @@ router.post('/:job_id/apply', function(req, res) {
       }
     }
   });
-  
+
   models.StudentJob.create({
     jobId: req.params.job_id,
     studentId: sess.user_id,
