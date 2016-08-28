@@ -21,7 +21,7 @@ nusPartime.config(["$routeProvider", "$locationProvider",
 				controller: "studentMainController"
 			}).
 			when("/company", {
-				templateUrl: "/app/components/company/companyMainPage",
+				templateUrl: "/app/components/company/companyMainPage.jade",
 				controller: "companyMainController"
 			}).
 			otherwise({
