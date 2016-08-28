@@ -1,46 +1,108 @@
 extends layout
 
 block content
+  
+  script.
+    var show_all_jobs = function() {
+      $(".category-job").show();
+    };
+    var toggle_job_content = function(job_blk_class) {
+      console.log(job_blk_class);
+      $(".category-job").hide();
+      $("."+job_blk_class).show();
+    };
+    $(document).ready(function() {
+      format_time();
+      $(".all-company-button a").click();
+      $(".all-company-button").addClass("active");
+      //- $("#"+!{JSON.stringify(cat_job_array)}[0].category_html_class).click();
+      $(".nav-side-bar li").on('click', function() {
+        $(".nav-side-bar li").removeClass('active');
+        $(this).addClass('active');
+      });
+    });
+
+    function format_time() {
+      $(".category-job").each(function() {
+        var status_span = $(this).children("div").children()[0];
+        if($(status_span).text() !== "Closed") {
+          $(status_span).text("Deadline: " + $.format.date($(status_span).text(), "dd MMM yyyy"))
+        }
+      })
+    }
 
   //- header
-  include header.jade
-  div(class="container")
-    div 
-      a(href="/company/new_job") post a new job
+  nav(class="navbar box-shadow", id="mainNav")
+    div(class="container")
+      div(class="navbar-header page-scroll")
 
-      
-    div
-      a(href="/company/new_company") add a new company
+        //- logo here
+        a(class="navbar-brand header-logo" href="/")
+          img(src="/images/logo.png")
 
-    h1 Welcome
+        //- New drop down here
+        ul(class="nav navbar-nav company-new-button")
+          li(class="dropdown")
+            a(href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") #[span New] #[span(class="caret")]
+            ul(class="dropdown-menu")
+              li 
+                a(href="/company/new_job") #[i(class="fa fa-usd job-icon" aria-hidden="true")] #[span(class="dropdown-text") Job]
+              li 
+                a(href="/company/new_company") #[i(class="fa fa-briefcase" aria-hidden="true")] #[span(class="dropdown-text") Company]
 
-    script.
-      var show_all_jobs = function() {
-        $(".category-job").show();
-      };
-      var toggle_job_content = function(job_blk_class) {
-        console.log(job_blk_class);
-        $(".category-job").hide();
-        $("."+job_blk_class).show();
-      };
-      $(document).ready(function() {
-        $("#all-jobs-button").click().focus();
-        //- $("#"+!{JSON.stringify(cat_job_array)}[0].category_html_class).click();
-      });
+        //- search bar is here
+        form(class="navbar-form navbar-form-sm navbar-left")
+          div(class="input-group")
+            input(class="form-control input-sm bg-light no-border rounded padder search-bar" type="text" placeholder="search posted job..")
+            span(class="input-group-btn")
+              button(type="submit" class="btn btn btn-sm bg-light rounded")
+                i(class="fa fa-search")
 
-    ul(class="list-group side-bar") 
-        button(type="button" class="list-group-item" id="all-jobs-button" onclick="show_all_jobs()") All
-        each cat_job in cat_job_array
-          button(type="button" class="list-group-item" id="#{cat_job.company_html_class}" onclick='toggle_job_content("#{cat_job.company_html_class}")')
-            = cat_job.company
-    
-    div(id="job-content")
-      h1(class="page-header")= title
+  div(class="company-index-body")
+    div(class="company-index-side-bar")
+      div(class="wrapper bg-light wrapper-centre")
+        span(class="title-font") #[i(class="fa fa-list-alt" aria-hidden="true")] #[span(class="title-icon") My Companies]
+      div(class="wrapper")
+        ul(class="nav nav-pills nav-stacked nav-side-bar font-mid")
+          li(role="presentation" class="all-company-button")
+            a(onclick="show_all_jobs()") All
+          each cat_job in cat_job_array
+            li(role="presentation")
+              a(id="#{cat_job.company_html_class}" onclick='toggle_job_content("#{cat_job.company_html_class}")')
+                = cat_job.company
 
-      div(class="list-group")
+    div(class="company-index-info")
+      div(class="wrapper filter-header")
+        div(class="btn-group pull-right")
+          button(type="button" class="btn btn-sm btn-bg btn-default")
+            i(class="fa fa-chevron-left")
+          button(type="button" class="btn btn-sm btn-bg btn-default")
+            i(class="fa fa-chevron-right")
+        div(class="btn-toolbar")
+          span(class="title-font title-icon") My Posted Jobs
+          
+          div(class="btn-group dropdown")
+            button(class="btn btn-default btn-sm btn-bg dropdown-toggle")
+              span(class="dropdown-label") Filter 
+              span(class="caret")
+          div(class="btn-group")
+            button(class="btn btn-sm btn-bg btn-default")
+              i(class="fa fa-refresh")
+          
+      ul(class="list-group list-group-lg no-radius m-b-none m-t-n-xxs")
         each cat_job in cat_job_array
           each job in cat_job.jobs
-            div(class="list-group-item category-job #{cat_job.company_html_class}")
-              h4(class="list-group-item-heading")
-                = job.title
-              a(href="/jobs/" + job.id + "/view") Details
+            if job.status == 0
+              li(class="list-group-item category-job #{cat_job.company_html_class} b-l-3x b-l-success")
+                h4(class="list-group-item-heading")
+                  = job.title
+                a(href="/jobs/" + job.id + "/view") Details
+                div(class="pull-right")
+                  span(class="font-not-important")=job.applicationDeadline
+            else
+              li(class="list-group-item category-job #{cat_job.company_html_class} b-l-3x")
+                h4(class="list-group-item-heading")
+                  = job.title
+                a(href="/jobs/" + job.id + "/view") Details
+                div(class="pull-right")
+                  span(class="font-not-important") Closed

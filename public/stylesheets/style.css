@@ -1,12 +1,184 @@
+@import 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300';
+
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: "Source Sans Pro",sans-serif;
+  color: #58666e;
+  background-color: #edf1f2;
   padding: 0;
   margin: 0;
 }
 
-a {
-  color: #00B7FF;
+/*general*/
+.b-l-primary {
+  border-left-color: #7266ba;
 }
+
+.b-l-info {
+  border-left-color: #23b7e5;
+}
+
+.b-l-warning {
+  border-left-color: #fad733;
+}
+
+.b-l-success {
+  border-left-color: #27c24c;
+}
+
+.b-l-3x {
+  border-left-width: 3px;
+}
+
+.navbar-brand:hover, a, a:focus, a:hover {
+  text-decoration: none;
+}
+
+.m-b-none {
+  margin-bottom: 0!important;
+}
+
+.m-t-n-xxs {
+  margin-top: -1px;
+}
+
+.no-radius {
+  border-radius: 0;
+}
+
+.wrapper {
+  padding: 15px;
+}
+
+.wrapper-centre {
+  text-align: center;
+}
+
+.bg-light {
+  background-color: #edf1f2;
+}
+
+.title-font {
+  font-size: 20px;
+}
+
+.font-mid {
+  font-size: 15px;
+}
+
+.font-large {
+  font-size: 18px;
+}
+
+.font-not-important {
+  color: #98a6ad;
+}
+
+.title-icon {
+  padding-left: 15px;
+}
+
+.rounded {
+  border-radius: 500px;
+}
+
+.navbar-form-sm {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.padder {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+/*end of general*/
+
+/*for navbar*/
+#mainNav {
+  background-color: #fff;
+  margin: 0px;
+  border-radius: 0px;
+}
+
+.header-logo {
+  padding-left: 25px;
+}
+
+.box-shadow {
+  box-shadow: 0 2px 2px rgba(0,0,0,.05),0 1px 0 rgba(0,0,0,.05);
+}
+
+.nav a {
+  color: #58666e;
+}
+
+.dropdown-text {
+  padding-left: 10px;
+}
+
+.job-icon {
+  padding-left: 5px;
+}
+
+.company-new-button {
+  padding-left: 70px;
+}
+/*end of navbar*/
+
+/*company index body*/
+.company-index-body {
+  display: table;
+  padding: 0px;  
+  height: 100%;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.company-index-side-bar {
+  display: table-cell;
+  float: none;
+  height: 100%;
+  vertical-align: top;
+  width: 240px;
+  border-right: 1px solid #dee5e7;
+  background-color: #e4eaec;
+}
+
+.company-index-info {
+  display: table-cell;
+  float: none;
+  height: 100%;
+  vertical-align: top;
+  background-color: #fff;
+}
+
+.filter-header {
+  background-color: #f6f8f8;
+  height: 59px;
+}
+
+.filter-header .btn {
+  border-radius: 0px;
+}
+
+.filter-header .btn:focus {
+  outline: 0px;
+}
+
+.category-job {
+  border-radius: 0!important;
+}
+
+.search-bar {
+  border: 0px;
+  box-shadow: none;
+}
+
+.search-bar:focus {
+  border: 0px!important;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+/*end of company index body*/
 
 /*for header*/
 .navbar-header a {
