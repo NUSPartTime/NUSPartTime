@@ -119,7 +119,7 @@ block content
 
           div(class="list-group")
             each student in students
-              tr
+              ul
                 //- Since students do not have name yet, use matric now
-                td=student.matric
+                li=student.matric
 
