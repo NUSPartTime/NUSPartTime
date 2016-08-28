@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
 var nusPartime = angular.module("nusPartimeApp", [
-	"ngRoute"
+	"ngRoute", "ngCookies"
 ]);
 
 nusPartime.config(["$routeProvider", "$locationProvider", 
@@ -9,7 +9,12 @@ nusPartime.config(["$routeProvider", "$locationProvider",
 		$routeProvider.
 			when("/", {
 				templateUrl: "/app/components/index/index.jade",
-				controller: "indexController"
+				controller: "indexController",
+				resolve: {
+					isAuthenticated: function(AuthService) {
+						return AuthService.isAuthenticated();
+					}
+				}
 			}).
 			when("/student", {
 				templateUrl: "/app/components/student/studentMainPage.jade",
@@ -24,25 +29,47 @@ nusPartime.config(["$routeProvider", "$locationProvider",
 			});
 	}]);
 
-nusPartime.constant('AUTH_EVENTS', {
-	loginSuccess: 'auth-login-success',
-	loginFailed: 'auth-login-failed',
-	logoutSuccess: 'auth-logout-success',
-	sessionTimeout: 'auth-session-timeout',
-	notAuthenticated: 'auth-not-authenticated',
-	notAuthorized: 'auth-not-authorized'
+nusPartime.constant("AUTH_EVENTS", {
+	loginSuccess: "auth-login-success",
+	loginFailed: "auth-login-failed",
+	logoutSuccess: "auth-logout-success",
+	sessionTimeout: "auth-session-timeout",
+	notAuthenticated: "auth-not-authenticated",
+	notAuthorized: "auth-not-authorized"
+});
+
+nusPartime.constant("USER_ROLES", {
+  all: "*",
+  admin: "admin",
+  student: "student",
+  employer: "employer",
+  guest: "guest"
 })
 
-nusPartime.run(['$rootScope', '$window',
-	function($rootScope, $window) {
+nusPartime.run(["$rootScope", "$window", "$location", "AuthService", 
+	function($rootScope, $window, $location, AuthService) {
 		$rootScope.user = {};
 		$window.fbAsyncInit = function() {
 			// Executed when the SDK is loaded
 			FB.init({
-				appId: '833829723419057',
+				appId: "833829723419057",
 				xfbml: true,
 				cookie: true,
-				version: 'v2.7'
+				version: "v2.7"
+			});
+
+			FB.getLoginStatus(function(response){
+				// if logged into Facebook
+				if (response.status === 'connected') {
+					var userID = FB.getAuthResponse().userID;
+					var loginStatus = AuthService.isAuthenticated();
+					if (!loginStatus) {
+						AuthService.login(userID).then(function(param) {
+							// redirect if needed
+							$location.path(param);
+						});
+					}
+				}
 			});
 		};
 
@@ -55,51 +82,23 @@ nusPartime.run(['$rootScope', '$window',
 			js.id = id;
 			js.src = "//connect.facebook.net/en_US/sdk.js";
 			fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
+		}(document, "script", "facebook-jssdk"));
 	}]);
 
-// nusPartime.factory('AuthService', function ($http, Session) {
-//   var authService = {};
- 
-//   authService.login = function (credentials) {
-//     return $http
-//       .post('/login', credentials)
-//       .then(function (res) {
-//         Session.create(res.data.id, res.data.user.id,
-//                        res.data.user.role);
-//         return res.data.user;
-//       });
-//   };
- 
-//   authService.isAuthenticated = function () {
-//     return !!Session.userId;
-//   };
- 
-//   authService.isAuthorized = function (authorizedRoles) {
-//     if (!angular.isArray(authorizedRoles)) {
-//       authorizedRoles = [authorizedRoles];
-//     }
-//     return (authService.isAuthenticated() &&
-//       authorizedRoles.indexOf(Session.userRole) !== -1);
-//   };
- 
-//   return authService;
-// });
-
-// nusPartime.factory('facebookService', function($q) {
-//     return {
-//         getMyId: function() {
-//             var deferred = $q.defer();
-//             FB.api('/me', {
-//                 fields: 'last_name'
-//             }, function(response) {
-//                 if (!response || response.error) {
-//                     deferred.reject('Error occured');
-//                 } else {
-//                     deferred.resolve(response);
-//                 }
-//             });
-//             return deferred.promise;
-//         }
-//     }
-// });
+// nusPartime.factory("FacebookService", ["$q", 
+// 	function($q) {
+// 		return {
+// 			isLoggedIn: function() {
+// 				var deferred = $q.defer();
+// 				FB.getLoginStatus(function(response) {
+// 					console.log(response);
+// 					if (response.status === "connected") {
+// 						deferred.resolve("true");	
+// 					} else {
+// 						deferred.resolve("false");	
+// 					}
+// 				});
+// 				return deferred.promise;
+// 			}
+// 		}
+// 	}]);

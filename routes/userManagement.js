@@ -2,6 +2,66 @@ var models  = require('../models');
 var express = require('express');
 var router = express.Router();
 
+router.post('/login', function(req, res) {
+	var userId = req.body.userId;
+	models.sequelize.Promise.all([
+		models.User.findOne({
+			where: {
+				id: userId
+			}
+		}),
+		models.Student.findOne({
+			where: {
+				id: userId
+			}
+		}),
+		models.Employer.findOne({
+			where: {
+				id: userId
+			}
+		})
+	]).spread(function(user, student, employer) {
+		if (user == null) {
+			res.send({error: "User Id not specified!"});
+		} else {
+			if (student != null) {
+				if (employer != null) {
+					// role as both student and employer, stay at main page and let user select?
+					res.send({
+						isStudent: "true",
+						isEmployer: "true",
+						redirect: "/"
+					});
+				} else {
+					res.send({
+						isStudent: "true",
+						isEmployer: "false",
+						redirect: "/student"
+					});
+				}
+			} else if (employer != null) {
+				res.send({
+					isStudent: "false",
+					isEmployer: "true",
+					redirect: "/company"
+				});
+			} else {
+				res.send({
+					isStudent: "false",
+					isEmployer: "false",
+					redirect: "/"
+				});
+			}
+		}
+	});
+});
+
+
+
+
+
+
+
 router.get('/new_student', function(req, res, next) {
   res.render('student_register', { title: 'Student Validation',
                                    header: 'NUS Student Validation' });
@@ -19,16 +79,6 @@ router.post('/new_student/create', function(req, res) {
     req.session.user_id = user_id;
     res.redirect('/student');
   });
-});
-
-/* Set session user id for first time loading main page */
-router.post('/update_session_user_id', function(req, res) {
-  if (req.session.user_id == undefined) {
-    req.session.user_id = req.body.id;
-    req.session.is_student = false;
-    req.session.is_employer = false;
-    res.send({need_redirect: true});
-  }
 });
 
 /* POST user creation. */

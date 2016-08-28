@@ -9,7 +9,7 @@ var _ = require("underscore");
 var sequelize = require("sequelize");
 
 var routes = require('./routes/index');
-// var userManagement = require('./routes/userManagement');
+var userManagement = require('./routes/userManagement');
 // var notification = require('./routes/notification');
 // var student = require('./routes/student');
 // var studentDetail = require('./routes/studentDetail');
@@ -37,7 +37,7 @@ app.use(session({
 }));
 
 app.use('/', routes);
-// app.use('/userManagement', userManagement);
+app.use('/userManagement', userManagement);
 // app.use('/notification', notification);
 // app.use('/company', company);
 // app.use('/studentDetail', studentDetail);
