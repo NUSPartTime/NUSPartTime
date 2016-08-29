@@ -5,9 +5,9 @@
 	<div class="panel-body">
 		<form ng-submit="register()">
 			<div>
-				<input type="text" name="matricNumber" class="form-control" required>
+				<input type="text" name="matricNumber" ng-model="matricNumber" class="form-control" required>
 			</div>
-			<button class="btn btn-primary">
+			<button type="submit" class="btn btn-primary">
 				Register
 			</button>
 		</form>
