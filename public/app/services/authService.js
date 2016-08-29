@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module("nusPartimeApp").factory("AuthService", function ($http, $cookies, Session) {
+angular.module("nusPartimeApp").factory("AuthService", function ($http, $location, $cookies, Session) {
 	var authService = {};
 
 	authService.login = function(userId) {
@@ -27,10 +27,12 @@ angular.module("nusPartimeApp").factory("AuthService", function ($http, $cookies
 		return (!!Session.userId || !!$cookies.get("userId"));
 	};
 
-	// login using info stored in session / cookie
+	// login using info stored in session/cookie, redirect to main page otherwise 
 	authService.autoLogin = function() {
 		if (authService.isAuthenticated()) {
 			return authService.login($cookies.get("userId"));
+		} else {
+			$location.path("/");
 		}
 	}
 

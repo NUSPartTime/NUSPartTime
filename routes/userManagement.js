@@ -1,8 +1,8 @@
-var models  = require('../models');
-var express = require('express');
+var models  = require("../models");
+var express = require("express");
 var router = express.Router();
 
-router.post('/login', function(req, res) {
+router.post("/login", function(req, res) {
 	var userId = req.body.userId;
 	models.sequelize.Promise.all([
 		models.User.findOne({
@@ -56,7 +56,20 @@ router.post('/login', function(req, res) {
 	});
 });
 
+router.post("/createNewStudent", function(req, res) {
+	var user_id = req.body.user_id;
+	var matric_number = req.body.matric_number;
 
+	models.Student.create({
+		id: user_id,
+		matric: matric_number
+	}).then(function() {
+		console.log("Student created with id: " + user_id + " and matricNumber: " + matric_number);
+		res.send({
+			redirect: "/student"
+		});
+	});
+});
 
 
 
@@ -65,20 +78,6 @@ router.post('/login', function(req, res) {
 router.get('/new_student', function(req, res, next) {
   res.render('student_register', { title: 'Student Validation',
                                    header: 'NUS Student Validation' });
-});
-
-router.post('/new_student/create', function(req, res) {
-  var user_id = req.session.user_id;
-  var matric_number = req.body.matric_number;
-
-  models.Student.create({
-    id: user_id,
-    matric: matric_number
-  }).then(function() {
-    console.log("Student created successfully");
-    req.session.user_id = user_id;
-    res.redirect('/student');
-  });
 });
 
 /* POST user creation. */
