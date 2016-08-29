@@ -8,7 +8,7 @@ nusPartime.config(["$routeProvider", "$locationProvider",
 	function($routeProvider, $locationProvider) {
 		$routeProvider.
 			when("/", {
-				templateUrl: "/app/components/index/index.jade",
+				templateUrl: "/app/components/index/index.html",
 				controller: "indexController",
 				resolve: {
 					isAuthenticated: function(AuthService) {
@@ -17,11 +17,11 @@ nusPartime.config(["$routeProvider", "$locationProvider",
 				}
 			}).
 			when("/student", {
-				templateUrl: "/app/components/student/studentMainPage.jade",
+				templateUrl: "/app/components/student/studentMainPage.html",
 				controller: "studentMainController"
 			}).
 			when("/company", {
-				templateUrl: "/app/components/company/companyMainPage.jade",
+				templateUrl: "/app/components/company/companyMainPage.html",
 				controller: "companyMainController"
 			}).
 			otherwise({
