@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 angular.module("nusPartimeApp").service("Session", function () {
 	this.create = function (userId, isStudent, isEmployer) {

@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 angular.module("nusPartimeApp").factory("AuthService", function ($http, $location, $cookies, Session) {
 	var authService = {};

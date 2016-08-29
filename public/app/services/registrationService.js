@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 angular.module("nusPartimeApp").factory("RegistrationService", ["$http", "$location", "Session",
 	function ($http, $location, Session) {

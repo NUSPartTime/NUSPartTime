@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 angular.module("nusPartimeApp").controller("indexController", 
 	["$scope", "$location", "AuthService", "RegistrationService", "isAuthenticated",

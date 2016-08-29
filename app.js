@@ -21,7 +21,6 @@ var app = module.exports = express();
 app.use(express.static(path.join(__dirname, '/public')));
 
 // view engine setup
-// app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
@@ -29,12 +28,6 @@ app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(cookieParser());
-app.use(session({
-  secret: 'ssshhhhh',
-  resave: true,
-  saveUninitialized: true
-}));
 
 app.use('/', routes);
 app.use('/userManagement', userManagement);
@@ -43,12 +36,6 @@ app.use('/userManagement', userManagement);
 // app.use('/studentDetail', studentDetail);
 // app.use('/student', student);
 // app.use('/jobs', jobs);
-
-
-// app.get('*', function (req, res) {
-//     res.sendFile(path.join(__dirname, '/views/layout.jade'));
-// });
-// app.get('*', routes.index);
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
