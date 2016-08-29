@@ -17,6 +17,7 @@ angular.module("nusPartimeApp").controller("indexController", ["$scope", "$locat
 		}
 
 		$scope.studentRegistration = function() {
+			$location.path("/studentRegister");
 		}
 
 		$scope.companyRegistration = function() {

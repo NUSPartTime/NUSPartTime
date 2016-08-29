@@ -24,6 +24,10 @@ nusPartime.config(["$routeProvider", "$locationProvider",
 				templateUrl: "/app/components/company/companyMainPage.html",
 				controller: "companyMainController"
 			}).
+			when("/studentRegister", {
+				templateUrl: "/app/components/studentRegistration/studentRegistrationPage.html",
+				controller: "studentRegistrationController"
+			}).
 			otherwise({
 				redirectTo: "/"
 			});
