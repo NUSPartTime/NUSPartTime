@@ -4,6 +4,14 @@ angular.module("nusPartimeApp").controller("indexController", ["$scope", "$locat
 	function($scope, $location, AuthService, isAuthenticated) {
 		if (isAuthenticated) {
 			$scope.fbLoginText = "Log Out";
+			// check if need to redirect
+			AuthService.autoLogin().then(function(response) {
+				if (response.isRegistered) {
+					$location.path(response.redirectUrl);
+				} else {
+					$scope.showLogin = true;
+				}
+			});
 		} else {
 			$scope.fbLoginText = "Log In";
 		}
@@ -33,6 +41,7 @@ angular.module("nusPartimeApp").controller("indexController", ["$scope", "$locat
 						console.log("logged out from FB");
 						AuthService.logout();
 
+						$scope.showLogin = false;
 						$scope.fbLoginText = "Log In";
 						$scope.$apply();
 					});
@@ -42,7 +51,11 @@ angular.module("nusPartimeApp").controller("indexController", ["$scope", "$locat
 							console.log("logged in from FB");
 							AuthService.login(FB.getAuthResponse().userID).
 								then(function(response) {
-									$location.path(response);
+									if (response.isRegistered) {
+										$location.path(response.redirectUrl);
+									} else {
+										$scope.showLogin = true;
+									}
 								});
 
 							$scope.fbLoginText = "Log Out";

@@ -28,27 +28,27 @@ router.post('/login', function(req, res) {
 				if (employer != null) {
 					// role as both student and employer, stay at main page and let user select?
 					res.send({
-						isStudent: "true",
-						isEmployer: "true",
+						isStudent: true,
+						isEmployer: true,
 						redirect: "/"
 					});
 				} else {
 					res.send({
-						isStudent: "true",
-						isEmployer: "false",
+						isStudent: true,
+						isEmployer: false,
 						redirect: "/student"
 					});
 				}
 			} else if (employer != null) {
 				res.send({
-					isStudent: "false",
-					isEmployer: "true",
+					isStudent: false,
+					isEmployer: true,
 					redirect: "/company"
 				});
 			} else {
 				res.send({
-					isStudent: "false",
-					isEmployer: "false",
+					isStudent: false,
+					isEmployer: false,
 					redirect: "/"
 				});
 			}

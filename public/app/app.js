@@ -39,11 +39,11 @@ nusPartime.constant("AUTH_EVENTS", {
 });
 
 nusPartime.constant("USER_ROLES", {
-  all: "*",
-  admin: "admin",
-  student: "student",
-  employer: "employer",
-  guest: "guest"
+	all: "*",
+	admin: "admin",
+	student: "student",
+	employer: "employer",
+	guest: "guest"
 })
 
 nusPartime.run(["$rootScope", "$window", "$location", "AuthService", 

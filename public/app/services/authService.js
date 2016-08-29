@@ -3,27 +3,36 @@
 angular.module("nusPartimeApp").factory("AuthService", function ($http, $cookies, Session) {
 	var authService = {};
 
-	authService.login = function (userId) {
+	authService.login = function(userId) {
 		var postParam = {userId: userId};
-		return $http
-			.post("/userManagement/login", postParam)
-			.then(function (res) {
-				console.log("AuthService Log in response from server: ");
-				console.log(res.data);
-				if (res.data.error != undefined) {
+		return $http.post("/userManagement/login", postParam)
+					.then(function(res) {
+						console.log("AuthService Login response from server: ");
+						console.log(res.data);
+						if (res.data.error != undefined) {
 
-				} else {
-					$cookies.put("userId", userId);
-					Session.create(userId, res.data.isStudent,
-					               res.data.isEmployer);
-					return res.data.redirect;
-				}
-			});
+						} else {
+							$cookies.put("userId", userId);
+							Session.create(userId, res.data.isStudent,
+											res.data.isEmployer);
+							return {
+								redirectUrl: res.data.redirect,
+								isRegistered: (res.data.isStudent || res.data.isEmployer)
+							};
+						}
+					});
 	};
 
-	authService.isAuthenticated = function () {
+	authService.isAuthenticated = function() {
 		return (!!Session.userId || !!$cookies.get("userId"));
 	};
+
+	// login using info stored in session / cookie
+	authService.autoLogin = function() {
+		if (authService.isAuthenticated()) {
+			return authService.login($cookies.get("userId"));
+		}
+	}
 
 	authService.logout = function() {
 		Session.destroy();
