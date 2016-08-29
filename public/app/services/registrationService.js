@@ -9,7 +9,7 @@ angular.module("nusPartimeApp").factory("RegistrationService", ["$http", "$locat
 				userId: userId,
 				matricNumber: matricNumber
 			};
-			return $http.post("/userManagement/login", postParam)
+			return $http.post("/userManagement/createNewStudent", postParam)
 						.then(function(res) {
 							Session.isStudent = true;
 							// redirect to student page if successful

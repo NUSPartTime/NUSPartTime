@@ -6,8 +6,11 @@ angular.module("nusPartimeApp").controller("studentRegistrationController",
 		AuthService.autoLogin();
 		$scope.register = function() {
 			console.log($scope.matricNumber);
-			// suppose to check validity of matric number
+			// suppose to check validity of matric number 
+			/*
+				stub
+			*/
 			// then register
-			RegistrationService.registerStudent(Session.userId, $scope.matricNumber)
+			RegistrationService.registerStudent(Session.userId, $scope.matricNumber);
 		}
 	}]);
