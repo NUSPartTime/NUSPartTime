@@ -13,6 +13,14 @@ angular.module("nusPartimeApp").directive("studentHeader", function() {
                 }
                 $scope.user.userId = Session.userId;
             });
+
+            $scope.directStudentPage = function() {
+                $location.path("/student");
+            }
+
+            $scope.dirctHomePage = function() {
+                $location.path("/");
+            }
         }]
     }
 });

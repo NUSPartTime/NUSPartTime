@@ -5,7 +5,7 @@ angular.module("nusPartimeApp").directive("mainHeader", function() {
         restirct: "AE",
         templateUrl: "/app/directives/mainHeader.html",
         controller: ["$scope", "$location", function($scope, $location) {
-            $scope.redirctHomePage = function() {
+            $scope.dirctHomePage = function() {
                 $location.path("/");
             }
         }]
