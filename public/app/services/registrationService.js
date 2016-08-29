@@ -4,6 +4,19 @@ angular.module("nusPartimeApp").factory("RegistrationService", ["$http", "$locat
 	function ($http, $location, Session) {
 		var registrationService = {};
 
+		registrationService.registerUser = function(userId, name) {
+			var postParam = {
+				userId: userId,
+				name: name
+			};
+			return $http.post("/userManagement/createNewUser", postParam)
+						.then(function(res) {
+							console.log("response from server register user: ");
+							console.log(res.data);
+							return {status: res.data.status};
+						});
+		}
+
 		registrationService.registerStudent = function(userId, matricNumber) {
 			var postParam = {
 				userId: userId,

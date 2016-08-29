@@ -1,12 +1,14 @@
 'use strict';
 
-angular.module("nusPartimeApp").controller("indexController", ["$scope", "$location", "AuthService", "isAuthenticated",
-	function($scope, $location, AuthService, isAuthenticated) {
+angular.module("nusPartimeApp").controller("indexController", 
+	["$scope", "$location", "AuthService", "RegistrationService", "isAuthenticated",
+	function($scope, $location, AuthService, RegistrationService, isAuthenticated) {
+		$scope.showLogin = false;
 		if (isAuthenticated) {
 			$scope.fbLoginText = "Log Out";
 			// check if need to redirect
 			AuthService.autoLogin().then(function(response) {
-				if (response.isRegistered) {
+				if (response.needRedirect) {
 					$location.path(response.redirectUrl);
 				} else {
 					$scope.showLogin = true;
@@ -35,8 +37,6 @@ angular.module("nusPartimeApp").controller("indexController", ["$scope", "$locat
 
 		$scope.fbToggle = function() {
 			FB.getLoginStatus(function(response) {
-				console.log(response);
-
 				if (response.status === 'connected') {
 					FB.logout(function(response) {
 						console.log("logged out from FB");
@@ -47,15 +47,33 @@ angular.module("nusPartimeApp").controller("indexController", ["$scope", "$locat
 						$scope.$apply();
 					});
 				} else {
-					FB.login(function(response) {
-						if (response.authResponse) {
+					FB.login(function(fbResponse) {
+						if (fbResponse.authResponse) {
 							console.log("logged in from FB");
 							AuthService.login(FB.getAuthResponse().userID).
-								then(function(response) {
-									if (response.isRegistered) {
-										$location.path(response.redirectUrl);
+								then(function(authenticationResponse) {
+									if (!authenticationResponse.isRegistered) {
+										// user doesn't exist, create new user
+										FB.api("/me", function(res) {
+											RegistrationService.registerUser(
+												res.id,
+												res.name
+											).then(function(registerUserResponse) {
+												if (registerUserResponse.status == "success"){
+													AuthService.login(res.id);
+													$scope.showLogin = true;
+												} else {
+													console.log(registerUserResponse.error);
+												}
+											});
+										});
 									} else {
-										$scope.showLogin = true;
+										if (authenticationResponse.needRedirect) {
+											$location.path(authenticationResponse.redirectUrl);
+										} else {
+											// registered user but neither student or employer
+											$scope.showLogin = true;
+										}
 									}
 								});
 

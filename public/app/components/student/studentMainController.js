@@ -2,10 +2,10 @@
 
 angular.module("nusPartimeApp").controller("studentMainController", ["$scope", "$location", "Session", "AuthService",
 	function($scope, $location, Session, AuthService) {
-		AuthService.autoLogin();
-		if (!Session.isStudent) {
-			$location.path("/studentRegister");
-		} else {
-			// is student
-		}
+		AuthService.autoLogin().then(function(res) {
+			if (res.isRegistered && !Session.isStudent) {
+				$location.path("/studentRegister");
+			}
+		});
+		
 	}]);

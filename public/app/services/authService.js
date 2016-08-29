@@ -10,14 +10,25 @@ angular.module("nusPartimeApp").factory("AuthService", function ($http, $locatio
 						console.log("AuthService Login response from server: ");
 						console.log(res.data);
 						if (res.data.error != undefined) {
-
+							// FB may not been loaded yet
+							if (typeof FB !== "undefined") {
+								FB.logout();
+							}
+							// session might have expired
+							authService.logout();
+							$location.path("/");
+							return {
+								error: res.data.error,
+								isRegistered: res.data.isRegistered
+							}
 						} else {
 							$cookies.put("userId", userId);
 							Session.create(userId, res.data.isStudent,
 											res.data.isEmployer);
 							return {
 								redirectUrl: res.data.redirect,
-								isRegistered: (res.data.isStudent || res.data.isEmployer)
+								isRegistered: res.data.isRegistered,
+								needRedirect: (res.data.isStudent || res.data.isEmployer)
 							};
 						}
 					});
