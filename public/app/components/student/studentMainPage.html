@@ -1,7 +1,9 @@
 <student-header></student-header>
 
 <ul class="list-group side-bar">
-	<button type="button" class="list-group-item" id="all-jobs-button" ng-click="showAll()"></button>
+	<button type="button" class="list-group-item" id="all-jobs-button" ng-click="showAllContent()"> 
+		All 
+	</button>
 	<div ng-repeat="catJobs in catJobsArray">
 		<button type="button" class="list-group-item" ng-click="showContent($index)">
 			{{ catJobs.category }}
@@ -11,34 +13,11 @@
 
 <div>
 	<div class="list-group">
-		<div ng-repeat="catJobs in catJobsArray">
-			<div ng-repeat="job in catJobs.jobs">
-				<div>
-					<h4 class="list-group-item-heading">
-						{{ job.title }}
-					</h4>
-					<a href=""> Details </a>
-				</div>
-			</div>
+		<div ng-repeat="job in displayedJobs">
+			<h4 class="list-group-item-heading">
+				{{ job.title }}
+			</h4>
+			<a href=""> Details </a>
 		</div>
 	</div>
 </div>
-
-
-<!-- 
-ul() 
-      button( onclick="show_all_jobs()") All
-      each cat_job in cat_job_array
-        button( id="#{cat_job.category_html_class}" onclick='toggle_job_content("#{cat_job.category_html_class}")')
-          = cat_job.category
-  
-  div(id="job-content")
-    h1(class="page-header")= title
-
-    div(class="list-group")
-      each cat_job in cat_job_array
-        each job in cat_job.jobs
-          div(class="list-group-item category-job #{cat_job.category_html_class}")
-            h4(class="list-group-item-heading")
-              = job.title
-            a(href="/jobs/" + job.id + "/details") Details -->
