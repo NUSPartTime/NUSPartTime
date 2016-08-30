@@ -13,7 +13,11 @@ angular.module("nusPartimeApp").factory("DataRetrievalService",
 
 		dataRetrievalService.getJob = function(jobId, userId) {
 			return $http.get("/jobManagement/getJob/" + jobId + "/user/" + userId).then(function(res) {
-						return res.data;
+						if (res.data.status == "error") {
+							return {error: "Job ID not found!"}
+						} else {
+							return res.data;
+						}
 					})
 		}
 

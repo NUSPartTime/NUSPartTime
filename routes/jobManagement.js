@@ -2,6 +2,7 @@ var models  = require('../models');
 var express = require('express');
 var router = express.Router();
 
+/* GET all jobs stored in the DB */
 router.get('/allJobs', function(req, res) {
 	models.sequelize.Promise.all([
 		models.Category.findAll(),
@@ -70,6 +71,40 @@ router.get('/getJob/:jobId/user/:userId', function(req, res) {
 		});
 	});
 });
+
+
+/* POST student job application */
+router.post('/:job_id/apply', function(req, res) {
+	var sess = req.session;
+	models.sequelize.Promise.all([
+		models.Job.findAll({
+			where: {
+				id: req.params.job_id
+			},
+		}),
+		models.CompanyContact.findAll()
+	]).spread(function(all_jobs, all_companyContacts) {
+		if(typeof(all_jobs[0]) != "undefined") {
+			var job = all_jobs[0];
+			var userId = null;
+			for(var companyContact of all_companyContacts) {
+				if (companyContact.companyId == job.companyId) {
+				userId = companyContact.employerId;
+				break;
+				}
+			}
+		if (typeof(userId) != "undefined") {
+			var message = "There's a new application for " + job.title;
+			models.Notification.create({
+				userId: userId,
+				jobId: req.params.job_id,
+				status: 0,
+				message: message
+			});
+		}
+	}
+});
+
 
 // /* This is for company to view job status */
 // router.get('/:job_id/view', function(req, res, next) {
@@ -167,37 +202,6 @@ router.get('/getJob/:jobId/user/:userId', function(req, res) {
 //   });
 // });
 
-// /* POST student job application */
-// router.post('/:job_id/apply', function(req, res) {
-//   var sess = req.session;
-//   models.sequelize.Promise.all([
-//     models.Job.findAll({
-//       where: {
-//         id: req.params.job_id
-//       },
-//     }),
-//     models.CompanyContact.findAll()
-//   ]).spread(function(all_jobs, all_companyContacts) {
-//     if(typeof(all_jobs[0]) != "undefined") {
-//       var job = all_jobs[0];
-//       var userId = null;
-//       for(var companyContact of all_companyContacts) {
-//         if (companyContact.companyId == job.companyId) {
-//           userId = companyContact.employerId;
-//           break;
-//         }
-//       }
-//       if (typeof(userId) != "undefined") {
-//         var message = "There's a new application for " + job.title;
-//         models.Notification.create({
-//           userId: userId,
-//           jobId: req.params.job_id,
-//           status: 0,
-//           message: message
-//         });
-//       }
-//     }
-//   });
 
 //   models.StudentJob.create({
 //     jobId: req.params.job_id,

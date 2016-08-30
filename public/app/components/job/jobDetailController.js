@@ -9,7 +9,22 @@ angular.module("nusPartimeApp").controller("jobDetailController",
 			} else {
 				DataRetrievalService.getJob(jobId, Session.userId).then(function(res) {
 					console.log(res);
+					$scope.applicationStatus = res.applicationStatus;
+					$scope.job = res.job;
+					$scope.error = res.error;
 				});
 			}
 		});
+
+		$scope.applyJob = function() {
+
+		}
+
+		$scope.reapplyJob = function() {
+			
+		}
+
+		$scope.cancelApplication = function() {
+			
+		}
 	}]);
