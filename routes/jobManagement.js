@@ -34,37 +34,36 @@ router.get('/allJobs', function(req, res) {
 
 
 /* GET job with certain ID */
-router.get('/:job_id/details', function(req, res) {
+router.get('/getJob/:jobId/user/:userId', function(req, res) {
+	console.log(req.params);
 	models.sequelize.Promise.all([
 		models.StudentJob.findAll({
 			where: {
 				jobId: req.params.jobId,
-				studentId: sess.user_id,
+				studentId: req.params.userId,
 			}
 		}),
 		models.Job.findAll({
 			where: {
-				id: req.params.job_id
+				id: req.params.jobId
 			},
 			include: [models.Company]
 		})
-	]).spread(function(all_studentJobs, all_jobs) {
-		if (typeof(all_jobs[0]) != "undefined") {
-			var job = all_jobs[0];
+	]).spread(function(allStudentJobs, allJobs) {
+		if (typeof(allJobs[0]) != "undefined") {
+			var job = allJobs[0];
 		} else {
 			res.send({
 				status: "error"
 			});
 		}
 
-		if (typeof(all_studentJobs[0]) != "undefined") {
-			var applicationStatus = all_studentJobs[0].status;
+		if (typeof(allStudentJobs[0]) != "undefined") {
+			var applicationStatus = allStudentJobs[0].status;
 		} else {
 			var applicationStatus = -1;
 		}
 
-		console.log(job.id);
-		console.log(applicationStatus);
 		res.send({
 			job: job,
 			applicationStatus: applicationStatus

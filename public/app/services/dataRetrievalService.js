@@ -6,17 +6,13 @@ angular.module("nusPartimeApp").factory("DataRetrievalService",
 
 		// return an array of categories, each containing an array of jobs
 		dataRetrievalService.getAllJobs = function() {
-			return $http.get("/jobs/allJobs").then(function(res) {
+			return $http.get("/jobManagement/allJobs").then(function(res) {
 						return JSON.parse(res.data.catJobArray);
 					});
 		};
 
-		dataRetrievalService.getJob = function(id) {
-			var param = {
-				jobId: id,
-
-			}
-			return $http.get("/jobs/getJob", ).then(function(res) {
+		dataRetrievalService.getJob = function(jobId, userId) {
+			return $http.get("/jobManagement/getJob/" + jobId + "/user/" + userId).then(function(res) {
 						return res.data;
 					})
 		}

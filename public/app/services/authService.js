@@ -7,8 +7,6 @@ angular.module("nusPartimeApp").factory("AuthService", function ($http, $locatio
 		var postParam = {userId: userId};
 		return $http.post("/userManagement/login", postParam)
 					.then(function(res) {
-						console.log("AuthService Login response from server: ");
-						console.log(res.data);
 						if (res.data.error != undefined) {
 							// FB may not been loaded yet
 							if (typeof FB !== "undefined") {

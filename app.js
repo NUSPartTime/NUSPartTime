@@ -11,10 +11,9 @@ var sequelize = require("sequelize");
 var routes = require('./routes/index');
 var userManagement = require('./routes/userManagement');
 // var notification = require('./routes/notification');
-// var student = require('./routes/student');
 // var studentDetail = require('./routes/studentDetail');
 // var company = require('./routes/company');
-var jobs = require('./routes/jobs');
+var jobManagement = require('./routes/jobManagement');
 
 var app = module.exports = express();
 
@@ -34,8 +33,7 @@ app.use('/userManagement', userManagement);
 // app.use('/notification', notification);
 // app.use('/company', company);
 // app.use('/studentDetail', studentDetail);
-// app.use('/student', student);
-app.use('/jobs', jobs);
+app.use('/jobManagement', jobManagement);
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
