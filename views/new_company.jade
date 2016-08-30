@@ -2,27 +2,82 @@ extends layout
 
 block content
 
-  //- header
-  include header.jade
+  script.
+    var NAME_IS_NIL = "company/project name is not specified";
+    var EMAIL_IS_NIL = "email address is not filled";
 
-  div(class="container")
-    h2 New Recruitor Registoration
+    // for validation
+    $(document).ready(function() {
+      
+      $(".form-validation .signup-button").on('click', function(event) {
+        
+        var name = $(".form-validation .name").val();
+        var contact = $(".form-validation .contact").val();
+        var email = $(".form-validation .email").val();
+        
+        if(name === "" || email === "") {
 
-    div(class="col-md-6")
-      div(class="panel panel-default")
-        div(class="panel-heading")
-          h4 I am from a company
-        div(class="panel-body")
-          form(action="/company/new_company", method="post")
-            div(class="form-group")
-              label Company Name
-              input(type="text", name="name", class="form-control")
+          event.preventDefault();
 
-            div(class="form-group")
-              label Contact Number
-              input(type="text", name="contact", class="form-control")
+          var errors = [];
+          if(name === "") errors.push(NAME_IS_NIL);
+          if(email === "") errors.push(EMAIL_IS_NIL);
+          var error_message = errors.join(" and ");
 
-            div(class="form-group")
-              label Email
-              input(type="email", name="email", class="form-control")
-            button(type="submit" class="btn btn-primary") Register
+          $(".signup-warning").removeClass("hidden");
+          $(".signup-warning span").text("You are not able to create a new company/project since " + error_message);
+        }
+        
+      });
+    });
+  div(class="app-header-fixed app")
+    div(class="company-sign-up")
+      div(class="container wide-screen sign-up-wrapper")
+        a(class="navbar-brand block sign-up-logo")
+          div
+            img(src="/images/logo.png")
+        div(class="signup-info-wrapper")
+          div(class="wrapper signup-title")
+            strong Register a new company/project to post jobs
+          form(action="/company/new_company", method="post", class="form-validation")
+
+            //- error message here
+            div(class="alert alert-danger signup-warning hidden")
+              span
+
+            //- form input here
+            div(class="list-group")
+              div(class="list-group-item signup-input-field")
+                input(type="text", name="name", class="form-control signup-input name", placeholder="Company/Project name")
+              div(class="list-group-item signup-input-field")
+                input(type="text", name="contact", class="form-control signup-input contact", placeholder="Contact number")
+              div(class="list-group-item signup-input-field")
+                input(type="email", name="email", class="form-control signup-input email", placeholder="Contact email")
+
+            //- submit button here
+            button(type="submit" class="btn btn-lg btn-primary btn-block signup-button") Register!
+            div(class="margin-top")
+              a(href="/company")
+                button(type="button" class="btn btn-lg btn-primary btn-block signup-back-button") Cancel
+              
+
+    div(class="signup-footer-info")
+      p
+        small(class="font-not-important") NUS Part Time all rights reserved #[br] ©️ 2016
+
+        //- div(class="panel-heading")
+        //-   h4 I am from a company
+        //- div(class="panel-body")
+        //-   form(action="/company/new_company", method="post")
+        //-     div(class="form-group")
+        //-       label Company Name
+        //-       input(type="text", name="name", class="form-control")
+
+        //-     div(class="form-group")
+        //-       label Contact Number
+        //-       input(type="text", name="contact", class="form-control")
+
+        //-     div(class="form-group")
+        //-       label Email
+        //-       input(type="email", name="email", class="form-control")
+        //-     button(type="submit" class="btn btn-primary") Register

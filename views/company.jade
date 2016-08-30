@@ -48,7 +48,7 @@ block content
               li 
                 a(href="/company/new_job") #[i(class="fa fa-usd job-icon" aria-hidden="true")] #[span(class="dropdown-text") Job]
               li 
-                a(href="/company/new_company") #[i(class="fa fa-briefcase" aria-hidden="true")] #[span(class="dropdown-text") Company]
+                a(href="/company/new_company") #[i(class="fa fa-briefcase" aria-hidden="true")] #[span(class="dropdown-text") Company/Project]
 
         //- search bar is here
         form(class="navbar-form navbar-form-sm navbar-left")
@@ -61,7 +61,7 @@ block content
   div(class="company-index-body")
     div(class="company-index-side-bar")
       div(class="wrapper bg-light wrapper-centre")
-        span(class="title-font") #[i(class="fa fa-list-alt" aria-hidden="true")] #[span(class="title-icon") My Companies]
+        span(class="title-font") #[i(class="fa fa-list-alt" aria-hidden="true")]#[span(class="title-icon") Companies/Projects]
       div(class="wrapper")
         ul(class="nav nav-pills nav-stacked nav-side-bar font-mid")
           li(role="presentation" class="all-company-button")
@@ -89,19 +89,19 @@ block content
             button(class="btn btn-sm btn-bg btn-default")
               i(class="fa fa-refresh")
           
-      ul(class="list-group list-group-lg no-radius m-b-none m-t-n-xxs")
+      ul(class="list-group list-group-lg no-radius m-b-none m-t-n-xxs font-light")
         each cat_job in cat_job_array
           each job in cat_job.jobs
             if job.status == 0
               li(class="list-group-item category-job #{cat_job.company_html_class} b-l-3x b-l-success")
-                h4(class="list-group-item-heading")
+                h4(class="list-group-item-heading font-light")
                   = job.title
                 a(href="/jobs/" + job.id + "/view") Details
                 div(class="pull-right")
                   span(class="font-not-important")=job.applicationDeadline
             else
               li(class="list-group-item category-job #{cat_job.company_html_class} b-l-3x")
-                h4(class="list-group-item-heading")
+                h4(class="list-group-item-heading font-light")
                   = job.title
                 a(href="/jobs/" + job.id + "/view") Details
                 div(class="pull-right")

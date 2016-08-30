@@ -2,53 +2,135 @@ extends layout
 
 block content
   
-  //- header
-  include header.jade
+  script.
+    var COMPANY_ID = "company/project name";
+    var TITLE = "job title";
+    var SALARY = "hourly salary";
+    var APPLICATION = "application deadline";
+
+    $(function () {
+      $('.datepicker').datepicker();
+    });
+
+    $(document).ready(function() {
+      $(".newjob-form .signup-button").on('click', function(event) {
+        
+        var companyId = $(".newjob-form .newjob-company").val();
+        var title = $(".newjob-form .newjob-title").val();
+        var salary = $(".newjob-form .newjob-salary").val();
+        var description = $(".newjob-form .newjob-description").val();
+        var applicationDeadline = $(".newjob-form .newjob-application-deadline").val();
+        var deadline = $(".newjob-form .newjob-deadline").val();
+        
+        if(companyId === "" || title === "" || salary === "" || applicationDeadline === "") {
+
+          event.preventDefault();
+
+          var errors = [];
+
+          if(companyId === "") errors.push(COMPANY_ID);
+          if(title === "") errors.push(TITLE);
+          if(salary === "") errors.push(SALARY);
+          if(applicationDeadline === "") errors.push(APPLICATION);
+
+          var error_message = errors.join(", ");
+          var link = errors.length > 1 ? " are " : " is ";
+
+          $(".signup-warning").removeClass("hidden");
+          $(".signup-warning span").text("You are not able to post a new job since the " + error_message + link + "not specified.");
+
+          $('html, body').animate({
+            scrollTop: $(".box-shadow").offset().top
+          }, 500);
+        }
+        
+      });
+    });
+
+  nav(class="navbar box-shadow", id="mainNav")
+    div(class="container")
+      div(class="navbar-header page-scroll")
+
+        //- logo here
+        a(class="navbar-brand header-logo" href="/")
+          img(src="/images/logo.png")
 
   div(class="container")
     //- title need to be defined
     //- can be edit/new
-    h2=title
     
-    div(class="panel panel-default")
-      div(class="panel-heading")
-        h4 Job Details
+    div(class="panel panel-default new-job-panel")
+      div(class="panel-heading font-bold") Post a new job
       div(class="panel-body")
-        form(action="", method="post")
-          div(class="form-group")
-            label Company Name
-            select(name='companyId')
-              each val, index in companies
-                option(value=index)=val
-            
-          div(class="form-group")
-            label Job Category
-            select(name='categoryId')
-              each val, index in categories
-                option(value=index)=val
-                
-          div(class="form-group")
-            label Job Title
-            input(type="text", name="title", class="form-control")
-            
-          div(class="form-group")
-            label Salary
-            input(type="number", name="salary", class="form-control", placeholder="SGD")
+        form(action="", method="post" class="newjob-form")
+          //- error message here
+          div(class="alert alert-danger signup-warning hidden")
+            span
+
+          input(type="text", name="status", class="hidden", value="0")
 
           div(class="form-group")
-            label Status
-            input(type="text", name="status", class="form-control")
+            label(class="col-sm-3 newjob-input-label font-light") Company/Project Name
+            div(class="col-sm-9")
+              select(name='companyId', class="form-control newjob-company newjob-input font-light")
+                each val, index in companies
+                  option(value=index)=val
+
+          div(class="line-dashed")
 
           div(class="form-group")
-            label Description
-            textarea(name="description", class="form-control", rows="4")
-            
-          div(class="form-group")
-            label Application Deadline
-            input(type="date", name="application_deadline", class="form-control")
-            
-          div(class="form-group")
-            label Deadline
-            input(type="date", name="deadline", class="form-control")
+            lable(class="col-sm-3 newjob-input-label font-light") Job Title
+            div(class="col-sm-9")
+              input(type="text", name="title", class="form-control newjob-title newjob-input font-light", placeholder="e.g. Software engineer")
 
-          button(type="submit" class="btn btn-primary") Create!
+          div(class="line-dashed")
+
+          div(class="form-group")
+            lable(class="col-sm-3 newjob-input-label font-light") Salary
+            div(class="col-sm-9")
+              div(class="input-group")
+                span(class="input-group-addon") $
+                input(type="text", name="salary", class="form-control newjob-salary font-light")
+                span(class="input-group-addon") .00
+              span(class="help-block font-light") Notice: the salary should be hourly salary.
+
+          div(class="line-dashed")
+
+          div(class="form-group")
+            lable(class="col-sm-3 newjob-input-label font-light") Description
+            div(class="col-sm-9")
+              textarea(name="description", class="form-control newjob-description font-light", overflow="scroll", rows="15", placeholder="The description of the job details...")
+
+          div(class="line-dashed")
+
+          div(class="form-group")
+            lable(class="col-sm-3 newjob-input-label font-light") Application Deadline
+            div(class="col-sm-9")
+              div(class="input-group date newjob-input", data-provide="datepicker", data-date-format="MM dd yyyy")
+                input(type="text", name="application_deadline", class="form-control newjob-application-deadline font-light")
+                span(class="input-group-addon") #[i(class="fa fa-calendar-check-o")]
+
+          div(class="line-dashed")
+
+          div(class="form-group")
+            lable(class="col-sm-3 newjob-input-label font-light") Job End Date
+            div(class="col-sm-9")
+              div(class="input-group date", data-provide="datepicker", data-date-format="MM dd yyyy")
+                input(type="text", name="deadline", class="form-control newjob-deadline font-light")
+                span(class="input-group-addon") #[i(class="fa fa-calendar-check-o")]
+              span(class="help-block font-light") Notice: please fill in when the project will be finished.
+
+          div(class="line-dashed")
+
+          div(class="col-sm-4 col-sm-offset-3 newjob-button-group")
+            button(type="submit", class="btn btn-primary signup-button newjob-button") Post!
+            a(href="/company")
+              button(type="button", class="btn btn-primary signup-back-button") Cancel
+
+
+            
+          //- div(class="form-group")
+          //-   label Job Category
+          //-   select(name='categoryId')
+          //-     each val, index in categories
+          //-       option(value=index)=val
