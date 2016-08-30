@@ -105,10 +105,11 @@ router.post('/create_student', function(req, res) {
 
 router.post('/create_company', function(req, res) {
   console.log("Creating company");
+  req.session.is_employer = true;
   /*
     Stub
   */
-  res.send({redirect: '/company'});
+  res.send({redirect: '/company/new_company'});
 });
 
 /* GET user destroyed. */

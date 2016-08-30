@@ -48,11 +48,11 @@ router.get('/', auth, function(req, res){
 
 });
 
-router.get('/new_company', auth,  function(req, res, next) {
+router.get('/new_company',  function(req, res, next) {
   res.render('new_company', { title: 'Ready to Hire?' });
 });
 
-router.post('/new_company', auth,  function(req, res){
+router.post('/new_company',  function(req, res){
   var Company = require('../models/company');
   models.Employer.findOrCreate({
     where: {
