@@ -11,5 +11,15 @@ angular.module("nusPartimeApp").factory("DataRetrievalService",
 					});
 		};
 
+		dataRetrievalService.getJob = function(id) {
+			var param = {
+				jobId: id,
+
+			}
+			return $http.get("/jobs/getJob", ).then(function(res) {
+						return res.data;
+					})
+		}
+
 		return dataRetrievalService
 	});

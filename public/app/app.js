@@ -4,8 +4,8 @@ var nusPartime = angular.module("nusPartimeApp", [
 	"ngRoute", "ngCookies"
 ]);
 
-nusPartime.config(["$routeProvider", "$locationProvider", 
-	function($routeProvider, $locationProvider) {
+nusPartime.config(["$routeProvider", "$locationProvider",
+	function($routeProvider, $locationProvider, $route) {
 		$routeProvider.
 			when("/", {
 				templateUrl: "/app/components/index/index.html",
@@ -27,6 +27,15 @@ nusPartime.config(["$routeProvider", "$locationProvider",
 			when("/studentRegister", {
 				templateUrl: "/app/components/studentRegistration/studentRegistrationPage.html",
 				controller: "studentRegistrationController"
+			}).
+			when("/job/:id", {
+				templateUrl: "/app/components/job/jobDetail.html",
+				controller: "jobDetailController",
+				resolve: {
+				    jobId: function ($route) {
+				        return $route.current.params.id;
+				    }
+				}
 			}).
 			otherwise({
 				redirectTo: "/"

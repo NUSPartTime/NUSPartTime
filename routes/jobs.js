@@ -34,49 +34,43 @@ router.get('/allJobs', function(req, res) {
 
 
 /* GET job with certain ID */
-// router.get('/:job_id/details', function(req, res) {
-//   var sess = req.session;
+router.get('/:job_id/details', function(req, res) {
+	models.sequelize.Promise.all([
+		models.StudentJob.findAll({
+			where: {
+				jobId: req.params.jobId,
+				studentId: sess.user_id,
+			}
+		}),
+		models.Job.findAll({
+			where: {
+				id: req.params.job_id
+			},
+			include: [models.Company]
+		})
+	]).spread(function(all_studentJobs, all_jobs) {
+		if (typeof(all_jobs[0]) != "undefined") {
+			var job = all_jobs[0];
+		} else {
+			res.send({
+				status: "error"
+			});
+		}
 
-//   if(sess.is_employer){
-//     res.redirect('../'+req.params.job_id+'/view');
-//   }
+		if (typeof(all_studentJobs[0]) != "undefined") {
+			var applicationStatus = all_studentJobs[0].status;
+		} else {
+			var applicationStatus = -1;
+		}
 
-//   models.sequelize.Promise.all([
-//     models.StudentJob.findAll({
-//       where: {
-//         jobId: req.params.job_id,
-//         studentId: sess.user_id,
-//       }
-//     }),
-//     models.Job.findAll({
-//       where: {
-//         id: req.params.job_id
-//       },
-//       include: [models.Company]
-//     })
-//   ]).spread(function(all_studentJobs, all_jobs) {
-//     if (typeof(all_jobs[0]) != "undefined") {
-//       var job = all_jobs[0];
-//     } else {
-//       res.render('user_error', {
-//         message: "The job requested doesn't exist."
-//       });
-//     }
-
-//     if (typeof(all_studentJobs[0]) != "undefined") {
-//       var applicationStatus = all_studentJobs[0].status;
-//     } else {
-//       var applicationStatus = -1;
-//     }
-
-//     console.log(job.id);
-//     console.log(applicationStatus);
-//     res.render('job', {
-//       job: job,
-//       applicationStatus: applicationStatus
-//     });
-//   });
-// });
+		console.log(job.id);
+		console.log(applicationStatus);
+		res.send({
+			job: job,
+			applicationStatus: applicationStatus
+		});
+	});
+});
 
 // /* This is for company to view job status */
 // router.get('/:job_id/view', function(req, res, next) {
@@ -85,7 +79,6 @@ router.get('/allJobs', function(req, res) {
 //   if(!sess.is_employer){
 //     res.redirect('../'+req.params.job_id+'/details');
 //   }
-
 
 //   var userId = sess.user_id;
 //   models.sequelize.Promise.all([
