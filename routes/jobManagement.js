@@ -77,13 +77,13 @@ router.get("/getJob/:jobId/user/:userId", function(req, res) {
 router.post("/applyJob", function(req, res) {
 	var jobId = req.body.jobId;
 	var userId = req.body.userId;
-	console.log("user: " + userId + "  applying for job: " + jobId);
 	if (!jobId || !userId) {
 		res.send({
 			status: "error",
 			error: "Job ID or User ID not specified!"
 		});
 	} else {
+		console.log("user: " + userId + "  applying for job: " + jobId);
 		models.sequelize.Promise.all([
 			models.Job.findAll({
 				where: {
@@ -116,6 +116,62 @@ router.post("/applyJob", function(req, res) {
 			jobId: jobId,
 			studentId: userId,
 			status: 1
+		}).then(function(){
+			res.send({
+				status: "success",
+				applicationStatus: 1
+			});
+		});
+	}
+});
+
+
+/* POST student job application cancel */
+router.post("/cancelJob", function(req, res){
+	var jobId = req.body.jobId;
+	var userId = req.body.userId;
+	if (!jobId || !userId) {
+		res.send({
+			status: "error",
+			error: "Job ID or User ID not specified!"
+		});
+	} else {
+		console.log("user: " + userId + "  cancel job application for: " + jobId);
+		models.StudentJob.update({
+			status: 0
+		},{
+			where: {
+				jobId: jobId,
+				studentId: userId
+			}
+		}).then(function(){
+			res.send({
+				status: "success",
+				applicationStatus: 0
+			});
+		});
+	}
+});
+
+
+/* POST student job re-application */
+router.post('/reapplyJob', function(req, res){
+	var jobId = req.body.jobId;
+	var userId = req.body.userId;
+	if (!jobId || !userId) {
+		res.send({
+			status: "error",
+			error: "Job ID or User ID not specified!"
+		});
+	} else {
+		console.log("user: " + userId + "  reapply for job: " + jobId);
+		models.StudentJob.update({
+			status: 1
+		},{
+			where: {
+				jobId: jobId,
+				studentId: userId
+			}
 		}).then(function(){
 			res.send({
 				status: "success",
@@ -219,38 +275,6 @@ router.post("/applyJob", function(req, res) {
 //         res.redirect('/jobs/' + req.params.job_id + '/view');
 //       });
 //     }
-//   });
-// });
-
-
-
-// /* POST student job application cancel */
-// router.post('/:job_id/cancel', function(req, res){
-//   var sess = req.session;
-//   models.StudentJob.update({
-//     status: 0
-//   },{
-//     where: {
-//       jobId: req.params.job_id,
-//       studentId: sess.user_id,
-//     }
-//   }).then(function(){
-//     res.redirect('/jobs/' + req.params.job_id + '/details');
-//   });
-// });
-
-// /* POST student job re-application */
-// router.post('/:job_id/reapply', function(req, res){
-//   var sess = req.session;
-//   models.StudentJob.update({
-//     status: 1
-//   },{
-//     where: {
-//       jobId: req.params.job_id,
-//       studentId: sess.user_id
-//     }
-//   }).then(function(){
-//     res.redirect('/jobs/' + req.params.job_id + '/details');
 //   });
 // });
 

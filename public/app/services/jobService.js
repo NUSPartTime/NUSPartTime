@@ -31,5 +31,25 @@ angular.module("nusPartimeApp").factory("JobService",
 					});
 		}
 
+		jobService.cancelJob = function(jobId, userId) {
+			var postParam = {
+				jobId: jobId,
+				userId: userId
+			};
+			return $http.post("/jobManagement/cancelJob", postParam).then(function(res) {
+						return res.data;
+					});
+		}
+
+		jobService.reapplyJob = function(jobId, userId) {
+			var postParam = {
+				jobId: jobId,
+				userId: userId
+			};
+			return $http.post("/jobManagement/reapplyJob", postParam).then(function(res) {
+						return res.data;
+					});
+		}
+
 		return jobService;
 	});

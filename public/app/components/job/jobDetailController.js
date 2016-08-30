@@ -27,10 +27,22 @@ angular.module("nusPartimeApp").controller("jobDetailController",
 		}
 
 		$scope.reapplyJob = function() {
-			
+			JobService.reapplyJob(jobId, Session.userId).then(function(res) {
+				if (!res.error) {
+					$scope.applicationStatus = res.applicationStatus;
+				} else {
+					console.log(res.error);
+				}
+			});
 		}
 
 		$scope.cancelApplication = function() {
-			
+			JobService.cancelJob(jobId, Session.userId).then(function(res) {
+				if (!res.error) {
+					$scope.applicationStatus = res.applicationStatus;
+				} else {
+					console.log(res.error);
+				}
+			});
 		}
 	}]);
