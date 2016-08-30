@@ -14,6 +14,7 @@ var userManagement = require('./routes/userManagement');
 // var studentDetail = require('./routes/studentDetail');
 // var company = require('./routes/company');
 var jobManagement = require('./routes/jobManagement');
+var companyManagement = require('./routes/companyManagement');
 
 var app = module.exports = express();
 
@@ -30,6 +31,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/', routes);
 app.use('/userManagement', userManagement);
+app.use('/companyManagement', companyManagement);
 // app.use('/notification', notification);
 // app.use('/company', company);
 // app.use('/studentDetail', studentDetail);

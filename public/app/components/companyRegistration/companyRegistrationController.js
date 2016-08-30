@@ -1,17 +1,15 @@
 "use strict";
 
-angular.module("nusPartimeApp").controller("studentRegistrationController",
+angular.module("nusPartimeApp").controller("companyRegistrationController",
 	["$scope", "RegistrationService", "AuthService", "Session",
 	function($scope, RegistrationService, AuthService, Session) {
 		AuthService.autoLogin();
 
 		$scope.register = function() {
-			console.log($scope.matricNumber);
-			// suppose to check validity of matric number
 			/*
 				stub
 			*/
 			// then register
-			RegistrationService.registerStudent(Session.userId, $scope.matricNumber);
-		}
+			RegistrationService.registerCompany(Session.userId, $scope.name, $scope.contact, $scope.email);
+		};
 	}]);

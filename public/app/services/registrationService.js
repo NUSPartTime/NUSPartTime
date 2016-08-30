@@ -30,5 +30,21 @@ angular.module("nusPartimeApp").factory("RegistrationService", ["$http", "$locat
 						})
 		}
 
+		registrationService.registerCompany = function(userId, name, contact, email){
+			var postParam = {
+				userId: userId,
+				name: name,
+				contact: contact,
+				email: email
+			};
+
+			return $http.post("companyManagement/createNewCompany", postParam)
+						.then(function(res){
+							Session.isEmployer = true;
+
+							$location.path("/company");
+						});
+		}
+
 		return registrationService;
 	}]);

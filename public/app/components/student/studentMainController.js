@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module("nusPartimeApp").controller("studentMainController", 
+angular.module("nusPartimeApp").controller("studentMainController",
 	["$scope", "$location", "Session", "AuthService", "JobService",
 	function($scope, $location, Session, AuthService, JobService) {
 		$scope.catJobsArray = [];
@@ -12,9 +12,8 @@ angular.module("nusPartimeApp").controller("studentMainController",
 				$location.path("/studentRegister");
 			}
 		});
-		
+
 		JobService.getAllJobs().then(function(res) {
-			console.log(res);
 			$scope.catJobsArray = res;
 			for (var catJobs of res) {
 				$scope.allJobsArray = $scope.allJobsArray.concat(catJobs.jobs);

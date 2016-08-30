@@ -24,6 +24,10 @@ nusPartime.config(["$routeProvider", "$locationProvider",
 				templateUrl: "/app/components/company/companyMainPage.html",
 				controller: "companyMainController"
 			}).
+			when("/companyRegister", {
+				templateUrl: "/app/components/companyRegistration/companyRegistrationPage.html",
+				controller: "companyRegistrationController"
+			}).
 			when("/studentRegister", {
 				templateUrl: "/app/components/studentRegistration/studentRegistrationPage.html",
 				controller: "studentRegistrationController"
@@ -59,7 +63,7 @@ nusPartime.constant("USER_ROLES", {
 	guest: "guest"
 })
 
-nusPartime.run(["$rootScope", "$window", "$location", "AuthService", 
+nusPartime.run(["$rootScope", "$window", "$location", "AuthService",
 	function($rootScope, $window, $location, AuthService) {
 		$rootScope.user = {};
 		$window.fbAsyncInit = function() {
@@ -98,7 +102,7 @@ nusPartime.run(["$rootScope", "$window", "$location", "AuthService",
 		}(document, "script", "facebook-jssdk"));
 	}]);
 
-// nusPartime.factory("FacebookService", ["$q", 
+// nusPartime.factory("FacebookService", ["$q",
 // 	function($q) {
 // 		return {
 // 			isLoggedIn: function() {
@@ -106,9 +110,9 @@ nusPartime.run(["$rootScope", "$window", "$location", "AuthService",
 // 				FB.getLoginStatus(function(response) {
 // 					console.log(response);
 // 					if (response.status === "connected") {
-// 						deferred.resolve("true");	
+// 						deferred.resolve("true");
 // 					} else {
-// 						deferred.resolve("false");	
+// 						deferred.resolve("false");
 // 					}
 // 				});
 // 				return deferred.promise;
