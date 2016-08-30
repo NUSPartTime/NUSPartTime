@@ -33,7 +33,7 @@ nusPartime.config(["$routeProvider", "$locationProvider",
 				controller: "studentRegistrationController"
 			}).
 			when("/job/:id", {
-				templateUrl: "/app/components/job/jobDetail.html",
+				templateUrl: "/app/components/jobDetail/jobDetail.html",
 				controller: "jobDetailController",
 				resolve: {
 				    jobId: function ($route) {
