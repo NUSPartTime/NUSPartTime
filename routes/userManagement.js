@@ -100,6 +100,7 @@ router.post('/logout', function(req, res) {
 
 router.post('/create_student', function(req, res) {
   console.log("Creating student with id : " + req.body.id);
+  req.session.is_student = true;
   res.send({redirect: '/student'});
 });
 

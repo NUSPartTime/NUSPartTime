@@ -2,15 +2,8 @@ var models  = require('../models');
 var express = require('express');
 var router = express.Router();
 
-var auth = function(req, res, next) {
-  if (req.session && req.session.is_student)
-    return next();
-  else
-    return res.sendStatus(401);
-};
-
 /* GET student page. */
-router.get('/', auth, function(req, res) {
+router.get('/', function(req, res) {
   console.log(req.session.user_id);
 
   models.sequelize.Promise.all([
