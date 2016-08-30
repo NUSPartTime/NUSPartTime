@@ -14,7 +14,7 @@ var userManagement = require('./routes/userManagement');
 // var student = require('./routes/student');
 // var studentDetail = require('./routes/studentDetail');
 // var company = require('./routes/company');
-// var jobs = require('./routes/jobs');
+var jobs = require('./routes/jobs');
 
 var app = module.exports = express();
 
@@ -35,7 +35,7 @@ app.use('/userManagement', userManagement);
 // app.use('/company', company);
 // app.use('/studentDetail', studentDetail);
 // app.use('/student', student);
-// app.use('/jobs', jobs);
+app.use('/jobs', jobs);
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
