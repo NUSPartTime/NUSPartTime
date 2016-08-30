@@ -125,10 +125,34 @@ router.post('/:job_id/edit', function(req, res) {
         // Also use job id to find the particular job
         id: req.params.job_id
       },
+    }),
+    models.StudentJob.findAll({
+      where: {
+        jobId: req.params.job_id    
+      }
     })
-  ]).spread(function(all_jobs) {
+  ]).spread(function(all_jobs, all_studentJobs) {
     if(typeof(all_jobs[0]) != "undefined") {
       job = all_jobs[0];
+      
+      if (typeof(req.body.status)!= "undefined") {
+        var message = "";
+        if (req.body.status == 1) {
+          message = "The job you applied is open";
+        } else {
+          message = "The job you applied is closed";
+        }
+        for(var studentJob of all_studentJobs) {
+          models.Notification.create({
+            userId: studentJob.studentId,
+            jobId: req.params.job_id,
+            status: 0,
+            message: message
+          });
+        }
+        console.log("Notification done");
+      }
+
       job.update({
         companyId: req.body.companyId,
         title: req.body.title,
