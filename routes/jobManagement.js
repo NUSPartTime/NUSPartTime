@@ -93,16 +93,17 @@ router.post('/:job_id/apply', function(req, res) {
 				break;
 				}
 			}
-		if (typeof(userId) != "undefined") {
-			var message = "There's a new application for " + job.title;
-			models.Notification.create({
-				userId: userId,
-				jobId: req.params.job_id,
-				status: 0,
-				message: message
-			});
+			if (typeof(userId) != "undefined") {
+				var message = "There's a new application for " + job.title;
+				models.Notification.create({
+					userId: userId,
+					jobId: req.params.job_id,
+					status: 0,
+					message: message
+				});
+			}
 		}
-	}
+	});
 });
 
 

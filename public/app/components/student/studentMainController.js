@@ -1,8 +1,8 @@
 "use strict";
 
 angular.module("nusPartimeApp").controller("studentMainController", 
-	["$scope", "$location", "Session", "AuthService", "DataRetrievalService",
-	function($scope, $location, Session, AuthService, DataRetrievalService) {
+	["$scope", "$location", "Session", "AuthService", "JobService",
+	function($scope, $location, Session, AuthService, JobService) {
 		$scope.catJobsArray = [];
 		$scope.allJobsArray = [];
 		$scope.displayedJobs = [];
@@ -13,7 +13,7 @@ angular.module("nusPartimeApp").controller("studentMainController",
 			}
 		});
 		
-		DataRetrievalService.getAllJobs().then(function(res) {
+		JobService.getAllJobs().then(function(res) {
 			console.log(res);
 			$scope.catJobsArray = res;
 			for (var catJobs of res) {

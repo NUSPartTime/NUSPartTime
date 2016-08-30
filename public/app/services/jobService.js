@@ -1,17 +1,17 @@
 "use strict";
 
-angular.module("nusPartimeApp").factory("DataRetrievalService", 
+angular.module("nusPartimeApp").factory("JobService", 
 	function ($http) {
-		var dataRetrievalService = {};
+		var jobService = {};
 
 		// return an array of categories, each containing an array of jobs
-		dataRetrievalService.getAllJobs = function() {
+		jobService.getAllJobs = function() {
 			return $http.get("/jobManagement/allJobs").then(function(res) {
 						return JSON.parse(res.data.catJobArray);
 					});
-		};
+		}
 
-		dataRetrievalService.getJob = function(jobId, userId) {
+		jobService.getJob = function(jobId, userId) {
 			return $http.get("/jobManagement/getJob/" + jobId + "/user/" + userId).then(function(res) {
 						if (res.data.status == "error") {
 							return {error: "Job ID not found!"}
@@ -21,5 +21,5 @@ angular.module("nusPartimeApp").factory("DataRetrievalService",
 					})
 		}
 
-		return dataRetrievalService
+		return jobService
 	});
