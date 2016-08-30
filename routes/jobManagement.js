@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 
 /* GET all jobs stored in the DB */
-router.get('/allJobs', function(req, res) {
+router.get("/allJobs", function(req, res) {
 	models.sequelize.Promise.all([
 		models.Category.findAll(),
 		models.Job.findAll({
@@ -33,9 +33,8 @@ router.get('/allJobs', function(req, res) {
 });
 
 
-
 /* GET job with certain ID */
-router.get('/getJob/:jobId/user/:userId', function(req, res) {
+router.get("/getJob/:jobId/user/:userId", function(req, res) {
 	console.log(req.params);
 	models.sequelize.Promise.all([
 		models.StudentJob.findAll({
@@ -74,36 +73,53 @@ router.get('/getJob/:jobId/user/:userId', function(req, res) {
 
 
 /* POST student job application */
-router.post('/:job_id/apply', function(req, res) {
-	var sess = req.session;
-	models.sequelize.Promise.all([
-		models.Job.findAll({
-			where: {
-				id: req.params.job_id
-			},
-		}),
-		models.CompanyContact.findAll()
-	]).spread(function(all_jobs, all_companyContacts) {
-		if(typeof(all_jobs[0]) != "undefined") {
-			var job = all_jobs[0];
-			var userId = null;
-			for(var companyContact of all_companyContacts) {
-				if (companyContact.companyId == job.companyId) {
-				userId = companyContact.employerId;
-				break;
+router.post("/applyJob", function(req, res) {
+	var jobId = req.body.jobId;
+	var userId = req.body.userId;
+	console.log("user: " + userId + "  applying for job: " + jobId);
+	if (!jobId || !userId) {
+		res.send({
+			status: "error"
+		});
+	} else {
+		models.sequelize.Promise.all([
+			models.Job.findAll({
+				where: {
+					id: jobId
+				},
+			}),
+			models.CompanyContact.findAll()
+		]).spread(function(allJobs, allCompanyContacts) {
+			if(typeof(allJobs[0]) != "undefined") {
+				var job = allJobs[0];
+				var userId = null;
+				for(var companyContact of allCompanyContacts) {
+					if (companyContact.companyId == job.companyId) {
+						userId = companyContact.employerId;
+						break;
+					}
+				}
+				if (typeof(userId) != "undefined") {
+					var message = "There's a new application for " + job.title;
+					models.Notification.create({
+						userId: userId,
+						jobId: jobId,
+						status: 0,
+						message: message
+					});
 				}
 			}
-			if (typeof(userId) != "undefined") {
-				var message = "There's a new application for " + job.title;
-				models.Notification.create({
-					userId: userId,
-					jobId: req.params.job_id,
-					status: 0,
-					message: message
-				});
-			}
-		}
-	});
+		});
+		models.StudentJob.create({
+			jobId: jobId,
+			studentId: userId,
+			status: 1
+		}).then(function(){
+			res.send({
+				status: "success"
+			});
+		});
+	}
 });
 
 
@@ -204,14 +220,6 @@ router.post('/:job_id/apply', function(req, res) {
 // });
 
 
-//   models.StudentJob.create({
-//     jobId: req.params.job_id,
-//     studentId: sess.user_id,
-//     status: 1
-//   }).then(function(){
-//     res.redirect('/jobs/' + req.params.job_id + '/details');
-//   });
-// });
 
 // /* POST student job application cancel */
 // router.post('/:job_id/cancel', function(req, res){
