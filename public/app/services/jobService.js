@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module("nusPartimeApp").factory("JobService", 
+angular.module("nusPartimeApp").factory("JobService",
 	function ($http) {
 		var jobService = {};
 
@@ -49,6 +49,21 @@ angular.module("nusPartimeApp").factory("JobService",
 			return $http.post("/jobManagement/reapplyJob", postParam).then(function(res) {
 						return res.data;
 					});
+		}
+
+		jobService.getJobApplicationForm = function(userId){
+			var postParam = {
+				userId: userId
+			};
+			return $http.post("/jobManagement/getJobApplicationForm", postParam).then(function(res){
+				return res.data;
+			});
+		}
+
+		jobService.createJob = function(postParam){
+			return $http.post("/jobManagement/createJob", postParam).then(function(res){
+				return res.data;
+			});
 		}
 
 		return jobService;
