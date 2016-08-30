@@ -73,13 +73,15 @@ router.get("/getJob/:jobId/user/:userId", function(req, res) {
 
 
 /* POST student job application */
+// TODO: improve implementation (current implementation is flawed, but let's leave it this way first...)
 router.post("/applyJob", function(req, res) {
 	var jobId = req.body.jobId;
 	var userId = req.body.userId;
 	console.log("user: " + userId + "  applying for job: " + jobId);
 	if (!jobId || !userId) {
 		res.send({
-			status: "error"
+			status: "error",
+			error: "Job ID or User ID not specified!"
 		});
 	} else {
 		models.sequelize.Promise.all([
@@ -116,7 +118,8 @@ router.post("/applyJob", function(req, res) {
 			status: 1
 		}).then(function(){
 			res.send({
-				status: "success"
+				status: "success",
+				applicationStatus: 1
 			});
 		});
 	}

@@ -17,8 +17,12 @@ angular.module("nusPartimeApp").controller("jobDetailController",
 		});
 
 		$scope.applyJob = function() {
-			JobService.applyJob(jobId).then(function(res) {
-				
+			JobService.applyJob(jobId, Session.userId).then(function(res) {
+				if (!res.error) {
+					$scope.applicationStatus = res.applicationStatus;
+				} else {
+					console.log(res.error);
+				}
 			});
 		}
 

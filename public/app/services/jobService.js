@@ -27,8 +27,8 @@ angular.module("nusPartimeApp").factory("JobService",
 				userId: userId
 			};
 			return $http.post("/jobManagement/applyJob", postParam).then(function(res) {
-				console.log(res.data);
-			});
+						return res.data;
+					});
 		}
 
 		return jobService;
