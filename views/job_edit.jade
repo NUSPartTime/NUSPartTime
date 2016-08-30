@@ -13,6 +13,17 @@ block content
     });
 
     $(document).ready(function() {
+      
+      var regex = /<br\s*[\/]?>/gi;
+      var text = $(".newjob-description").text().replace(regex, "\n");
+      $(".newjob-description").text(text);
+
+      var deadline = $.format.date($('.newjob-deadline').val(), "MMMM dd yyyy");
+      $('.newjob-deadline').val(deadline);
+
+      var applicationDeadline = $.format.date($('.newjob-application-deadline').val(), "MMMM dd yyyy");
+      $('.newjob-application-deadline').val(applicationDeadline);
+
       $(".newjob-form .signup-button").on('click', function(event) {
         
         var companyId = $(".newjob-form .newjob-company").val();
@@ -62,28 +73,31 @@ block content
     //- can be edit/new
     
     div(class="panel panel-default new-job-panel")
-      div(class="panel-heading font-bold") Post a new job
+      div(class="panel-heading font-bold") Edit a job
       div(class="panel-body")
         form(action="", method="post" class="newjob-form")
           //- error message here
           div(class="alert alert-danger signup-warning hidden")
             span
 
-          input(type="text", name="status", class="hidden", value="0")
+          input(type="text", name="status", class="hidden", value=job.status)
 
           div(class="form-group")
             label(class="col-sm-3 newjob-input-label font-light") Company/Project Name
             div(class="col-sm-9")
               select(name='companyId', class="form-control newjob-company newjob-input font-light")
                 each val, index in companies
-                  option(value=index)=val
+                  if index == job.companyID
+                    option(value=index selected="selected")=val
+                  else
+                    option(value=index)=val
 
           div(class="line-dashed")
 
           div(class="form-group")
             lable(class="col-sm-3 newjob-input-label font-light") Job Title
             div(class="col-sm-9")
-              input(type="text", name="title", class="form-control newjob-title newjob-input font-light", placeholder="e.g. Software engineer")
+              input(type="text", name="title", class="form-control newjob-title newjob-input font-light", placeholder="e.g. Software engineer", value=job.title)
 
           div(class="line-dashed")
 
@@ -92,7 +106,7 @@ block content
             div(class="col-sm-9")
               div(class="input-group")
                 span(class="input-group-addon") $
-                input(type="text", name="salary", class="form-control newjob-salary font-light")
+                input(type="text", name="salary", class="form-control newjob-salary font-light", value=job.salary)
                 span(class="input-group-addon") .00
               span(class="help-block font-light") Notice: the salary should be hourly salary.
 
@@ -101,7 +115,7 @@ block content
           div(class="form-group")
             lable(class="col-sm-3 newjob-input-label font-light") Description
             div(class="col-sm-9")
-              textarea(name="description", class="form-control newjob-description font-light", overflow="scroll", rows="15", placeholder="The description of the job details...")
+              textarea(name="description", class="form-control newjob-description font-light", overflow="scroll", rows="15", placeholder="The description of the job details...")=job.description
 
           div(class="line-dashed")
 
@@ -109,7 +123,7 @@ block content
             lable(class="col-sm-3 newjob-input-label font-light") Application Deadline
             div(class="col-sm-9")
               div(class="input-group date newjob-input", data-provide="datepicker", data-date-format="MM dd yyyy")
-                input(type="text", name="application_deadline", class="form-control newjob-application-deadline font-light")
+                input(type="text", name="application_deadline", class="form-control newjob-application-deadline font-light", value=job.applicationDeadline)
                 span(class="input-group-addon") #[i(class="fa fa-calendar-check-o")]
 
           div(class="line-dashed")
@@ -118,15 +132,15 @@ block content
             lable(class="col-sm-3 newjob-input-label font-light") Job End Date
             div(class="col-sm-9")
               div(class="input-group date", data-provide="datepicker", data-date-format="MM dd yyyy")
-                input(type="text", name="deadline", class="form-control newjob-deadline font-light")
+                input(type="text", name="deadline", class="form-control newjob-deadline font-light", value=job.deadline)
                 span(class="input-group-addon") #[i(class="fa fa-calendar-check-o")]
               span(class="help-block font-light") Notice: please fill in when the project will be finished.
 
           div(class="line-dashed")
 
           div(class="col-sm-4 col-sm-offset-3 newjob-button-group")
-            button(type="submit", class="btn btn-primary signup-button newjob-button") Post!
-            a(href="/company")
+            button(type="submit", class="btn btn-primary signup-button newjob-button") Update!
+            a(href="/jobs/" + job.id + "/view")
               button(type="button", class="btn btn-primary signup-back-button") Cancel
 
 

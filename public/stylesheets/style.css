@@ -1,4 +1,4 @@
-@import 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300, 700';
+@import 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700';
 
 body {
   font-family: "Source Sans Pro",sans-serif;
@@ -9,6 +9,10 @@ body {
 }
 
 /*general*/
+.table>thead>tr>th {
+  border-bottom: 0px;
+}
+
 .b-l-primary {
   border-left-color: #7266ba;
 }
@@ -138,10 +142,23 @@ body {
   width: 360px;
 }
 
+.btn-addon i {
+  width: 30px;
+  height: 30px;
+  margin: -6px 10px -6px -10px;
+  line-height: 30px;
+  background-color: rgba(0,0,0,.1);
+  border-radius: 2px 0 0 2px;
+}
+
 .form-control {
   border-color: #cfdadd;
   -webkit-box-shadow: none;
   box-shadow: none;
+}
+
+.breadcrumb {
+  background-color: #f6f8f8;
 }
 
 .form-control:focus {
@@ -170,7 +187,7 @@ body {
 }
 
 .header-logo {
-  padding-left: 25px;
+  padding-left: 75px;
 }
 
 .box-shadow {
@@ -361,6 +378,88 @@ body {
 }
 
 /*end of new job ui*/
+
+/*for job details*/
+.job-details-container {
+  background-color: #f0f3f4;
+  width: 100%;
+  padding-bottom: 50px;
+}
+
+.job-details-header {
+  background-color: #f6f8f8;
+  border-bottom: 1px solid #dee5e7;
+  padding: 20px 20px 20px 40px;
+  color: #58666e;
+}
+
+.job-details-header ol {
+  margin: 0;
+  padding: 0;
+}
+.job-details-header li {
+  font-weight: 300;
+  margin: 0!important;
+  font-size: 20px;
+}
+
+.job-details-wrapper {
+  padding: 20px 20px 20px 40px;
+}
+
+.job-details {
+  display: inline-flex;
+}
+
+.job-details-status {
+  padding-top: 7px;
+  padding-left: 100px;
+}
+
+.job-details span {
+  font-size: 30px;
+  font-weight: 300;
+}
+
+.job-details-misc {
+  background-color: #f3f5f6;
+  margin-top: 15px;
+  font-size: 16px;
+}
+
+.job-details-salary-title, .job-details-eadline-title, .job-details-company-title {
+  padding-left: 5px;
+}
+
+.job-details-edit-button {
+  margin-bottom: 15px;
+  background-color: #fad733;
+  border-color: #fad733;
+  padding-right: 10px;
+}
+
+.job-details-edit-button:hover, .job-details-edit-button:focus {
+  background-color: #f9d21a;
+  border-color: #f9cf0b;
+}
+
+.job-details-button {
+  padding-top: 6px;
+}
+
+.job-details-applicants table {
+  border: 1px solid #dee5e7;
+  color: #58666e;
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+.job-detail-applicants thead {
+  background-color: #fff;
+}
+
+
+/*end of job details*/
 
 /*for header*/
 .navbar-header a {
