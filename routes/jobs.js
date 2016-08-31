@@ -99,7 +99,7 @@ router.get('/:job_id/view', function(req, res, next) {
         companies[company.id] = company.name;
       }
 
-      res.render('edit_job', {
+      res.render('job_details', {
         job: job,
         students: all_students,
         title: "Applicants",
@@ -117,6 +117,56 @@ router.get('/:job_id/view', function(req, res, next) {
 });
 
 /* This is for companies to update a job */
+router.get('/:job_id/edit',  function(req, res, next) {
+  var userId = req.session.user_id;
+  var companies = {};
+  var categories = {};
+
+  models.sequelize.Promise.all([
+    models.Job.findAll({
+      where: {
+        // Also use job id to find the particular job
+        id: req.params.job_id
+      },
+    }),
+    models.CompanyContact.findAll({
+      where: {
+        employerId: userId
+      }
+    }),
+    models.Company.findAll(),
+    models.Category.findAll()
+  ]).spread(function(all_jobs, all_companyContact, all_company, all_categories) {
+    if(typeof(all_jobs[0]) != "undefined") {
+      job = all_jobs[0];
+
+      if(all_companyContact == null){
+        console.log('company does not exist');
+      }else{
+
+        for(var contact of all_companyContact){
+          for(var company of all_company){
+            if(company.id == contact.companyId){
+              companies[company.id] = company.name;
+            }
+          }
+        }
+
+        for(var category of all_categories){
+          categories[category.id] = category.name;
+        }
+
+      }
+
+      res.render('job_edit', { title: 'edit job',
+                               job: job,
+                               companies: companies,
+                               categories: categories});
+    }
+  });
+  
+});
+
 router.post('/:job_id/edit', function(req, res) {
   var sess = req.session;
   models.sequelize.Promise.all([
