@@ -9,6 +9,9 @@ body {
 }
 
 /*general*/
+.text-black {
+    color: #000;
+}
 .table>thead>tr>th {
   border-bottom: 0px;
 }
@@ -51,6 +54,15 @@ body {
 
 .wrapper {
   padding: 15px;
+}
+
+.padder {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.wrapper-lg {
+    padding: 30px;
 }
 
 .wrapper-centre {
@@ -107,6 +119,10 @@ body {
   margin-top: 15px;
 }
 
+.margin-top-sm {
+  margin-top: 5px;
+}
+
 .app-header-fixed {
   padding-top: 50px;
 }
@@ -151,20 +167,6 @@ body {
   border-radius: 2px 0 0 2px;
 }
 
-.mce-panel {
-    background-color: #edf1f2!important;
-    border-color: #ccc!important;
-}
-
-.mce-panel iframe {
-    font-size: 14px!important;
-    font-family: "Source Sans Pro",sans-serif!important;
-}
-
-.mce-panel .mce-btn {
-    background-color: #edf1f2!important;
-}
-
 .form-control {
   border-color: #cfdadd;
   -webkit-box-shadow: none;
@@ -185,6 +187,11 @@ body {
   margin-left: -15px;
   margin-right: -15px;
   margin-bottom: 15px;
+}
+
+.list-group-sp .list-group-item {
+    margin-bottom: 5px;
+    border-radius: 3px;
 }
 
 .input-group-addon {
@@ -466,16 +473,89 @@ body {
 }
 
 .job-details-applicants table {
-  border: 1px solid #dee5e7;
-  color: #58666e;
-  background-color: #fff;
-  border-radius: 4px;
+    border: 1px solid #dee5e7;
+    color: #58666e;
+    background-color: #fff;
+    border-radius: 4px;
 }
 
 .job-detail-applicants thead {
-  background-color: #fff;
+    background-color: #fff;
+}
+/*end of job details*/
+
+/*company profile*/
+.company-profile {
+    width: 100%;
+    height: 100%;
+    table-layout: fixed;
+    border-spacing: 0;
+    color: #58666e;
 }
 
+.company-profile-header {
+    background:url(../images/c4.jpg) center center;
+    background-size:cover;
+}
+
+.company-profile-header-content {
+    background-color: rgba(255,255,255,.5);
+}
+
+.company-profile-photo {
+    width: 96px;
+    display: inline-block;
+    margin-right:15px;
+}
+
+.company-profile-photo img {
+    border-radius: 50%;
+    max-width: 100%;
+}
+
+.company-profile-txt {
+    margin-bottom:15px;
+    display:block;
+    overflow:hidden;
+}
+
+.person-name {
+    margin-bottom: 15px;
+    margin-top: 10px;
+}
+
+.profile-facebook-butoon {
+    padding-right: 15px;
+    padding-left: 15px;
+    border-radius: 50px;
+    color: #fff!important;
+    background-color: #27c24c;
+    border-color: #27c24c;
+}
+
+.company-profile-navbar {
+    border-bottom: 1px solid #dee5e7;
+    color: #58666e;
+    background-color: #fff;
+}
+
+.companyInfo-title {
+    padding: 10px;
+}
+
+.companyInfo-wrapper {
+    border: 1px solid #e7ecee;
+}
+
+.companyInfo-sp {
+    border-left: 1px dashed #e7ecee;
+}
+
+.company-title {
+    text-align: center;
+    padding-top: 30px;
+}
+/*end of company profile*/
 
 /*end of job details*/
 

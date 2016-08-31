@@ -1,8 +1,65 @@
-<form ng-submit="updateCompanyProfile()">
+<nav id="mainNav" class="navbar box-shadow">
+    <div class="navbar-header page-scroll">
+        <a href="/" class="navbar-brand header-logo"><img src="/images/logo.png"></a>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="panel panel-default new-job-panel">
+        <div class="panel-heading font-bold">Edit Company</div>
+        <div class="panel-body">
+            <form name="updateCompany-form" class="newjob-form" ng-submit="updateCompanyProfile()">
+                <div class="form-group">
+                    <label class="col-sm-3 newjob-input-label font-light">Company/Project Name</label>
+                    <div class="col-sm-9">
+                        <input ng-model="currentCompany.name" class="form-control newjob-input font-light" required="true"></input>
+                    </div>
+                </div>
+                <div class="line-dashed"></div>
+                <div class="form-group">
+                    <label class="col-sm-3 newjob-input-label font-light">Contact Number</label>
+                    <div class="col-sm-9">
+                        <input ng-model="currentCompany.phone" class="form-control newjob-input font-light"></input>
+                    </div>
+                </div>
+                <div class="line-dashed"></div>
+                <div class="form-group">
+                    <label class="col-sm-3 newjob-input-label font-light">Email Address</label>
+                    <div class="col-sm-9">
+                        <input ng-model="currentCompany.email" class="form-control newjob-input font-light" required="true"></input>
+                    </div>
+                </div>
+                <div class="line-dashed"></div>
+                <div class="form-group">
+                    <label class="col-sm-3 newjob-input-label font-light">Company Address</label>
+                    <div class="col-sm-9">
+                        <input ng-model="currentCompany.address" class="form-control newjob-input font-light"></input>
+                    </div>
+                </div>
+                <div class="line-dashed"></div>
+                <div class="form-group">
+                    <lable class="col-sm-3 newjob-input-label font-light">Description</lable>
+                    <div class="col-sm-9">
+                        <textarea ng-model="currentCompany.description" overflow="scroll" rows="10" placeholder="The description of the company/project..." class="form-control newjob-input font-light"></textarea>
+                    </div>
+                </div>
+                <div class="line-dashed"></div>
+                <div class="col-sm-4 col-sm-offset-3 newjob-button-group">
+                    <button type="submit" class="btn btn-primary signup-button newjob-button" ng-click="updateCompany-form.$valid">Update!</button>
+                    <a href="/#/companyProfile">
+                        <button type="button" class="btn btn-primary signup-back-button">Cancel</button>
+                    </a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<!-- <form ng-submit="updateCompanyProfile()">
     <input ng-model="currentCompany.name"> name
     <input ng-model="currentCompany.email"> email
     <input ng-model="currentCompany.phone"> phone
     <input ng-model="currentCompany.address"> address
     <input ng-model="currentCompany.description"> description
     <button type="submit">Submit</button>
-</form>
+</form> -->

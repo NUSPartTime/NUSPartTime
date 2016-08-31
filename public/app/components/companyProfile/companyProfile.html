@@ -1,3 +1,129 @@
-<div ng-repeat="company in companies">{{company.name}}
-<a href ng-click="editCompanyProfile(company)">Edit</a>
+
+<nav class="navbar box-shadow" id="mainNav">
+	<div class="navbar-header page-scroll">
+
+		<!-- logo here -->
+		<a class="navbar-brand header-logo" href="/#/">
+			<img src="/images/logo.png"></img>
+		</a>
+
+		<!-- dropdown for new job or company/project -->
+		<ul class="nav navbar-nav company-new-button">
+			<li class="dropdown">
+				<a href class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<span>New</span>
+					<span class="caret"></span>
+				</a>
+				<ul	class="dropdown-menu">
+					<li>
+						<a href="#/jobCreate">
+							<i class="fa fa-usd job-icon" aria-hidden="true"></i>
+							<span class="dropdown-text">Job</span>
+						</a>
+					</li>
+					<li>
+						<a href="#/companyRegister">
+							<i class="fa fa-briefcase" aria-hidden="true"></i>
+							<span class="dropdown-text">Company</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+
+		<!-- search bar here -->
+		<form class="navbar-form navbar-form-sm navbar-left">
+			<div class="input-group">
+				<input class="form-control input-sm bg-light no-border rounded padder search-bar" type="text" placeholder="search posted job.." />
+				<span class="input-group-btn">
+					<button type="submit" class="btn btn btn-sm bg-light rounded"><i class="fa fa-search"></i></button>
+				</span>
+			</div>
+		</form>
+	</div>
+</nav>
+<!-- header end here -->
+
+<!-- body -->
+<!-- profile header -->
+<div class="company-profile">
+    <div class="col">
+        <div class="company-profile-header">
+            <div class="company-profile-header-content wrapper-lg">
+                <div class="row margin-top">
+                    <div class="col-sm-7">
+                        <div class="company-profile-photo pull-left">
+                            <img src="/images/IMG_2021.JPG" />
+                        </div>
+                        <div class="company-profile-txt">
+                            <div class="person-name">
+                                <span class="h3">Yang Zhuohan</span>
+                            </div>
+                            <a href="#" class="btn btn-sm profile-facebook-butoon font-light">Facebook</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wrapper company-profile-navbar">
+            <ul class="nav nav-pills nav-sm font-light">
+                <li class="personalInfo-button"><a href ng-click="showPersonalInfo()">Personal Info</a></li>
+                <li class="companyInfo-button"><a href ng-click="showCompanyInfo()">Company/Project Info</a></li>
+            </ul>
+        </div>
+
+        <div class="companyInfo padder hidden">
+            <h3 class="font-light companyInfo-title">My Registered Companies / Projects</h3>
+            <div class="list-group list-group-lg list-group-sp">
+                <a href ng-click="editCompanyProfile(company)" ng-repeat="company in companies" class="list-group-item clearfix companyInfo-wrapper">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <h4 class="font-light company-title">{{ company.name }}</h4>
+                        </div>
+                        <div class="col-sm-10 companyInfo-sp">
+                            <div class="row margin-top-sm font-light">
+                                <div class="col-sm-4">
+                                    <span>Contact Number</span>
+                                </div>
+                                <div class="col-sm-8">
+                                    <span>{{ company.phone }}</span>
+                                </div>
+                            </div>
+                            <div class="row margin-top-sm font-light">
+                                <div class="col-sm-4">
+                                    <span>Email Address</span>
+                                </div>
+                                <div class="col-sm-8">
+                                    <span>{{ company.email }}</span>
+                                </div>
+                            </div>
+                            <div class="row margin-top-sm font-light">
+                                <div class="col-sm-4">
+                                    <span>Address</span>
+                                </div>
+                                <div class="col-sm-8">
+                                    <span>{{ company.address }}</span>
+                                </div>
+                            </div>
+                            <div class="row margin-top-sm font-light">
+                                <div class="col-sm-4">
+                                    <span>Description</span>
+                                </div>
+                                <div class="col-sm-8">
+                                    <span>{{ company.description }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
+
+<!-- <div ng-repeat="company in companies">{{company.name}}
+<a href ng-click="editCompanyProfile(company)">Edit</a>
+</div> -->
