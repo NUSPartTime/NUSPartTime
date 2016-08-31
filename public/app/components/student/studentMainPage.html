@@ -1,5 +1,14 @@
 <student-header></student-header>
 
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7&appId=833829723419057";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 <ul class="list-group side-bar">
 	<button type="button" class="list-group-item" id="all-jobs-button" ng-click="showAllContent()"> 
 		All 
@@ -18,6 +27,7 @@
 				{{ job.title }}
 			</h4>
 			<a ng-href="#/job/{{job.id}}"> Details </a>
+			<div class="fb-like" data-href="http://www.nuspartime.com/#/job/{{job.id}}" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
 		</div>
 	</div>
 </div>

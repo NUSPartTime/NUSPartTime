@@ -12,7 +12,6 @@ router.post('/allNotifications', function(req, res) {
         },
         include: [models.Job]
     }).then(function(allNotifications) {
-        console.log(allNotifications);
         res.send({
             notificationArray: JSON.stringify(allNotifications)
         });
