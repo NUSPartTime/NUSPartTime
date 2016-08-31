@@ -1,147 +1,75 @@
-
-
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title></title>
-    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
-    <link rel="stylesheet" href="/stylesheets/style.css">
-    <link rel="stylesheet/less" href="/stylesheets/index-page.less">
-    <link rel="stylesheet/less" href="/stylesheets/student-page.less">
-    <link rel="stylesheet" href="/stylesheets/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css">
-    <script src="/javascripts/vendor/jquery.min.js"></script>
-    <script src="/javascripts/vendor/bootstrap.min.js"></script>
-    <script src="/javascripts/vendor/less-2.7.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
-</head>
-
-<body>
-    <script>
-        var COMPANY_ID = "company/project name";
-        var TITLE = "job title";
-        var SALARY = "hourly salary";
-        var APPLICATION = "application deadline";
-
-        $(function() {
-            $('.datepicker').datepicker();
-        });
-
-        $(document).ready(function() {
-            $(".newjob-form .signup-button").on('click', function(event) {
-
-                var companyId = $(".newjob-form .newjob-company").val();
-                var title = $(".newjob-form .newjob-title").val();
-                var salary = $(".newjob-form .newjob-salary").val();
-                var description = $(".newjob-form .newjob-description").val();
-                var applicationDeadline = $(".newjob-form .newjob-application-deadline").val();
-                var deadline = $(".newjob-form .newjob-deadline").val();
-
-                if (companyId === "" || title === "" || salary === "" || applicationDeadline === "") {
-
-                    event.preventDefault();
-
-                    var errors = [];
-
-                    if (companyId === "") errors.push(COMPANY_ID);
-                    if (title === "") errors.push(TITLE);
-                    if (salary === "") errors.push(SALARY);
-                    if (applicationDeadline === "") errors.push(APPLICATION);
-
-                    var error_message = errors.join(", ");
-                    var link = errors.length > 1 ? " are " : " is ";
-
-                    $(".signup-warning").removeClass("hidden");
-                    $(".signup-warning span").text("You are not able to post a new job since the " + error_message + link + "not specified.");
-
-                    $('html, body').animate({
-                        scrollTop: $(".box-shadow").offset().top
-                    }, 500);
-                }
-
-            });
-        });
-    </script>
-    <nav id="mainNav" class="navbar box-shadow">
-        <div class="container">
-            <div class="navbar-header page-scroll">
-                <a href="/" class="navbar-brand header-logo"><img src="/images/logo.png"></a>
-            </div>
-        </div>
-    </nav>
-    <div class="container">
-        <div class="panel panel-default new-job-panel">
-            <div class="panel-heading font-bold">Post a new job</div>
-            <div class="panel-body">
-                <form ng-submit="updateJob()" class="newjob-form">
-                    <div class="alert alert-danger signup-warning hidden"><span></span></div>
-                    <input type="text" name="status" ng-model="status" value="0" class="hidden">
-                    <div class="form-group">
-                        <label class="col-sm-3 newjob-input-label font-light">Company/Project Name</label>
-                        <div class="col-sm-9">
-                            <select name="companyId" ng-model="currentJob.companyId" class="form-control newjob-company newjob-input font-light">
-                                <option ng-repeat="(key, val) in companies" value="{{key}}">{{ val }}</option>
-
-                            </select>
-                        </div>
+<nav id="mainNav" class="navbar box-shadow">
+    <div class="navbar-header page-scroll">
+        <a href="/" class="navbar-brand header-logo"><img src="/images/logo.png"></a>
+    </div>
+</nav>
+<div class="container">
+    <div class="panel panel-default new-job-panel">
+        <div class="panel-heading font-bold">Post a new job</div>
+        <div class="panel-body">
+            <form name="updatejob-form" ng-submit="updateJob()" class="newjob-form">
+                <div class="alert alert-danger signup-warning hidden"><span></span></div>
+                <input type="text" name="status" ng-model="currentJob.status" class="hidden">
+                <div class="form-group">
+                    <label class="col-sm-3 newjob-input-label font-light">Company/Project Name</label>
+                    <div class="col-sm-9">
+                        <select name="companyId" ng-model="currentJob.companyId" class="form-control newjob-company newjob-input font-light">
+                            <option ng-repeat="(key, val) in companies" value="{{key}}">{{ val }}</option>
+                        </select>
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 newjob-input-label font-light">Category</label>
-                        <div class="col-sm-9">
-                            <select name="categoryId" ng-model="currentJob.categoryId" class="form-control newjob-company newjob-input font-light">
-                                <option ng-repeat="(key, val) in categories" value="{{key}}">{{ val }}</option>
-
-                            </select>
-                        </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 newjob-input-label font-light">Category</label>
+                    <div class="col-sm-9">
+                        <select name="categoryId" ng-model="currentJob.categoryId" class="form-control newjob-company newjob-input font-light">
+                            <option ng-repeat="(key, val) in categories" value="{{key}}">{{ val }}</option>
+                        </select>
                     </div>
-                    <div class="line-dashed"></div>
-                    <div class="form-group">
-                        <lable class="col-sm-3 newjob-input-label font-light">Job Title</lable>
-                        <div class="col-sm-9">
-                            <input type="text" name="title" ng-model="currentJob.title"  placeholder="e.g. Software engineer" class="form-control newjob-title newjob-input font-light">
-                        </div>
+                </div>
+                <div class="line-dashed"></div>
+                <div class="form-group">
+                    <lable class="col-sm-3 newjob-input-label font-light">Job Title</lable>
+                    <div class="col-sm-9">
+                        <input type="text" name="title" ng-model="currentJob.title"  placeholder="e.g. Software engineer" class="form-control newjob-title newjob-input font-light" required="true">
                     </div>
-                    <div class="line-dashed"></div>
-                    <div class="form-group">
-                        <lable class="col-sm-3 newjob-input-label font-light">Salary</lable>
-                        <div class="col-sm-9">
-                            <div class="input-group"><span class="input-group-addon">$</span>
-                                <input type="text" name="salary" ng-model="currentJob.salary" class="form-control newjob-salary font-light"><span class="input-group-addon">.00</span></div><span class="help-block font-light">Notice: the salary should be hourly salary.</span></div>
+                </div>
+                <div class="line-dashed"></div>
+                <div class="form-group">
+                    <lable class="col-sm-3 newjob-input-label font-light">Salary</lable>
+                    <div class="col-sm-9">
+                        <div class="input-group"><span class="input-group-addon">$</span>
+                            <input type="text" name="salary" ng-model="currentJob.salary" class="form-control newjob-salary font-light" required="true"><span class="input-group-addon">.00</span></div><span class="help-block font-light">Notice: the salary should be hourly salary.</span></div>
+                </div>
+                <div class="line-dashed"></div>
+                <div class="form-group">
+                    <lable class="col-sm-3 newjob-input-label font-light">Description</lable>
+                    <div class="col-sm-9">
+                        <textarea name="description" ng-model="currentJob.description" overflow="scroll" rows="15" placeholder="The description of the job details..." class="form-control newjob-description font-light"></textarea>
                     </div>
-                    <div class="line-dashed"></div>
-                    <div class="form-group">
-                        <lable class="col-sm-3 newjob-input-label font-light">Description</lable>
-                        <div class="col-sm-9">
-                            <textarea name="description" ng-model="currentJob.description" overflow="scroll" rows="15" placeholder="The description of the job details..." class="form-control newjob-description font-light"></textarea>
-                        </div>
+                </div>
+                <div class="line-dashed"></div>
+                <div class="form-group">
+                    <lable class="col-sm-3 newjob-input-label font-light">Application Deadline</lable>
+                    <div class="col-sm-9">
+                        <div data-provide="datepicker" data-date-format="MM dd yyyy" class="input-group date newjob-input">
+                            <input type="text" name="application_deadline" ng-model="currentJob.applicationDeadline" class="form-control newjob-application-deadline font-light" required="true"><span class="input-group-addon"><i class="fa fa-calendar-check-o"></i></span></div>
                     </div>
-                    <div class="line-dashed"></div>
-                    <div class="form-group">
-                        <lable class="col-sm-3 newjob-input-label font-light">Application Deadline</lable>
-                        <div class="col-sm-9">
-                            <div data-provide="datepicker" data-date-format="MM dd yyyy" class="input-group date newjob-input">
-                                <input type="text" name="application_deadline" ng-model="currentJob.applicationDeadline" class="form-control newjob-application-deadline font-light"><span class="input-group-addon"><i class="fa fa-calendar-check-o"></i></span></div>
-                        </div>
-                    </div>
-                    <div class="line-dashed"></div>
-                    <div class="form-group">
-                        <lable class="col-sm-3 newjob-input-label font-light">Job End Date</lable>
-                        <div class="col-sm-9">
-                            <div data-provide="datepicker" data-date-format="MM dd yyyy" class="input-group date">
-                                <input type="text" name="deadline" ng-model="currentJob.deadline" class="form-control newjob-deadline font-light"><span class="input-group-addon"><i class="fa fa-calendar-check-o"></i></span></div><span class="help-block font-light">Notice: please fill in when the project will be finished.</span></div>
-                    </div>
-                    <div class="line-dashed"></div>
-                    <div class="col-sm-4 col-sm-offset-3 newjob-button-group">
-                        <button type="submit" class="btn btn-primary signup-button newjob-button">Update!</button>
-                        <a href="/#/company">
-                            <button type="button" class="btn btn-primary signup-back-button">Cancel</button>
-                        </a>
-                    </div>
-                </form>
-            </div>
+                </div>
+                <div class="line-dashed"></div>
+                <div class="form-group">
+                    <lable class="col-sm-3 newjob-input-label font-light">Job End Date</lable>
+                    <div class="col-sm-9">
+                        <div data-provide="datepicker" data-date-format="MM dd yyyy" class="input-group date">
+                            <input type="text" name="deadline" ng-model="currentJob.deadline" class="form-control newjob-deadline font-light"><span class="input-group-addon"><i class="fa fa-calendar-check-o"></i></span></div><span class="help-block font-light">Notice: please fill in when the project will be finished.</span></div>
+                </div>
+                <div class="line-dashed"></div>
+                <div class="col-sm-4 col-sm-offset-3 newjob-button-group">
+                    <button type="submit" class="btn btn-primary signup-button newjob-button" ng-click="updateJob.$valid">Update!</button>
+                    <a href="/#/company">
+                        <button type="button" class="btn btn-primary signup-back-button">Cancel</button>
+                    </a>
+                </div>
+            </form>
         </div>
     </div>
-</body>
-
-</html>
+</div>
