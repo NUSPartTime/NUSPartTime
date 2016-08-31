@@ -20,20 +20,31 @@ angular.module("nusPartimeApp").controller("companyMainController",
 					$scope.allJobsArray = $scope.allJobsArray.concat(catJobs.jobs);
 				}
 				$scope.showAllContent();
-				$("#all-jobs-button").focus();
+				$(".all-company-button").addClass("active");
 
 			});
 		});
 
+		$scope.reload = function() {
+			location.reload();
+		}
+		
+		// Converts status number to open or closed
+		$scope.convertStatus = function(statusNumber) {
+			return statusNumber == "0" ? "Open" : "Closed";
+		}
 
-
-
-
-		$scope.showAllContent = function() {
+		$scope.showAllContent = function($event) {
+			if($event !== undefined) {
+				$(".nav-side-bar li").removeClass('active');
+				$($event.target).parent().addClass('active');
+			}
 			$scope.displayedJobs = $scope.allJobsArray;
 		}
 
-		$scope.showContent = function(index) {
+		$scope.showContent = function(index, $event) {
+			$(".nav-side-bar li").removeClass('active');
+			$($event.target).parent().addClass('active');
 			$scope.displayedJobs = $scope.catJobsArray[index].jobs;
 		}
 
@@ -41,6 +52,6 @@ angular.module("nusPartimeApp").controller("companyMainController",
 			JobService.setJob(job);
 			// should return to job view
 			$location.path("/jobEdit");
-
 		}
+
 	}]);

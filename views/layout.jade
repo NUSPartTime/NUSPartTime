@@ -11,9 +11,10 @@ html(ng-app="nusPartimeApp")
     script(src="/javascripts/vendor/angular-cookies.js")
     script(src="/javascripts/vendor/bootstrap.min.js")
     script(src="/javascripts/vendor/jquery-dateFormat.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js")
     script(src="/javascripts/vendor/bootstrap-switch.js")
-    script(src="/javascripts/vendor/moment.js")
-    script(src="/javascripts/vendor/sweetalert.js")
+    script(src="/javascripts/vendor/moment.min.js")
+    script(src="/javascripts/vendor/sweetalert.min.js")
 
     script(src="/app/app.js")
     script(src="/app/services/session.js")
@@ -33,8 +34,9 @@ html(ng-app="nusPartimeApp")
     script(src="/app/components/jobDetail/jobDetailController.js")
 
     link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
-    link(rel='stylesheet', href='/stylesheets/bootstrap-theme.min.css')
+    //- link(rel='stylesheet', href='/stylesheets/bootstrap-theme.min.css')
     link(rel='stylesheet', href='/stylesheets/font-awesome.min.css')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/bootstrap-switch.css')
     link(rel='stylesheet', href='/stylesheets/sweetalert.css')
@@ -43,5 +45,4 @@ html(ng-app="nusPartimeApp")
     script(src="/javascripts/vendor/less-2.7.1.min.js")
 
   body
-    div
-      ng-view
+    ng-view
