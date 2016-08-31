@@ -416,6 +416,10 @@ body {
   padding-left: 100px;
 }
 
+.job-details-status .bootstrap-switch {
+  border: 0;
+}
+
 .job-details span {
   font-size: 30px;
   font-weight: 300;

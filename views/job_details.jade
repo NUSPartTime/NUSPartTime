@@ -30,6 +30,21 @@ block content
           }
         });
       });
+
+      $(".job-details-delete-button").on("click", function() {
+        swal({
+          title: "Are you sure?",
+          text: "You will not be able to recover this job!",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "Yes, delete it!",
+          closeOnConfirm: false 
+        }, 
+        function(){
+          swal("Deleted!", "This job has been deleted.", "success");
+        });
+      });
       
       var displayMessage = $(".job-details-description").text();
       $(".job-details-description").html(displayMessage);
@@ -125,7 +140,9 @@ block content
                   each student in students
                     tr
                       td=student.matric
-
+    div(class="signup-footer-info")
+      p
+        small(class="font-not-important") NUS Part Time all rights reserved ©️ 2016
 
           //- //- Job title
           //- div(class="page-header")
