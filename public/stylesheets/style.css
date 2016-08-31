@@ -220,6 +220,10 @@ body {
   padding-left: 5px;
 }
 
+.notification-button {
+  display: inline-block;
+}
+
 .company-new-button {
   padding-left: 70px;
 }
