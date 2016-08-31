@@ -61,5 +61,33 @@ router.post("/createNewCompany", function(req, res) {
     });
 });
 
+router.post("/getCompanyProfile", function(req, res){
+    models.Company.findOne({
+        where:{
+            id: req.body.id
+        }
+    }).then(function(company){
+        res.send({company: company});
+    });
+});
+
+router.post("/getAllCompanies", function(req, res){
+    var userId = req.body.id;
+    models.CompanyContact.findAll({
+        where:{
+            employerId: userId
+        },
+        include: [models.Company]
+    }).then(function(allCompanyContacts){
+        var companies = [];
+        for(var contact of allCompanyContacts){
+            companies.push(contact.Company);
+        }
+        res.send({
+            companies: companies
+        })
+    });
+});
+
 
 module.exports = router;

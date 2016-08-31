@@ -12,5 +12,25 @@ angular.module("nusPartimeApp").factory("CompanyService", function($http, $locat
         });
     }
 
+    companyService.getAllCompanies = function(userId){
+        var postParam = {
+            id: userId
+        }
+
+        return $http.post("/companyManagement/getAllCompanies", postParam).then(function(res){
+            return res.data.companies;
+        });
+    }
+
+    companyService.getCompanyProfile = function(companyId){
+        var postParam = {
+            id: companyId
+        }
+
+        return $http.post("/companyManagement/getCompanyProfile", postParam).then(function(res){
+            return res.data;
+        });
+    }
+
     return companyService;
 });

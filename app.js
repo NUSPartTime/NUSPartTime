@@ -10,7 +10,7 @@ var sequelize = require("sequelize");
 
 var routes = require('./routes/index');
 var userManagement = require('./routes/userManagement');
-// var notification = require('./routes/notification');
+var notificationManagement = require('./routes/notificationManagement');
 // var studentDetail = require('./routes/studentDetail');
 // var company = require('./routes/company');
 var jobManagement = require('./routes/jobManagement');
@@ -32,7 +32,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', routes);
 app.use('/userManagement', userManagement);
 app.use('/companyManagement', companyManagement);
-// app.use('/notification', notification);
+app.use('/notificationManagement', notificationManagement);
 // app.use('/company', company);
 // app.use('/studentDetail', studentDetail);
 app.use('/jobManagement', jobManagement);
