@@ -9,6 +9,9 @@ angular.module("nusPartimeApp").controller("jobEditController",
                 $scope.categories = res.categories;
                 $scope.companies = res.companies;
 
+				$(function() {
+					$(".datepicker").datepicker();
+				});
             });
         });
         $scope.currentJob = JobService.getCurrentJob();
