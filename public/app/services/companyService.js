@@ -32,5 +32,20 @@ angular.module("nusPartimeApp").factory("CompanyService", function($http, $locat
         });
     }
 
+    companyService.currentCompany = {};
+    companyService.setCompany = function(company){
+        companyService.currentCompany = company;
+    }
+
+    companyService.getCompany = function(){
+        return companyService.currentCompany;
+    }
+
+    companyService.updateCompanyProfile = function(postParam){
+        return $http.post("/companyManagement/updateCompanyProfile", postParam).then(function(res){
+            return res.data;
+        });
+    }
+
     return companyService;
 });
