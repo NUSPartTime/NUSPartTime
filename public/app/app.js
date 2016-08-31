@@ -36,6 +36,10 @@ nusPartime.config(["$routeProvider", "$locationProvider",
 				templateUrl: "/app/components/jobCreation/jobCreation.html",
 				controller: "jobCreationController"
 			}).
+			when("/jobEdit/", {
+				templateUrl: "/app/components/jobEdit/jobEdit.html",
+				controller: "jobEditController"
+			}).
 			when("/job/:id", {
 				templateUrl: "/app/components/jobDetail/jobDetail.html",
 				controller: "jobDetailController",

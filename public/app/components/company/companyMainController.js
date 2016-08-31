@@ -1,8 +1,8 @@
 "use strict";
 
 angular.module("nusPartimeApp").controller("companyMainController",
-	["$scope", "$location", "Session", "AuthService", "CompanyService",
-	function($scope, $location, Session, AuthService, CompanyService) {
+	["$scope", "$location", "Session", "AuthService", "CompanyService", "JobService",
+	function($scope, $location, Session, AuthService, CompanyService, JobService) {
 
 		$scope.catJobsArray = [];
 		$scope.allJobsArray = [];
@@ -35,5 +35,12 @@ angular.module("nusPartimeApp").controller("companyMainController",
 
 		$scope.showContent = function(index) {
 			$scope.displayedJobs = $scope.catJobsArray[index].jobs;
+		}
+
+		$scope.editJob = function(job){
+			JobService.setJob(job);
+			// should return to job view
+			$location.path("/jobEdit");
+
 		}
 	}]);
