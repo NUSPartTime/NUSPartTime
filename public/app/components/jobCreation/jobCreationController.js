@@ -8,15 +8,19 @@ angular.module("nusPartimeApp").controller("jobCreationController",
             JobService.getJobApplicationForm(Session.userId).then(function(res){
                 $scope.categories = res.categories;
                 $scope.companies = res.companies;
+				$(function() {
+			        $('.datepicker').datepicker();
+			    });
             });
         });
 
         $scope.create = function(){
+			console.log($scope.status);
             var postParam = {
                 userId: Session.userId,
                 companyId: $scope.companyId,
                 title: $scope.title,
-                status: $scope.status,
+                status: "0",
                 salary: $scope.salary,
                 description: $scope.description,
                 applicationDeadline: $scope.applicationDeadline,

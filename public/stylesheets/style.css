@@ -151,6 +151,20 @@ body {
   border-radius: 2px 0 0 2px;
 }
 
+.mce-panel {
+    background-color: #edf1f2!important;
+    border-color: #ccc!important;
+}
+
+.mce-panel iframe {
+    font-size: 14px!important;
+    font-family: "Source Sans Pro",sans-serif!important;
+}
+
+.mce-panel .mce-btn {
+    background-color: #edf1f2!important;
+}
+
 .form-control {
   border-color: #cfdadd;
   -webkit-box-shadow: none;
@@ -214,7 +228,7 @@ body {
 /*company index body*/
 .company-index-body {
   display: table;
-  padding: 0px;  
+  padding: 0px;
   height: 100%;
   width: 100%;
   table-layout: fixed;
