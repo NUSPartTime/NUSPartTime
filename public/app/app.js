@@ -32,6 +32,10 @@ nusPartime.config(["$routeProvider", "$locationProvider",
 				templateUrl: "/app/components/notification/notificationPage.html",
 				controller: "notificationController"
 			}).
+			when("/companyProfile", {
+				templateUrl: "/app/components/companyProfile/companyProfile.html",
+				controller: "companyProfileController"
+			}).
 			when("/studentRegister", {
 				templateUrl: "/app/components/studentRegistration/studentRegistrationPage.html",
 				controller: "studentRegistrationController"
@@ -39,6 +43,10 @@ nusPartime.config(["$routeProvider", "$locationProvider",
 			when("/jobCreate/", {
 				templateUrl: "/app/components/jobCreation/jobCreation.html",
 				controller: "jobCreationController"
+			}).
+			when("/jobEdit/", {
+				templateUrl: "/app/components/jobEdit/jobEdit.html",
+				controller: "jobEditController"
 			}).
 			when("/job/:id", {
 				templateUrl: "/app/components/jobDetail/jobDetail.html",

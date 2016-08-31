@@ -241,6 +241,35 @@ router.post("/createJob", function(req, res) {
         });
     });
 });
+
+router.post('/updateJob', function(req, res){
+      models.sequelize.Promise.all([
+        models.Job.findAll({
+          where: {
+            id: req.body.id
+          },
+        })
+    ]).spread(function(allJobs) {
+        console.log(req.body);
+        if(typeof(allJobs[0]) != "undefined") {
+          job = allJobs[0];
+          job.update({
+            companyId: req.body.companyId,
+            title: req.body.title,
+            status: req.body.status,
+            salary: req.body.salary,
+            description: req.body.description,
+            applicationDeadline: req.body.applicationDeadline,
+            deadline: req.body.deadline
+          }).then(function(){
+            res.send({
+                redirect: "/company"
+            });
+          });
+        }
+      });
+});
+
             // /* This is for company to view job status */
             // router.get('/:job_id/view', function(req, res, next) {
             //   var sess = req.session;

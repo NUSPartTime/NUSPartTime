@@ -66,5 +66,21 @@ angular.module("nusPartimeApp").factory("JobService",
 			});
 		}
 
+		jobService.currentJob = {};
+		jobService.setJob = function(job){
+			jobService.currentJob = job;
+		}
+
+		jobService.getCurrentJob = function(){
+			return jobService.currentJob;
+		}
+
+		jobService.updateJob = function(postParam){
+			console.log(postParam);
+			return $http.post("/jobManagement/updateJob", postParam).then(function(res){
+				return res.data;
+			});
+		}
+
 		return jobService;
 	});
