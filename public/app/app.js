@@ -28,6 +28,10 @@ nusPartime.config(["$routeProvider", "$locationProvider",
 				templateUrl: "/app/components/companyRegistration/companyRegistrationPage.html",
 				controller: "companyRegistrationController"
 			}).
+			when("/notification/", {
+				templateUrl: "/app/components/notification/notificationPage.html",
+				controller: "notificationController"
+			}).
 			when("/studentRegister", {
 				templateUrl: "/app/components/studentRegistration/studentRegistrationPage.html",
 				controller: "studentRegistrationController"
