@@ -1,0 +1,15 @@
+<student-header></student-header>
+<div>
+	<div class="list-group">
+		<div ng-repeat="notification in notificationArray">
+			<h4 class="list-group-item-heading">
+				{{ notification.message }}
+			</h4>
+			<div ng-hide="{{ notification.status }}">
+				<form ng-submit="readNotification($index)">
+					<button type="submit" class="btn btn-primary">Mark as read</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
