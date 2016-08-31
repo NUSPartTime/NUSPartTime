@@ -225,6 +225,33 @@ body {
 }
 /*end of navbar*/
 
+/*student index body*/
+.student-index-body {
+  display: table;
+  padding: 0px;
+  height: 100%;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.student-index-side-bar {
+  display: table-cell;
+  float: none;
+  height: 100%;
+  vertical-align: top;
+  width: 240px;
+  border-right: 1px solid #dee5e7;
+  background-color: #e4eaec;
+}
+
+.student-index-info {
+  display: table-cell;
+  float: none;
+  height: 100%;
+  vertical-align: top;
+  background-color: #fff;
+}
+
 /*company index body*/
 .company-index-body {
   display: table;

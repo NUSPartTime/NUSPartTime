@@ -1,5 +1,6 @@
 <student-header></student-header>
 
+<!-- FB JavaScript SDK here -->
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -8,26 +9,42 @@
   js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7&appId=833829723419057";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
+<!-- End of FB JavaScript SDK -->
 
-<ul class="list-group side-bar">
-	<button type="button" class="list-group-item" id="all-jobs-button" ng-click="showAllContent()"> 
-		All 
-	</button>
-	<div ng-repeat="catJobs in catJobsArray">
-		<button type="button" class="list-group-item" ng-click="showContent($index)">
-			{{ catJobs.category }}
-		</button>
-	</div>
-</ul>
+<!-- index body -->
+<div class="student-index-body">
 
-<div>
-	<div class="list-group">
-		<div ng-repeat="job in displayedJobs">
-			<h4 class="list-group-item-heading">
-				{{ job.title }}
-			</h4>
-			<a ng-href="#/job/{{job.id}}"> Details </a>
-			<div class="fb-like" data-href="http://www.nuspartime.com/#/job/{{job.id}}" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+	<!-- define the side bar here -->
+	<div class="student-index-side-bar">
+		<div class="wrapper bg-light wrapper-centre">
+			<span class="title-font"><i class="fa fa-list-alt" aria-hidden="true"></i><span class="title-icon">Job Categories</span></span>
+		</div>
+		<div class="wrapper">
+			<ul class="nav nav-pills nav-stacked nav-side-bar font-mid">
+				<li role="presentation" class="all-jobs-button">
+					<a ng-click="showAllContent()">All</a>
+				</li>
+				<li ng-repeat="catJobs in catJobsArray">
+					<a ng-click="showContent($index)">{{ catJobs.category }}</a>
+				</li>
+			</ul>
 		</div>
 	</div>
+	<!-- end of side bar -->
+	
+	<!-- all jobs -->
+	<div class="studnet-index-info">
+		<!-- body -->
+		<ul class="list-group list-group-lg no-radius m-b-none m-t-n-xxs font-light">
+			<li ng-repeat="job in displayedJobs" ng-class="{0:'b-l-success'}[job.status]" class="list-group-item category-job b-l-3x">
+				<h4 class="list-group-item-heading font-light">{{ job.title }}</h4>
+				<a ng-href="#/job/{{job.id}}">Details&nbsp;&nbsp;</a>
+				<div class="fb-like" data-href="http://www.nuspartime.com/#/job/{{job.id}}" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+				<div class="pull-right">
+					<span class="font-not-important">{{ convertStatus(job.status) }}</span>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<!-- end of all jobs -->
 </div>
