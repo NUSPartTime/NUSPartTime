@@ -1,5 +1,7 @@
 var models  = require("../models");
 var express = require("express");
+var querystring = require('querystring');
+var https = require("https");
 var router = express.Router();
 
 router.post("/login", function(req, res) {
@@ -61,6 +63,44 @@ router.post("/login", function(req, res) {
 			}
 		}
 	});
+});
+
+
+router.post("/authenticateStudent", function(req, res) {
+	var matricNumber = req.body.matricNumber;
+	var pwd = req.body.password;
+	console.log("login with info: " + matricNumber + "  password: " + pwd);
+
+	var postData = querystring.stringify({
+		"userid": matricNumber,
+		"pwd": pwd
+	});
+
+	var hostUrl = "myisis.nus.edu.sg";
+	var pathUrl = "/psp/cs90prd/EMPLOYEE/HRMS/h/?tab=DEFAULT&cmd=login&languageCd=ENG";
+
+	var postOptions = {
+		host: hostUrl,
+		port: "443",
+		path: pathUrl,
+		method: "POST",
+		headers: {
+			"Content-Type": "application/x-www-form-urlencoded",
+		    "accept": "*/*"
+		}
+	};
+
+	var postRequest = https.request(postOptions, function(res) {
+		console.log('STATUS: ' + res.statusCode);
+		console.log('HEADERS: ' + JSON.stringify(res.headers));
+		res.setEncoding('utf8');
+		res.on('data', function (chunk) {
+			console.log('BODY: ' + chunk);
+		});
+	});
+
+	postRequest.write(postData);
+	postRequest.end();
 });
 
 

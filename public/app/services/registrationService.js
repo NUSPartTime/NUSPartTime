@@ -17,6 +17,18 @@ angular.module("nusPartimeApp").factory("RegistrationService", ["$http", "$locat
 						});
 		}
 
+		registrationService.authenticateStudent = function(matricNumber, pwd) {
+			var postParam = {
+				matricNumber: matricNumber,
+				password: pwd
+			};
+			return $http.post("/userManagement/authenticateStudent", postParam)
+						.then(function(res) {
+							console.log(res.data);
+							return res.data;
+						});
+		}
+
 		registrationService.registerStudent = function(userId, matricNumber) {
 			var postParam = {
 				userId: userId,
@@ -27,7 +39,7 @@ angular.module("nusPartimeApp").factory("RegistrationService", ["$http", "$locat
 							Session.isStudent = true;
 							// redirect to student page if successful
 							$location.path("/student");
-						})
+						});
 		}
 
 		registrationService.registerCompany = function(userId, name, contact, email){
