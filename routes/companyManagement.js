@@ -89,5 +89,28 @@ router.post("/getAllCompanies", function(req, res){
     });
 });
 
+router.post("/updateCompanyProfile", function(req, res){
+    var companyId = req.body.id;
+    models.Company.findOne({
+        where: {
+            id: companyId
+        }
+    }).then(function(company){
+        if(typeof(company) != null ){
+            company.update({
+                name: req.body.name,
+                address: req.body.address,
+                email: req.body.email,
+                phone: req.body.phone,
+                description: req.body.description
+            }).then(function(){
+                res.send({
+                    redirect: "/company"
+                });
+            });
+        }
+    });
+});
+
 
 module.exports = router;
