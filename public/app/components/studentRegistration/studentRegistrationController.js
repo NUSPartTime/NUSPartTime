@@ -6,11 +6,15 @@ angular.module("nusPartimeApp").controller("studentRegistrationController",
 		AuthService.autoLogin();
 
 		$scope.register = function() {
-			console.log($scope.matricNumber);
-			// suppose to check validity of matric number
+			
 			/*
-				stub
+			// suppose to check validity of matric number, but failed
+			RegistrationService.authenticateStudent($scope.matricNumber, $scope.pwd)
+				.then(function(res) {
+					console.log(res);
+				})
 			*/
+
 			// then register
 			RegistrationService.registerStudent(Session.userId, $scope.matricNumber);
 		}
