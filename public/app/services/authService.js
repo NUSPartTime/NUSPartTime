@@ -46,12 +46,14 @@ angular.module("nusPartimeApp").factory("AuthService", function ($http, $locatio
 		}
 	}
 
-	authService.logout = function() {
-		FB.logout(function(response) {
-			Session.destroy();
-			$cookies.remove("userId");
-            $route.reload();
-		});
+	authService.logout = function(isFBLoggedOut) {
+		Session.destroy();
+		$cookies.remove("userId");
+		if (!isFBLoggedOut) {
+			FB.logout(function(response) {
+	            $route.reload();
+			});
+		}
 	}
 
 //   authService.isAuthorized = function (authorizedRoles) {

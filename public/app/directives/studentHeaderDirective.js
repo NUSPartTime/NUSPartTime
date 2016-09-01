@@ -19,7 +19,7 @@ angular.module("nusPartimeApp").directive("studentHeader", function() {
             }
 
             $scope.logout = function() {
-                AuthService.logout();
+                AuthService.logout(false);
             }
         }]
     }
