@@ -8,11 +8,11 @@ angular.module("nusPartimeApp").controller("indexController",
 			$scope.fbLoginText = "Log Out";
 			// check if need to redirect
 			AuthService.autoLogin().then(function(response) {
-				if (response.needRedirect) {
+				// if (response.needRedirect) {
 				// 	$location.path(response.redirectUrl);
-				} else {
+				// } else {
 					$scope.showLogin = true;
-				}
+				// }
 			});
 		} else {
 			$scope.fbLoginText = "Log In";
@@ -69,12 +69,12 @@ angular.module("nusPartimeApp").controller("indexController",
 											});
 										});
 									} else {
-										if (authenticationResponse.needRedirect) {
-											$location.path(authenticationResponse.redirectUrl);
-										} else {
+										// if (authenticationResponse.needRedirect) {
+											// $location.path(authenticationResponse.redirectUrl);
+										// } else {
 											// registered user but neither student or employer
 											$scope.showLogin = true;
-										}
+										// }
 									}
 								});
 
