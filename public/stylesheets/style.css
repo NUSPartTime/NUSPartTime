@@ -210,6 +210,21 @@ body {
     margin-right: 15px;
 }
 
+.btn-primary {
+    color: #fff!important;
+    background-color: #7266ba;
+    border-color: #7266ba;
+}
+
+.btn-warning {
+    color: #fff!important;
+    background-color: #fad733;
+    border-color: #fad733;
+}
+.btn:focus {
+    outline: 0!important;
+}
+
 /*end of general*/
 
 /*for navbar*/
@@ -537,6 +552,46 @@ body {
     margin-top: -20px;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
+}
+
+.job-contact-person {
+    border-color:transparent;
+    border-width: 0px;
+}
+
+.job-contact-person .panel-heading {
+    border-color: #edf1f2;
+    border-bottom: 1px solid #dee5e7;
+}
+
+.apply-button i {
+    width: 30px;
+    height: 30px;
+    margin: -6px 10px -6px -10px;
+    line-height: 30px;
+    position: relative;
+    float: left;
+    background-color: rgba(0,0,0,.1);
+    border-radius: 2px 0 0 2px;
+}
+
+.list-of-applicants {
+    margin-bottom: 0!important;
+    border-radius: 2px;
+    margin-top: 0;
+}
+
+.list-of-applicants .avatar {
+    width: 40px;
+    display: inline-block;
+    margin-right: 15px；
+}
+
+.list-of-applicants .avatar img {
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
+    border-radius: 4px;
 }
 /*end of job details*/
 

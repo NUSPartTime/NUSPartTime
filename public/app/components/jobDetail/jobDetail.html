@@ -99,6 +99,55 @@
 					<p style="color: #dcf2f8;" ng-bind-html="description"></p>
 				</div>
 			</div>
+			<div class="col-sm-4">
+				<div class="panel job-contact-person margin-top">
+					<div class="panel-heading wrapper">
+						<h4 class="font-light"><i class="fa fa-phone-square" aria-hidden="true"></i>&nbsp;&nbsp;Contact Person</h4>
+					</div>
+					<div class="panel-body">
+						<div class="row font-light">
+							<div class="col-sm-5">
+								<span>Name</span>
+							</div>
+							<div class="col-sm-7">
+								<!-- TODO: add contact person name -->
+							</div>
+						</div>
+						<div class="row font-light margin-top">
+							<div class="col-sm-5">
+								<span>Email</span>
+							</div>
+							<div class="col-sm-7">
+								<!-- TODO: add contact person name -->
+							</div>
+						</div>
+						<div ng-switch on="applicationStatus" style="margin-top: 30px;">
+							<form ng-switch-when="-1" ng-submit="applyJob()">
+								<button type="submit" class="btn btn-primary btn-sm button-addon apply-button"><i class="fa fa-paper-plane"></i>Apply</button>
+							</form>
+							<form ng-switch-when="0" ng-submit="reapplyJob()">
+								<button type="submit" class="btn btn-primary btn-sm button-addon apply-button"><i class="fa fa-paper-plane"></i>Re-Apply</button>
+							</form>
+							<form ng-switch-default ng-submit="cancelApplication()">
+								<button type="submit" class="btn btn-warning btn-sm button-addon apply-button"><i class="fa fa-exclamation-circle"></i>Cancel</button>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="panel job-contact-person margin-top hidden">
+					<div class="panel-heading wrapper">
+						<h4 class="font-light"><i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;Applicants</h4>
+					</div>
+					<ul class="list-group list-group-lg list-of-applicants">
+						<li class="list-group-item">
+							<div class="avatar">
+								<img src="../images/logo.jpg" />
+							</div>
+							<a style="padding-left: 20px;" class="font-light">Yang Zhuohan</a>
+						</li>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</div>
 	<!-- end of job details -->
