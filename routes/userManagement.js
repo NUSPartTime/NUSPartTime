@@ -182,12 +182,11 @@ router.post("/updateUserProfile", function(req, res){
 });
 
 router.post("/getUserProfile", function(req, res){
-
-		models.User.findOne({
-			where: {
-				id: req.body.id
-			}
-		}).then(function(user){
+	models.User.findOne({
+		where: {
+			id: req.body.id
+		}
+	}).then(function(user){
 		res.send(user);
 	});
 })
