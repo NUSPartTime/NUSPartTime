@@ -158,6 +158,40 @@ router.post("/createNewUser", function(req, res) {
 	});
 });
 
+router.post("/updateUserProfile", function(req, res){
+
+		models.User.findOne({
+			where: {
+				id: req.body.id
+			}
+		}).then(function(user){
+		if(typeof(user) != null){
+			user.update({
+				name: req.body.name,
+				address: req.body.address,
+				phone: req.body.phone,
+				email: req.body.email,
+				description: req.body.description
+			}).then(function(){
+				res.send({
+					redirect: "/"
+				});
+			});
+		}
+	});
+});
+
+router.post("/getUserProfile", function(req, res){
+
+		models.User.findOne({
+			where: {
+				id: req.body.id
+			}
+		}).then(function(user){
+		res.send(user);
+	});
+})
+
 // /* GET user destroyed. */
 // router.get('/:user_id/destroy', function(req, res) {
 //   models.User.destroy({
