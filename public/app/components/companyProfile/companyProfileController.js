@@ -7,7 +7,7 @@ angular.module("nusPartimeApp").controller("companyProfileController",
             CompanyService.getAllCompanies(Session.userId).then(function(res){
                 $scope.companies = res;
 				$(".personalInfo-button").addClass("active");
-
+				$scope.editStatus = "0";
 
             });
 
@@ -34,5 +34,13 @@ angular.module("nusPartimeApp").controller("companyProfileController",
 			$(".companyInfo-button").addClass("active");
 			$(".personalInfo").addClass("hidden");
 			$(".personalInfo-button").removeClass("active");
+		}
+
+		$scope.editUser = function() {
+			$scope.editStatus = "1";
+		}
+
+		$scope.cancelEdit = function() {
+			$scope.editStatus = "0";
 		}
 	}]);

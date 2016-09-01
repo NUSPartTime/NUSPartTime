@@ -103,22 +103,39 @@
         </div>
 
 		<div class="personalInfo padder">
-			<a href class="panel hbox hbox-auto-xs no-border personalInfo-wrapper margin-top">
+			<a ng-click="editUser()" class="panel hbox hbox-auto-xs no-border personalInfo-wrapper margin-top">
 				<div class="col wrapper">
 					<span class="font-light font-xl personalInfo-title"><i class="fa fa-barcode" aria-hidden="true"></i>&nbsp;My Personal Information</span>
 					<i class="fa fa-circle-o m-r-sm pull-right" style=" color: #23b7e5;"></i><br>
 					<span class="font-not-important font-light font-sm" style="padding-left: 10px;">You can click this card to edit.</span>
 					<div class="row wrapper"  style="margin-top: 30px;">
 						<div class="col-sm-3 personalInfo-headers">
-							<p>Name</p>
+							<p style="padding-top: 5px;">Name</p>
 							<p>Address</p>
 							<p>Phone</p>
 							<p>Email</p>
 							<p>Description</p>
 						</div>
-						<div class="col-sm-9 personalInfo-details">
-							<!-- TODO: pass user's info here -->
-						</div>
+						<form name="updatejob-form" ng-submit="updateUserProfile()" class="col-sm-9 personalInfo-details">
+							<div ng-switch on="editStatus">
+								<div ng-switch-when="0">
+									<p style="padding-top: 5px;">{{ user.name }}</p>
+									<p>{{ user.address }}</p>
+									<p>{{ user.phone }}</p>
+									<p>{{ user.email }}</p>
+									<p>{{ user.description }}</p>
+								</div>
+								<div ng-switch-when="1">
+									<input type="text" ng-model="user.name" class="form-control newjob-title newjob-input font-light">
+									<input type="text" ng-model="user.address" class="form-control newjob-title newjob-input font-light">
+									<input type="text" ng-model="user.phone" class="form-control newjob-title newjob-input font-light">
+									<input type="text" ng-model="user.email" class="form-control newjob-title newjob-input font-light">
+									<textarea type="text" ng-model="user.description" class="form-control newjob-title newjob-input font-light"></textarea>
+									<button type="submit" class="btn btn-sm btn-warning btn-addon job-details-edit-button"><i class="fa fa-pencil"></i>Update</button>
+									<button ng-click="cancelEdit()" class="btn btn-sm" style="color: #fff; margin-top: -15px;">Cancel</button>
+								</div>
+							</div>
+						</form>
 					</div>
 				</div>
 				<div class="col wrapper personalInfo-brand">

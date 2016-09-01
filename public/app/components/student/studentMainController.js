@@ -8,22 +8,20 @@ angular.module("nusPartimeApp").controller("studentMainController",
 		$scope.displayedJobs = [];
 
 		AuthService.autoLogin().then(function(res) {
-			if (res.isRegistered && !Session.isStudent) {
+			if (!!res && res.isRegistered && !Session.isStudent) {
 				$location.path("/studentRegister");
+			} else {
+				JobService.getAllJobs().then(function(res) {
+					$scope.catJobsArray = res;
+					for (var catJobs of res) {
+						$scope.allJobsArray = $scope.allJobsArray.concat(catJobs.jobs);
+					}
+					$scope.showAllContent();
+
+					$(".all-jobs-button").addClass("active");
+				});
 			}
-		}).then(function() {
-			JobService.getAllJobs().then(function(res) {
-				$scope.catJobsArray = res;
-				for (var catJobs of res) {
-					$scope.allJobsArray = $scope.allJobsArray.concat(catJobs.jobs);
-				}
-				$scope.showAllContent();
-
-				$(".all-jobs-button").addClass("active");
-			});
 		});
-
-
 
 		$scope.showAllContent = function() {
 			$scope.displayedJobs = $scope.allJobsArray;

@@ -9,20 +9,19 @@ angular.module("nusPartimeApp").controller("companyMainController",
 		$scope.displayedJobs = [];
 
 		AuthService.autoLogin().then(function(res) {
-			if (res.isRegistered && !Session.isEmployer) {
+			if (!!res && res.isRegistered && !Session.isEmployer) {
 				// direct to company registration
 				$location.path("/companyRegister");
+			} else {
+				CompanyService.getAllJobs(Session.userId).then(function(res){
+					$scope.catJobsArray = res;
+					for (var catJobs of res) {
+						$scope.allJobsArray = $scope.allJobsArray.concat(catJobs.jobs);
+					}
+					$scope.showAllContent();
+					$(".all-company-button").addClass("active");
+				});
 			}
-		}).then(function(){
-			CompanyService.getAllJobs(Session.userId).then(function(res){
-				$scope.catJobsArray = res;
-				for (var catJobs of res) {
-					$scope.allJobsArray = $scope.allJobsArray.concat(catJobs.jobs);
-				}
-				$scope.showAllContent();
-				$(".all-company-button").addClass("active");
-
-			});
 		});
 
 		$scope.reload = function() {
