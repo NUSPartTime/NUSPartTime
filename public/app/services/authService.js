@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module("nusPartimeApp").factory("AuthService", function ($http, $location, $cookies, Session) {
+angular.module("nusPartimeApp").factory("AuthService", function ($http, $location, $cookies, Session, $route, $q) {
 	var authService = {};
 
 	authService.login = function(userId) {
@@ -42,12 +42,16 @@ angular.module("nusPartimeApp").factory("AuthService", function ($http, $locatio
 			return authService.login($cookies.get("userId"));
 		} else {
 			$location.path("/");
+			return $q.resolve();
 		}
 	}
 
 	authService.logout = function() {
-		Session.destroy();
-		$cookies.remove("userId");
+		FB.logout(function(response) {
+			Session.destroy();
+			$cookies.remove("userId");
+            $route.reload();
+		});
 	}
 
 //   authService.isAuthorized = function (authorizedRoles) {
