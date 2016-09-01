@@ -2,14 +2,16 @@
 
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<h4>Please Fill in Your Matric Number</h4>
+		<h4>Please help us to verify your identity</h4>
 	</div>
 	<div class="panel-body">
 		<form ng-submit="register()">
 			<div>
+				<label>User ID (Matric Number):</label>
 				<input type="text" name="matricNumber" ng-model="matricNumber" class="form-control" required>
 			</div>
 			<div>
+				<label>Password:</label>
 				<input type="password" name="pwd" ng-model="pwd" class="form-control" required>
 			</div>
 			<button type="submit" class="btn btn-primary">
