@@ -19,9 +19,15 @@ angular.module("nusPartimeApp").controller("studentProfileController",
 
         $scope.editUser = function() {
             $scope.editStatus = "1";
+            console.log($scope.editStatus);
+        }
+
+        $scope.updateUserProfile = function() {
+            console.log("update user profile");
         }
 
         $scope.cancelEdit = function() {
             $scope.editStatus = "0";
+            console.log($scope.editStatus);
         }
 	}]);

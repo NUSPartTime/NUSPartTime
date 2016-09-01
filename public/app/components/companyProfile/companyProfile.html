@@ -132,7 +132,7 @@
 									<input type="text" ng-model="user.email" class="form-control newjob-title newjob-input font-light">
 									<textarea type="text" ng-model="user.description" class="form-control newjob-title newjob-input font-light"></textarea>
 									<button type="submit" class="btn btn-sm btn-warning btn-addon job-details-edit-button"><i class="fa fa-pencil"></i>Update</button>
-									<button ng-click="cancelEdit()" class="btn btn-sm" style="color: #fff; margin-top: -15px;">Cancel</button>
+									<button ng-click="cancelEdit(); $event.stopPropagation();" class="btn btn-sm" style="color: #fff; margin-top: -15px;">Cancel</button>
 								</div>
 							</div>
 						</form>
