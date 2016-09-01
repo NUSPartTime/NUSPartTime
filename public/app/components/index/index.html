@@ -1,5 +1,30 @@
 <!-- background image  -->
-<div class="background-container">
+<div class="index-wrapper">
+	<div class="col fancy-fancy">
+		<div class="index-cover">
+			<div class="index-logo">
+				<img src="/images/logo.png"/>
+			</div>
+			<div class="index-header">
+				<span>A part-time job platform for<br><strong>NUS students</strong></span>
+			</div>
+			<button class="index-fb-login btn btn-rounded font-light margin-top" id="fb-login-wrapper" ng-click="fbToggle()">
+				<i class="fa fa-facebook"></i>&nbsp;&nbsp;{{ fbLoginText }}
+			</button>
+			<div class="index-button-group" ng-if="showLogin">
+				<div class="btn-group">
+					<button href class="btn btn-primary font-light" ng-click="studentRegistration()">Register as student</button>
+					<button href class="btn btn-success font-light" ng-click="companyRegistration()">Register as employer</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<!-- <div class="col wrapper index-info">
+
+	</div> -->
+</div>
+<!-- <div class="background-container">
 	<image src="/images/background.jpg" \>
 </div>
 
@@ -29,4 +54,4 @@
 			<button ng-click="companyRegistration()"> Company </button>
 		</div>
 	</div>
-</div>
+</div> -->
