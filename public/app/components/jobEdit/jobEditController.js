@@ -14,8 +14,12 @@ angular.module("nusPartimeApp").controller("jobEditController",
 				});
             });
         });
+
+		$scope.convertToInt = function(s){
+			return parseInt(s);
+		};
+
         $scope.currentJob = JobService.getCurrentJob();
-		$scope.comId = $scope.currentJob.companyId;
 		$scope.updateJob = function(){
             JobService.updateJob($scope.currentJob).then(function(res){
                 $location.path("/job/"+$scope.currentJob.id);
