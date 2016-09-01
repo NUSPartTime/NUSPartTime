@@ -40,9 +40,9 @@ nusPartime.config(["$routeProvider", "$locationProvider",
 				templateUrl: "/app/components/companyProfileEdit/companyProfileEdit.html",
 				controller: "companyProfileEditController"
 			}).
-			when("/userProfile", {
-				templateUrl: "/app/components/userProfile/userProfile.html",
-				controller: "userProfileController"
+			when("/studentProfile", {
+				templateUrl: "/app/components/userProfile/studentProfile.html",
+				controller: "studentProfileController"
 			}).
 			when("/studentRegister", {
 				templateUrl: "/app/components/studentRegistration/studentRegistrationPage.html",

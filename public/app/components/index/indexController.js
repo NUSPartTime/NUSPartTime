@@ -23,6 +23,7 @@ angular.module("nusPartimeApp").controller("indexController",
 		}
 
 		$scope.companyRegistration = function() {
+			$location.path("/companyRegister");
 		}
 
 		$scope.directStudentPage = function() {
@@ -40,7 +41,7 @@ angular.module("nusPartimeApp").controller("indexController",
 				if (response.status === 'connected') {
 					FB.logout(function(response) {
 						console.log("logged out from FB");
-						AuthService.logout();
+						AuthService.logout(true);
 
 						$scope.showLogin = false;
 						$scope.fbLoginText = "Log In";

@@ -7,7 +7,46 @@ body {
   padding: 0;
   margin: 0;
 }
+.tt-query {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
 
+.tt-hint {
+  color: #999
+}
+
+.tt-menu {    /* used to be tt-dropdown-menu in older versions */
+  width: 200px;
+  margin-top: 4px;
+  /*padding: 4px 0;*/
+  font-size: 12px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 0px;
+     -moz-border-radius: 0px;
+          border-radius: 0px;
+  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+     -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+          box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+.tt-suggestion {
+  padding: 3px 20px;
+  line-height: 24px;
+}
+
+.tt-suggestion.tt-cursor,.tt-suggestion:hover {
+  color: #fff;
+  background-color: #0097cf;
+
+}
+
+.tt-suggestion p {
+  margin: 0;
+}
 /*general*/
 .text-black {
     color: #000;
@@ -115,7 +154,7 @@ body {
 
 .navbar-form-sm {
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
 }
 
 .padder {
@@ -206,6 +245,10 @@ body {
   background-color: #edf1f2;
 }
 
+.input-group .input-group-btn {
+    vertical-align: top;
+}
+
 .profile-dropdown {
     margin-right: 15px;
 }
@@ -225,6 +268,24 @@ body {
     outline: 0!important;
 }
 
+.panel-without-mb {
+    margin-bottom: 0px;
+}
+
+.typeahead-result {
+    border-top-width: 0;
+    border-width: 1px 0;
+    border-radius: 0;
+    border-color: #edf1f2;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 15px;
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: #fff;
+}
 /*end of general*/
 
 /*for navbar*/
