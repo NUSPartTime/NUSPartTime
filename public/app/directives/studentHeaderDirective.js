@@ -18,8 +18,8 @@ angular.module("nusPartimeApp").directive("studentHeader", function() {
                 $location.path("/student");
             }
 
-            $scope.dirctHomePage = function() {
-                $location.path("/");
+            $scope.logout = function() {
+                AuthService.logout();
             }
         }]
     }
