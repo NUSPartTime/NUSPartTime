@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module("nusPartimeApp").controller("userProfileController",
+angular.module("nusPartimeApp").controller("studentProfileController",
 	["$scope", "$location",  "AuthService", "Session", "UserService",
 	function($scope, $location, AuthService, Session, UserService) {
 		AuthService.autoLogin().then(function(){
