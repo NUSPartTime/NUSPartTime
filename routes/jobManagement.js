@@ -71,6 +71,32 @@ router.get("/getJob/:jobId/user/:userId", function(req, res) {
     });
 });
 
+/* GET job with certain ID */
+router.get("/getUserJobs/:userId", function(req, res) {
+    console.log(req.params);
+    models.sequelize.Promise.all([
+        models.StudentJob.findAll({
+            where: {
+                studentId: req.params.userId,
+            },
+            include: [models.Job]
+        }),
+    ]).spread(function(allStudentJobs) {
+        var jobArray = [];
+        for (var studentJob of allStudentJobs) {
+            jobArray.push({
+                id: studentJob.Job.id,
+                title: studentJob.Job.title
+            });
+        }
+        console.log(jobArray);
+
+        res.send({
+            jobArray: JSON.stringify(jobArray)
+        })
+    });
+});
+
 
 /* POST student job application */
 // TODO: improve implementation (current implementation is flawed, but let's leave it this way first...)
