@@ -26,6 +26,8 @@ angular.module("nusPartimeApp").factory("AuthService", function ($http, $locatio
 							return {
 								redirectUrl: res.data.redirect,
 								isRegistered: res.data.isRegistered,
+								isStudent: res.data.isStudent,
+								isEmployer: res.data.isEmployer,
 								needRedirect: (res.data.isStudent || res.data.isEmployer)
 							};
 						}

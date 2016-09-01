@@ -13,8 +13,10 @@
 			</button>
 			<div class="index-button-group" ng-if="showLogin">
 				<div class="btn-group">
-					<button href class="btn btn-primary font-light" ng-click="studentRegistration()">Register as student</button>
-					<button href class="btn btn-success font-light" ng-click="companyRegistration()">Register as employer</button>
+					<button href class="btn btn-primary font-light" ng-click="studentRegistration()" ng-if="!isStudent">Register as student</button>
+					<button href class="btn btn-primary font-light" ng-click="directStudentPage()" ng-if="isStudent">Login as student</button>
+					<button href class="btn btn-success font-light" ng-click="companyRegistration()" ng-if="!isEmployer">Register as employer</button>
+					<button href class="btn btn-success font-light" ng-click="directCompanyPage()" ng-if="isEmployer">Login as employer</button>
 				</div>
 			</div>
 

@@ -3,6 +3,8 @@
 angular.module("nusPartimeApp").controller("indexController",
 	["$scope", "$location", "AuthService", "RegistrationService", "isAuthenticated",
 	function($scope, $location, AuthService, RegistrationService, isAuthenticated) {
+		$scope.isStudent = false;
+		$scope.isEmployer = false;
 		$scope.showLogin = false;
 		if (isAuthenticated) {
 			$scope.fbLoginText = "Log Out";
@@ -11,6 +13,8 @@ angular.module("nusPartimeApp").controller("indexController",
 				// if (response.needRedirect) {
 				// 	$location.path(response.redirectUrl);
 				// } else {
+					$scope.isStudent = response.isStudent;
+					$scope.isEmployer = response.isEmployer;
 					$scope.showLogin = true;
 				// }
 			});
@@ -73,6 +77,8 @@ angular.module("nusPartimeApp").controller("indexController",
 											// $location.path(authenticationResponse.redirectUrl);
 										// } else {
 											// registered user but neither student or employer
+											$scope.isStudent = authenticationResponse.isStudent;
+											$scope.isEmployer = authenticationResponse.isEmployer;
 											$scope.showLogin = true;
 										// }
 									}
