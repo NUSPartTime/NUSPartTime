@@ -13,16 +13,14 @@
                 <div class="form-group">
                     <label class="col-sm-3 newjob-input-label font-light">Company/Project Name</label>
                     <div class="col-sm-9">
-                        <select name="companyId" ng-model="currentJob.companyId" class="form-control newjob-company newjob-input font-light">
-                            <option ng-repeat="(key, val) in companies" value="{{key}}" selected="(key == currentJob.companyId) ? 'selected' : 'false'">{{ val }}</option>
+                        <select name="companyId" ng-model="currentJob.companyId" ng-options="convertToInt(key) as value for (key, value) in companies" class="form-control newjob-company newjob-input font-light">
                         </select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 newjob-input-label font-light">Category</label>
                     <div class="col-sm-9">
-                        <select name="categoryId" ng-model="currentJob.categoryId" class="form-control newjob-company newjob-input font-light">
-                            <option ng-repeat="(key, val) in categories" value="{{key}}">{{ val }}</option>
+                        <select name="categoryId" ng-model="currentJob.categoryId" ng-options="convertToInt(key) as value for (key, value) in categories" class="form-control newjob-company newjob-input font-light">
                         </select>
                     </div>
                 </div>

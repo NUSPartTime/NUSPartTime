@@ -1,3 +1,5 @@
+"use strict"
+
 var models  = require("../models");
 var express = require("express");
 var querystring = require('querystring');
@@ -84,7 +86,7 @@ router.post("/authenticateStudent", function(req, res) {
 	    "Referer": refererUrl
 	};
 
-	let postUrl = "https://myisis.nus.edu.sg/psp/cs90prd/EMPLOYEE/HRMS/s/WEBLIB_PTPP_SC.HOMEPAGE.FieldFormula.IScript_AppHP?cmd=login&languageCd=ENG";	
+	let postUrl = "https://myisis.nus.edu.sg/psp/cs90prd/EMPLOYEE/HRMS/s/WEBLIB_PTPP_SC.HOMEPAGE.FieldFormula.IScript_AppHP?cmd=login&languageCd=ENG";
 	var dataString = "userid=" + matricNumber + "&pwd=" + pwd;
 	var options = {
 	    url: postUrl,
