@@ -9,7 +9,7 @@ angular.module("nusPartimeApp").controller("indexController",
 			// check if need to redirect
 			AuthService.autoLogin().then(function(response) {
 				if (response.needRedirect) {
-					$location.path(response.redirectUrl);
+				// 	$location.path(response.redirectUrl);
 				} else {
 					$scope.showLogin = true;
 				}
