@@ -1,6 +1,110 @@
-<student-header></student-header>
+<nav id="mainNav" class="navbar box-shadow">
+    <div class="navbar-header page-scroll">
+        <a class="navbar-brand header-logo"><img src="/images/logo.png"></a>
+    </div>
+</nav>
+<div class="job-details-container">
+	<!-- header (nav bar) -->
+	<div class="job-details-header">
+		<ol class="breadcrumb">
+			<li>Job Details</li>
+		</ol>
+	</div>
+	<!-- end of header -->
 
-<div class="container" ng-if="job">
+	<!-- job details -->
+	<div class="job-details-wrapper">
+		<!-- <div class="row">
+			<div class="col-sm-8">
+				<div class="job-details">
+					<div class="job-details-title">
+						<span>{{ job.title }}</span>
+					</div>
+					<div class="job-details-status">
+
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+			</div>
+		</div> -->
+		<div class="row">
+			<div class="col-sm-8">
+				<div class="panel wrapper job-details-misc">
+					<div class="job-details">
+						<!-- job title -->
+						<div class="job-details-title">
+
+							<span><i class="fa fa-tasks"></i>&nbsp;&nbsp;{{ job.title }}</span>
+						</div>
+						<!-- end of job title -->
+						<!-- job status -->
+						<div class="job-details-status">
+
+						</div>
+						<!-- end of job status -->
+					</div>
+					<div class="job-details-company row font-light" style="margin-top: 30px;">
+						<!-- company name -->
+						<div class="col-sm-5">
+							<i class="fa fa-building"></i>
+							<span class="job-details-company-title">Company/Project</span>
+						</div>
+						<div class="col-sm-7">
+							<span class="job-details-company-detail">{{ job.Company.name }}</span>
+						</div>
+						<!-- end of company name -->
+
+					</div>
+					<div class="job-details-salary margin-top row font-light">
+						<!-- job salary -->
+						<div class="col-sm-5">
+							&nbsp;<i class="fa fa-usd"></i>
+							<span class="job-details-salary-title">Hourly Salary</span>
+						</div>
+						<div class="col-sm-7">
+							<span class="job-details-salary-detail">{{ job.salary }}&nbsp;SGD/Hour</span>
+						</div>
+						<!-- end of job salary -->
+					</div>
+					<div class="job-details-deadline margin-top row font-light">
+						<!-- job deadline -->
+						<div class="col-sm-5">
+							<i class="fa fa-calendar"></i>
+							<span class="job-details-deadline-title">&nbsp;Job End on</span>
+						</div>
+						<div class="col-sm-7">
+							<span class="job-details-deadline-detail">{{ job.deadline | date:"dd MMM yyyy"}}</span>
+						</div>
+						<!-- end of job deadline -->
+					</div>
+					<div class="job-details-applicationDeadline margin-top row font-light">
+						<!-- job application deadline -->
+						<div class="col-sm-5">
+							<i class="fa fa-clock-o"></i>
+							<span class="job-details-applicationDeadline-title">&nbsp;Application Deadline</span>
+						</div>
+						<div class="col-sm-7">
+							<span class="job-details-applicationDeadline-detail">{{ job.applicationDeadline | date:"dd MMM yyyy"}}</span>
+						</div>
+						<!-- end of job deadline -->
+					</div>
+
+				</div>
+				<div class="panel wrapper job-details-description font-light">
+					<span style="position: absolute; top:265px; right:15px;">
+						<i class="fa fa-caret-down" style="color: #fad733; margin-right: 10px;"></i>
+					</span>
+					<p style="color: #fff; font-size: 18px;">Job Description</p>
+					<p style="color: #dcf2f8;" ng-bind-html="description"></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end of job details -->
+
+</div>
+<!-- <div class="container" ng-if="job">
 	<h1 class="page-header">{{ job.title }}</h1>
 
 	<div>
@@ -26,8 +130,8 @@
 
 <div class="container" ng-if="!job">
 	<p>{{ error }}</p>
-</div>
-
+</div> -->
+<!--
 <div ng-switch on="applicationStatus">
 	<form ng-switch-when="-1" ng-submit="applyJob()">
 		<button type="submit" class="btn btn-primary">Apply</button>
@@ -38,4 +142,4 @@
 	<form ng-switch-default ng-submit="cancelApplication()">
 		<button type="submit" class="btn btn-primary">Cancel</button>
 	</form>
-</div>
+</div> -->

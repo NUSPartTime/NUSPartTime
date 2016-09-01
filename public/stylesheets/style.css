@@ -473,6 +473,8 @@ body {
 
 .job-details {
   display: inline-flex;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed #dee5e7;
 }
 
 .job-details-status {
@@ -490,9 +492,11 @@ body {
 }
 
 .job-details-misc {
-  background-color: #f3f5f6;
+  background-color: #fff;
   margin-top: 15px;
   font-size: 16px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
 }
 
 .job-details-salary-title, .job-details-eadline-title, .job-details-company-title {
@@ -524,6 +528,15 @@ body {
 
 .job-detail-applicants thead {
     background-color: #fff;
+}
+
+.job-details-description {
+    background-color: #23b7e5;
+    min-height: 100px;
+    height: auto;
+    margin-top: -20px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
 }
 /*end of job details*/
 
