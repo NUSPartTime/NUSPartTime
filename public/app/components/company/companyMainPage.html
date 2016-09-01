@@ -8,9 +8,15 @@
 		<a class="navbar-brand header-logo" href="/#/">
 			<img src="/images/logo.png"></img>
 		</a>
-
-		<!-- dropdown for new job or company/project -->
 		<ul class="nav navbar-nav company-new-button">
+			<li class="dropdown">
+				<a href="#/company" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<span>My Posted Jobs</span>
+				</a>
+			</li>
+		</ul>
+		<!-- dropdown for new job or company/project -->
+		<ul class="nav navbar-nav">
 			<li class="dropdown">
 				<a href class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<span>New</span>
@@ -33,6 +39,8 @@
 			</li>
 		</ul>
 
+
+
 		<!-- search bar here -->
 		<form class="navbar-form navbar-form-sm navbar-left">
 			<div class="input-group">
@@ -42,7 +50,30 @@
 				</span>
 			</div>
 		</form>
+
+
 	</div>
+	<ul class="nav navbar-nav navbar-right profile-dropdown">
+		<li>
+			<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+				<i class="fa fa-user" aria-hidden="true"></i>
+				&nbsp;User
+			</a>
+			<ul class="dropdown-menu">
+				<li>
+					<a href="#/companyProfile">User Profile</a>
+				</li>
+				<li role="separator" class="divider"></li>
+				<li>
+					<a href="#/notification">Notifications</a>
+				</li>
+				<li role="separator" class="divider"></li>
+				<li>
+					<a ng-click="dirctHomePage()">Log Out</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
 </nav>
 <!-- header end here -->
 
@@ -52,7 +83,7 @@
 	<!-- define the side bar here -->
 	<div class="company-index-side-bar">
 		<div class="wrapper bg-light wrapper-centre">
-			<span class="title-font"><i class="fa fa-list-alt" aria-hidden="true"></i><span class="title-icon">Companies/Projects</span></span>
+			<span class="title-font font-light"><i class="fa fa-list-alt" aria-hidden="true"></i><span class="title-icon">Companies/Projects</span></span>
 		</div>
 		<div class="wrapper">
 			<ul class="nav nav-pills nav-stacked nav-side-bar font-mid">
@@ -82,7 +113,7 @@
 			<div class="btn-toolbar">
 
 				<!-- page title -->
-				<span class="title-font title-icon">My Posted Jobs</span>
+				<span class="title-font title-icon font-light">My Posted Jobs</span>
 
 				<!-- filter button -->
 				<div class="btn-group dropdown">
@@ -101,7 +132,7 @@
 
 		<!-- body -->
 		<ul class="list-group list-group-lg no-radius m-b-none m-t-n-xxs font-light">
-			<li ng-repeat="job in displayedJobs" ng-class="{0:'b-l-success'}[job.status]" class="list-group-item category-job b-l-3x">
+			<li ng-repeat="job in displayedJobs" ng-class="{0:'b-l-primary'}[job.status]" class="list-group-item category-job b-l-3x">
 				<h4 class="list-group-item-heading font-light">{{ job.title }}</h4>
 				<a ng-href="#/job/{{job.id}}">Details&nbsp;&nbsp;</a>
 				<a href ng-click="editJob(job)">Edit</a>

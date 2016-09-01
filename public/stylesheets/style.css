@@ -85,6 +85,14 @@ body {
   font-size: 18px;
 }
 
+.font-xl {
+    font-size: 22px;
+}
+
+.font-sm {
+    font-size: 12px;
+}
+
 .font-bold {
   font-weight: bold;
 }
@@ -196,6 +204,10 @@ body {
 
 .input-group-addon {
   background-color: #edf1f2;
+}
+
+.profile-dropdown {
+    margin-right: 15px;
 }
 
 /*end of general*/
@@ -461,6 +473,8 @@ body {
 
 .job-details {
   display: inline-flex;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed #dee5e7;
 }
 
 .job-details-status {
@@ -478,9 +492,11 @@ body {
 }
 
 .job-details-misc {
-  background-color: #f3f5f6;
+  background-color: #fff;
   margin-top: 15px;
   font-size: 16px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
 }
 
 .job-details-salary-title, .job-details-eadline-title, .job-details-company-title {
@@ -512,6 +528,15 @@ body {
 
 .job-detail-applicants thead {
     background-color: #fff;
+}
+
+.job-details-description {
+    background-color: #23b7e5;
+    min-height: 100px;
+    height: auto;
+    margin-top: -20px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
 }
 /*end of job details*/
 
@@ -585,6 +610,47 @@ body {
 .company-title {
     text-align: center;
     padding-top: 30px;
+}
+
+.personalInfo-wrapper {
+    border-color: transparent;
+    border-width: 0;
+    display: table;
+    width: 100%;
+    height: 400px;
+    table-layout: fixed;
+    border-spacing: 0;
+    background-color: #fff!important;
+}
+
+.personalInfo-brand {
+    display: table-cell;
+    float:none;
+    height:100%;
+    vertical-align:top;
+    width: 30%;
+    background-color: #23b7e5;
+}
+
+.personalInfo-title {
+    padding: 10px;
+    color: #8278c2;
+}
+
+.personalInfo-details {
+
+}
+
+.personalInfo-headers {
+    border-right: 1px dashed #dee5e7;
+}
+
+.personalInfo-headers p {
+    padding-bottom: 10px;
+    font-weight: 300;
+    text-align: right;
+    font-size: 16px;
+    color: #58666e;
 }
 /*end of company profile*/
 

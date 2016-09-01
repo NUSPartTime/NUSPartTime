@@ -1,7 +1,7 @@
 "use strict";
 
 var nusPartime = angular.module("nusPartimeApp", [
-	"ngRoute", "ngCookies"
+	"ngRoute", "ngCookies", "ngSanitize"
 ]);
 
 nusPartime.config(["$routeProvider", "$locationProvider",
