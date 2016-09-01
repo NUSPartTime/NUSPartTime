@@ -8,11 +8,12 @@ angular.module("nusPartimeApp").controller("companyProfileController",
                 $scope.companies = res;
 				$(".personalInfo-button").addClass("active");
 
-				UserService.getUserProfile(Session.userId).then(function(res){
-					$scope.user = res;
-				});
+
             });
 
+			UserService.getUserProfile(Session.userId).then(function(res){
+				$scope.user = res;
+			});
 
         });
 
