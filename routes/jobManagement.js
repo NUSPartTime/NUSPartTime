@@ -243,31 +243,52 @@ router.post("/createJob", function(req, res) {
 });
 
 router.post('/updateJob', function(req, res){
-      models.sequelize.Promise.all([
+    models.sequelize.Promise.all([
         models.Job.findAll({
-          where: {
-            id: req.body.id
-          },
+            where: {
+                id: req.body.id
+            },
+        }),
+        models.StudentJob.findAll({
+            where: {
+                jobId: req.params.job_id    
+            }
         })
-    ]).spread(function(allJobs) {
+    ]).spread(function(allJobs, all_studentJobs) {
         console.log(req.body);
         if(typeof(allJobs[0]) != "undefined") {
-          job = allJobs[0];
-          job.update({
-            companyId: req.body.companyId,
-            title: req.body.title,
-            status: req.body.status,
-            salary: req.body.salary,
-            description: req.body.description,
-            applicationDeadline: req.body.applicationDeadline,
-            deadline: req.body.deadline
-          }).then(function(){
-            res.send({
-                redirect: "/company"
+            job = allJobs[0];
+
+            if (typeof(req.body.status)!= "undefined") {
+                var message = "";
+                if (req.body.status == 0) {
+                    message = 'The job "' + job.title + '"" you applied for has been closed.';
+                }
+                for(var studentJob of all_studentJobs) {
+                    models.Notification.create({
+                        userId: studentJob.studentId,
+                        jobId: req.params.job_id,
+                        status: 0,
+                        message: message
+                    });
+                }
+            }
+
+            job.update({
+                companyId: req.body.companyId,
+                title: req.body.title,
+                status: req.body.status,
+                salary: req.body.salary,
+                description: req.body.description,
+                applicationDeadline: req.body.applicationDeadline,
+                deadline: req.body.deadline
+            }).then(function(){
+                res.send({
+                    redirect: "/company"
+                });
             });
-          });
         }
-      });
+    });
 });
 
             // /* This is for company to view job status */
