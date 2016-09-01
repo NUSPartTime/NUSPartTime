@@ -6,9 +6,6 @@ angular.module("nusPartimeApp").controller("studentRegistrationController",
 		AuthService.autoLogin();
 
 		$scope.register = function() {
-			
-			
-			// suppose to check validity of matric number, but failed
 			RegistrationService.authenticateStudent($scope.matricNumber, $scope.pwd)
 				.then(function(res) {
 					console.log(res);

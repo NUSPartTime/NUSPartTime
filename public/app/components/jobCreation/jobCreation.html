@@ -13,8 +13,7 @@
                     <label class="col-sm-3 newjob-input-label font-light">Company/Project Name</label>
                     <div class="col-sm-9">
                         <select ng-model="companyId" class="form-control newjob-company newjob-input font-light">
-                            <option value="" selected hidden />
-                            <option ng-repeat="(key, val) in companies" value="{{key}}" selected>{{ val }}</option>
+                            <option ng-repeat="(key, val) in companies" value="{{key}}">{{ val }}</option>
                         </select>
                     </div>
                 </div>

@@ -152,6 +152,12 @@ body {
   border-radius: 500px;
 }
 
+.btn-rounded {
+    padding-right: 15px;
+    padding-left: 15px;
+    border-radius: 50px;
+}
+
 .navbar-form-sm {
   margin-top: 10px;
   margin-bottom: 0px;
@@ -264,6 +270,13 @@ body {
     background-color: #fad733;
     border-color: #fad733;
 }
+
+.btn-success {
+    color: #fff!important;
+    background-color:#27c24c;
+    border-color: #27c24c;
+}
+
 .btn:focus {
     outline: 0!important;
 }
@@ -779,6 +792,74 @@ body {
 
 /*end of job details*/
 
+/*index page*/
+.index-wrapper {
+    height: 100%;
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+    background:url(../images/color9.png) center center;
+    background-size:cover;
+}
+
+.index-wrapper .col {
+    display: table-cell;
+    float: none;
+    height: 100%;
+    vertical-align: top;
+}
+
+.index-wrapper .fancy-fancy {
+    width: 70%;
+}
+
+.index-cover {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255,255,255,.15);
+}
+
+.index-logo {
+    padding-top: 13%;
+}
+
+.index-logo img {
+    width: 300px;
+}
+
+.index-header {
+    padding-top: 40px;
+    color: #fff;
+    font-size: 20px;
+    font-family: "Source Sans Pro",sans-serif!important;
+    font-weight: 300;
+    text-align: center;
+}
+
+.index-fb-login {
+    width: auto;
+    color: #fff;
+    background-color: #3a3f51;
+    border-color: #3a3f51;
+}
+
+.index-wrapper .index-info {
+    background: inherit;
+    background: inherit;
+    -webkit-filter: blur(10px);
+    -moz-filter: blur(10px);
+    -ms-filter: blur(10px);
+    -o-filter: blur(10px);
+    filter: blur(10px);
+    filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=4, MakeShadow=false);
+}
+
+.index-button-group {
+    padding-top: 20px;
+}
+
+/*end of index page*/
 /*for header*/
 .navbar-header a {
   padding-top: 10px;
@@ -858,6 +939,8 @@ body {
   border: solid 2px;
   border-color: #fff;
 }
+
+
 
 .student-button a {
   position: relative;
