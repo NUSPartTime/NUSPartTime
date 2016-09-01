@@ -6,9 +6,15 @@
 		<a class="navbar-brand header-logo" href="/#/">
 			<img src="/images/logo.png"></img>
 		</a>
-
-		<!-- dropdown for new job or company/project -->
 		<ul class="nav navbar-nav company-new-button">
+			<li class="dropdown">
+				<a href="#/company" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<span>My Posted Jobs</span>
+				</a>
+			</li>
+		</ul>
+		<!-- dropdown for new job or company/project -->
+		<ul class="nav navbar-nav ">
 			<li class="dropdown">
 				<a href class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<span>New</span>
@@ -41,6 +47,27 @@
 			</div>
 		</form>
 	</div>
+	<ul class="nav navbar-nav navbar-right profile-dropdown">
+		<li>
+			<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+				<i class="fa fa-user" aria-hidden="true"></i>
+				&nbsp;User
+			</a>
+			<ul class="dropdown-menu">
+				<li>
+					<a href="#/companyProfile">User Profile</a>
+				</li>
+				<li role="separator" class="divider"></li>
+				<li>
+					<a href="#/notification">Notifications</a>
+				</li>
+				<li role="separator" class="divider"></li>
+				<li>
+					<a ng-click="dirctHomePage()">Log Out</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
 </nav>
 <!-- header end here -->
 
@@ -57,13 +84,13 @@
                         </div>
                         <div class="company-profile-txt">
                             <div class="person-name">
-                                <span class="h3">Yang Zhuohan</span>
+                                <span class="h3 font-light">Yang Zhuohan</span>
                             </div>
                             <a href="#" class="btn btn-sm profile-facebook-butoon font-light">Facebook</a>
                         </div>
                     </div>
                     <div class="col-sm-5">
-
+						<!-- TODO: something can be written here -->
                     </div>
                 </div>
             </div>
@@ -75,8 +102,42 @@
             </ul>
         </div>
 
+		<div class="personalInfo padder">
+			<a href class="panel hbox hbox-auto-xs no-border personalInfo-wrapper margin-top">
+				<div class="col wrapper">
+					<span class="font-light font-xl personalInfo-title"><i class="fa fa-barcode" aria-hidden="true"></i>&nbsp;My Personal Imformation</span>
+					<i class="fa fa-circle-o m-r-sm pull-right" style=" color: #23b7e5;"></i><br>
+					<span class="font-not-important font-light font-sm" style="padding-left: 10px;">You can click this card to edit.</span>
+					<div class="row wrapper"  style="margin-top: 30px;">
+						<div class="col-sm-3 personalInfo-headers">
+							<p>Name</p>
+							<p>Address</p>
+							<p>Phone</p>
+							<p>Email</p>
+							<p>Description</p>
+						</div>
+						<div class="col-sm-9 personalInfo-details">
+							<!-- TODO: pass user's info here -->
+						</div>
+					</div>
+				</div>
+				<div class="col wrapper personalInfo-brand">
+					<!-- <span style="color: #fad733;" class="font-light">Summary</span> -->
+					<div class="pull-right">
+						<i class="fa fa-caret-down" style="margin-left:10px; color: #fad733;" ></i>
+					</div>
+					<div style="padding-top:30%;">
+						<h1 style="text-align: center; color:#fff; font-weight:300;">{{companies.length}}</h1>
+						<div style="text-align: center; color:#dcf2f8;">
+							<span class="font-light">Registered Companies<br>or Projects</span>
+						</div>
+					</div>
+				</div>
+			</a>
+		</div>
+
         <div class="companyInfo padder hidden">
-            <h3 class="font-light companyInfo-title">My Registered Companies / Projects</h3>
+            <h3 class="font-light companyInfo-title"><i class="fa fa-coffee" aria-hidden="true"></i>&nbsp;&nbsp;My Registered Companies / Projects</h3>
             <div class="list-group list-group-lg list-group-sp">
                 <a href ng-click="editCompanyProfile(company)" ng-repeat="company in companies" class="list-group-item clearfix companyInfo-wrapper">
                     <div class="row">
@@ -102,7 +163,7 @@
                             </div>
                             <div class="row margin-top-sm font-light">
                                 <div class="col-sm-4">
-                                    <span>Address</span>
+                                    <span>Location</span>
                                 </div>
                                 <div class="col-sm-8">
                                     <span>{{ company.address }}</span>
