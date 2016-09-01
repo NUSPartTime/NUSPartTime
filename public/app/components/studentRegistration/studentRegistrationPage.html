@@ -17,6 +17,10 @@
 			<button type="submit" class="btn btn-primary">
 				Register
 			</button>
+			<div class="alert alert-danger" role="alert" ng-if="isError">
+				<span class="sr-only">Error:</span>
+				Your User ID or Password is wrong.
+			</div>
 		</form>
 	</div>
 </div>

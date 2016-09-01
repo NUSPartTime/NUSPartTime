@@ -51,7 +51,7 @@ angular.module("nusPartimeApp").factory("AuthService", function ($http, $locatio
 	authService.logout = function(isFBLoggedOut) {
 		Session.destroy();
 		$cookies.remove("userId");
-		if (!isFBLoggedOut) {
+		if (!isFBLoggedOut && typeof FB !== "undefined") {
 			FB.logout(function(response) {
 	            $route.reload();
 			});

@@ -66,6 +66,8 @@ angular.module("nusPartimeApp").controller("indexController",
 											).then(function(registerUserResponse) {
 												if (registerUserResponse.status == "success"){
 													AuthService.login(res.id);
+													$scope.isStudent = true;
+													$scope.isEmployer = true;
 													$scope.showLogin = true;
 												} else {
 													console.log(registerUserResponse.error);
