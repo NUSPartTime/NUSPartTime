@@ -15,7 +15,7 @@ angular.module("nusPartimeApp").controller("jobCreationController",
         });
 
         $scope.create = function(){
-			console.log($scope.status);
+			console.log($scope);
             var postParam = {
                 userId: Session.userId,
                 companyId: $scope.companyId,

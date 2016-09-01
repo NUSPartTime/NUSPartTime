@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module("nusPartimeApp").controller("indexController", 
+angular.module("nusPartimeApp").controller("indexController",
 	["$scope", "$location", "AuthService", "RegistrationService", "isAuthenticated",
 	function($scope, $location, AuthService, RegistrationService, isAuthenticated) {
 		$scope.showLogin = false;
