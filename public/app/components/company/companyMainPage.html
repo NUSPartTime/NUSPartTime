@@ -42,14 +42,14 @@
 
 
 		<!-- search bar here -->
-		<form class="navbar-form navbar-form-sm navbar-left">
+		<div class="navbar-form navbar-form-sm navbar-left">
 			<div class="input-group">
-				<input class="form-control input-sm bg-light no-border rounded padder search-bar" type="text" placeholder="search posted job.." />
+				<input id="profile-typeahead" class="typeahead form-control input-sm bg-light no-border rounded padder search-bar" type="text" placeholder="search posted job.." />
 				<span class="input-group-btn">
 					<button type="submit" class="btn btn btn-sm bg-light rounded"><i class="fa fa-search"></i></button>
 				</span>
 			</div>
-		</form>
+		</div>
 
 
 	</div>
@@ -115,18 +115,6 @@
 				<!-- page title -->
 				<span class="title-font title-icon font-light">My Posted Jobs</span>
 
-				<!-- filter button -->
-				<div class="btn-group dropdown">
-					<button class="btn btn-default btn-sm btn-bg dropdown-toggle">
-						<span class="dropdown-label">Filter</span>
-						<span class="caret"></span>
-					</button>
-				</div>
-
-				<!-- refresh button -->
-				<div class="btn-group">
-					<button class="btn btn-sm btn-bg btn-default" ng-click="reload()"><i class="fa fa-refresh"></i></button>
-				</div>
 			</div>
 		</div>
 
