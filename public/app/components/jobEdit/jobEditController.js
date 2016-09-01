@@ -15,8 +15,8 @@ angular.module("nusPartimeApp").controller("jobEditController",
             });
         });
         $scope.currentJob = JobService.getCurrentJob();
-
-        $scope.updateJob = function(){
+		$scope.comId = $scope.currentJob.companyId;
+		$scope.updateJob = function(){
             JobService.updateJob($scope.currentJob).then(function(res){
                 $location.path("/job/"+$scope.currentJob.id);
             });
