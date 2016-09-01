@@ -70,6 +70,10 @@ angular.module("nusPartimeApp").controller("companyMainController",
 			}
 		});
 
+		$scope.logout = function() {
+            AuthService.logout(false);
+        }
+
 		$scope.reload = function() {
 			location.reload();
 		}
