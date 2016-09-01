@@ -24,8 +24,7 @@ angular.module("nusPartimeApp").factory("RegistrationService", ["$http", "$locat
 			};
 			return $http.post("/userManagement/authenticateStudent", postParam)
 						.then(function(res) {
-							console.log(res.data);
-							return res.data;
+							return {isAuthentified: res.data.status};
 						});
 		}
 

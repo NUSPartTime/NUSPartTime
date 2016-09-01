@@ -3,6 +3,7 @@ var express = require("express");
 var querystring = require('querystring');
 var https = require("https");
 var router = express.Router();
+var request = require('request');
 
 router.post("/login", function(req, res) {
 	var userId = req.body.userId;
@@ -69,38 +70,51 @@ router.post("/login", function(req, res) {
 router.post("/authenticateStudent", function(req, res) {
 	var matricNumber = req.body.matricNumber;
 	var pwd = req.body.password;
-	console.log("login with info: " + matricNumber + "  password: " + pwd);
 
-	var postData = querystring.stringify({
-		"userid": matricNumber,
-		"pwd": pwd
-	});
-
-	var hostUrl = "myisis.nus.edu.sg";
-	var pathUrl = "/psp/cs90prd/EMPLOYEE/HRMS/h/?tab=DEFAULT&cmd=login&languageCd=ENG";
-
-	var postOptions = {
-		host: hostUrl,
-		port: "443",
-		path: pathUrl,
-		method: "POST",
-		headers: {
-			"Content-Type": "application/x-www-form-urlencoded",
-		    "accept": "*/*"
-		}
+	let originUrl = "https://myisis.nus.edu.sg";
+	let agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36";
+	let refererUrl = "https://myisis.nus.edu.sg/psp/cs90prd/EMPLOYEE/HRMS/s/WEBLIB_PTPP_SC.HOMEPAGE.FieldFormula.IScript_AppHP?cmd=login";
+	var headers = {
+	    "Origin": originUrl,
+	    "Accept-Encoding": "gzip, deflate, br",
+	    "Accept-Language": "zh-CN,zh;q=0.8,en;q=0.6",
+	    "User-Agent": agent,
+	    "Content-Type": "application/x-www-form-urlencoded",
+	    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+	    "Referer": refererUrl
 	};
 
-	var postRequest = https.request(postOptions, function(res) {
-		console.log('STATUS: ' + res.statusCode);
-		console.log('HEADERS: ' + JSON.stringify(res.headers));
-		res.setEncoding('utf8');
-		res.on('data', function (chunk) {
-			console.log('BODY: ' + chunk);
-		});
-	});
+	let postUrl = "https://myisis.nus.edu.sg/psp/cs90prd/EMPLOYEE/HRMS/s/WEBLIB_PTPP_SC.HOMEPAGE.FieldFormula.IScript_AppHP?cmd=login&languageCd=ENG";	
+	var dataString = "userid=" + matricNumber + "&pwd=" + pwd;
+	var options = {
+	    url: postUrl,
+	    method: "POST",
+	    headers: headers,
+	    body: dataString
+	};
 
-	postRequest.write(postData);
-	postRequest.end();
+	function callback(error, response, body) {
+		let presentUrl = "myisis.nus.edu.sg/psp/cs90prd/EMPLOYEE/HRMS/s/WEBLIB_PTPP_SC.HOMEPAGE.FieldFormula.IScript_AppHP";
+		let errorKey = "errorCode=105";
+		if (body.indexOf(presentUrl) !== -1) {
+			// contains url, check if username and pwd valid
+			if (body.indexOf(errorKey) === -1) {
+				res.send({
+					status: true
+				});
+			} else {
+				res.send({
+					status: false
+				});
+			}
+		} else {
+			res.send({
+				status: false
+			});
+		}
+	}
+
+	request(options, callback);
 });
 
 
