@@ -1,14 +1,14 @@
 "use strict";
 
 angular.module("nusPartimeApp").controller("jobDetailController",
-	["$scope","$location", "$sce", "JobService", "Session", "AuthService", "jobId",
-	function($scope, $location ,$sce, JobService, Session, AuthService, jobId) {
+	["$scope","$location", "$sce", "JobService", "UserService", "Session", "AuthService", "jobId",
+	function($scope, $location ,$sce, JobService, UserService, Session, AuthService, jobId) {
 		AuthService.autoLogin().then(function(res) {
 			if (!res.isRegistered) {
 				$location.path("/");
 			} else {
 				JobService.getJob(jobId, Session.userId).then(function(res) {
-					var NO_DESC = "<strong>Oops!</strong> Currently there is no description. <br /> Please contact the company/project manager for more details."
+					var NO_DESC = "<strong>Oops!</strong> Currently there is no description. <br /> Please contact the company/project manager for more details.";
 					$scope.job = res.job;
 					$scope.error = res.error;
 					$scope.isOwner = res.isOwner;
@@ -16,6 +16,16 @@ angular.module("nusPartimeApp").controller("jobDetailController",
 					if (res.isOwner) {
 						// get list of student who has applied the job
 						$scope.applicantList = res.applicants;
+						var nameMap = {};
+						for (var i=0; i<$scope.applicantList.length; i++) {
+							nameMap[$scope.applicantList[i].id] = i;
+						}
+						for (var applicant of $scope.applicantList) {
+							UserService.getUserProfile(applicant.id).then(function(res) {
+								var index = nameMap[res.id];
+								$scope.applicantList[index].name = res.name;
+							});
+						}
 					} else {
 						// get the information about the owner of the job
 						$scope.applicationStatus = res.applicationStatus;
