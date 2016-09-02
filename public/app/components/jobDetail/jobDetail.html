@@ -136,10 +136,9 @@
 					<ul class="list-group list-group-lg list-of-applicants">
 						<li class="list-group-item" ng-repeat="applicant in applicantList">
 							<div class="avatar">
-								<div>{{applicant.id}}</div>
 								<img src="https://graph.facebook.com/v2.7/{{applicant.id}}/picture?type=large" />
 							</div>
-							<!-- <a style="padding-left: 20px;" class="font-light" href="" ng-click="directToApplicant(applicant.id)">{{ applicant.id }}</a> -->
+							<a style="padding-left: 20px;" class="font-light" href="" ng-click="directToApplicant(applicant.id)">{{ applicant.name }}</a>
 						</li>
 					</ul>
 				</div>
