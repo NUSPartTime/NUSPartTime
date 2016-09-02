@@ -18,7 +18,7 @@ angular.module("nusPartimeApp").controller("notificationController",
 			NotificationService.readNotification($scope.notificationArray[index].id).then(function(res) {
 				if (!res.error) {
 					$scope.notificationArray[index].status = res.status;
-					location.reload();
+					//location.reload();
 				} else {
 					console.log(res.error);
 				}

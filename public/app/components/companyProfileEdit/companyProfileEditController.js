@@ -8,6 +8,7 @@ angular.module("nusPartimeApp").controller("companyProfileEditController",
         $scope.currentCompany = CompanyService.getCompany();
 
         $scope.updateCompanyProfile = function(){
+			swal("Success", "Company profile updated!", "success");
             CompanyService.updateCompanyProfile($scope.currentCompany).then(function(res){
                 $location.path("/company");
             });
