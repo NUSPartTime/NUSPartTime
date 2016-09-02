@@ -78,11 +78,6 @@ angular.module("nusPartimeApp").controller("jobDetailController",
 			$location.path("/jobEdit");
 		}
 
-		// todo
-		$scope.directToApplicant = function(userId) {
-			// should direct to applicant main page via get method...
-		}
-
 		$scope.toggleJobStatus = function() {
 			if ($scope.job.status === 0) {
 				// open status -> close status

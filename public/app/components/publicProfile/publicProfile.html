@@ -1,10 +1,6 @@
-<!-- header -->
-<student-header></student-header>
-<!-- header end here -->
+<main-header></main-header>
 
-<!-- body -->
-<!-- profile header -->
-<div class="company-profile" style="display: none;">
+<div class="company-profile">
     <div>
         <div class="company-profile-header">
             <div class="company-profile-header-content wrapper-lg">
@@ -46,26 +42,14 @@
 							<p>Description</p>
 						</div>
 						<form name="updateUser-form" ng-submit="updateUserProfile()" class="col-sm-9 personalInfo-details">
-							<div ng-switch on="editStatus">
-								<div ng-switch-when="0">
-									<p style="padding-top: 5px;">{{ user.name }}&nbsp;</p>
-									<p>{{ user.address }}&nbsp;</p>
-									<p>{{ user.phone }}&nbsp;</p>
-									<p>{{ user.email }}&nbsp;</p>
-									<p>
-									    <a href="{{user.resume}}">Link to CV&nbsp;</a>
-									</p>
-									<p>{{ user.description }}&nbsp;</p>
-								</div>
-								<div ng-switch-when="1">
-									<input type="text" ng-model="user.name" class="form-control newjob-title newjob-input font-light" required="true">
-									<input type="text" ng-model="user.address" class="form-control newjob-title newjob-input font-light">
-									<input type="text" ng-model="user.phone" class="form-control newjob-title newjob-input font-light">
-									<input type="text" ng-model="user.email" class="form-control newjob-title newjob-input font-light">
-									<input type="text" ng-model="user.resume" class="form-control newjob-title newjob-input font-light" required="true">
-									<textarea type="text" ng-model="user.description" class="form-control newjob-title newjob-input font-light"></textarea>
-								</div>
-							</div>
+							<p style="padding-top: 5px;">{{ user.name }}&nbsp;</p>
+							<p>{{ user.address }}&nbsp;</p>
+							<p>{{ user.phone }}&nbsp;</p>
+							<p>{{ user.email }}&nbsp;</p>
+							<p>
+							    <a href="{{user.resume}}">Link to CV&nbsp;</a>
+							</p>
+							<p>{{ user.description }}&nbsp;</p>
 						</form>
 					</div>
 				</div>
@@ -73,7 +57,3 @@
 		</div>
     </div>
 </div>
-<!-- <div ng-repeat="company in companies">{{company.name}}
-<a href ng-click="editCompanyProfile(company)">Edit</a>
-</div> -->
-
