@@ -29,7 +29,7 @@ It is hosted on http://nuspartime.com
 
     + **Description:**
 
-    *Designed database schema and manage the structure of database. Implemented Sequelize.js ORM to handle MySQL relational database. Designed student main page. Implemented notification system.*
+    *Designed database schema and manage the structure of database. Integrated Sequelize.js ORM to handle MySQL relational database. Designed and implemented student main page. Implemented notification system.*
 
 * Zhang Hanming (A0121658E)
     + **Roles:** *Back-end Development and Testing*
