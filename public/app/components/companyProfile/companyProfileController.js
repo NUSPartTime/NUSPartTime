@@ -94,6 +94,7 @@ angular.module("nusPartimeApp").controller("companyProfileController",
 		$scope.updateUserProfile = function() {
             UserService.updateUserProfile($scope.user).then(function(res){
                 console.log(res);
+				$scope.editStatus = "0";
             });
 
         }
