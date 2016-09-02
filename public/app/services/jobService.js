@@ -12,17 +12,26 @@ angular.module("nusPartimeApp").factory("JobService",
 		}
 
 		jobService.getUserJobs = function(userId) {
-			return $http.get("/jobManagement/getUserJobs/" + userId).then(function(res) {
-						console.log(res.data.jobArray);
+			var postParam = {
+				userId: userId
+			};
+			return $http.post("/jobManagement/getUserJobs", postParam).then(function(res) {
 						return JSON.parse(res.data.jobArray);
 					})
 		}
 
 		jobService.getJob = function(jobId, userId) {
-			return $http.get("/jobManagement/getJob/" + jobId + "/user/" + userId).then(function(res) {
-						if (res.data.status == "error") {
-							return {error: "Job ID not found!"}
+			var postParam = {
+				jobId: jobId,
+				userId: userId
+			};
+			return $http.post("/jobManagement/getJob", postParam).then(function(res) {
+						if (res.data.status !== "success") {
+							return {
+								error: error
+							};
 						} else {
+							console.log(res.data);
 							return res.data;
 						}
 					})
