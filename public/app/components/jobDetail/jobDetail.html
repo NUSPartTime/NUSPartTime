@@ -127,7 +127,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="col-sm-4" ng-if="isOwner">
 				<div class="panel job-contact-person margin-top">
 					<div class="panel-heading wrapper">
@@ -138,19 +138,18 @@
 							<div class="avatar">
 								<img src="https://graph.facebook.com/v2.7/{{applicant.id}}/picture?type=small" />
 							</div>
-							<a style="padding-left: 20px;" class="font-light" href="" ng-click="directToApplicant({{applicant.id}})">{{ applicant.name }}</a>
+							<!-- <a style="padding-left: 20px;" class="font-light" href="" ng-click="directToApplicant(applicant.id)">{{ applicant.id }}</a> -->
 						</li>
 					</ul>
 				</div>
 				<div class="job-details-status">
 
 				</div>
-				<div class="btn-toolbar pull-right job-details-button">
-
+				<div class="btn-toolbar pull-right job-details-button" ng-switch on="job.jobStatus">
 					<a href ng-click="editJob(job)"><button class="btn btn-sm btn-warning btn-addon job-details-edit-button"><i class="fa fa-pencil"></i>Edit</button></a>
 					<!-- <button class="btn btn-sm btn-danger btn-addon job-details-delete-button"><i class="fa fa-trash"></i>Delete</button> -->
-					<button class="btn btn-sm btn-addon">Open/Close</button>
-					<!-- 如果是open就显示close，如果是close就显示open -->
+					<button class="btn btn-sm btn-addon" ng-switch-when="1" ng-click="toggleJobStatus()">Open</button>
+					<button class="btn btn-sm btn-addon" ng-switch-when="0" ng-click="toggleJobStatus()">Close</button>
 				</div>
 			</div>
 		</div>

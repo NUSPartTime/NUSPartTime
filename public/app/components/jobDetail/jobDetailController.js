@@ -19,11 +19,11 @@ angular.module("nusPartimeApp").controller("jobDetailController",
 
 					if (res.isOwner) {
 						// get list of student who has applied the job
-						$scope.applicantList = res.data.applicants;
+						$scope.applicantList = res.applicants;
 					} else {
 						// get the information about the owner of the job
-						$scope.applicationStatus = res.data.applicationStatus;
-						$scope.employerInfo = res.data.employer;
+						$scope.applicationStatus = res.applicationStatus;
+						$scope.employerInfo = res.employer;
 					}
 
 					console.log($scope.job.description);
@@ -72,7 +72,24 @@ angular.module("nusPartimeApp").controller("jobDetailController",
 			$location.path("/jobEdit");
 		}
 
+		// todo
 		$scope.directToApplicant = function(userId) {
 			// should direct to applicant main page via get method...
+		}
+
+		$scope.toggleJobStatus = function() {
+			if ($scope.job.jobStatus === 0) {
+				// open status -> close status
+				$scope.job.jobStatus = 1;
+				JobService.updateJob($scope.job).then(function(res) {
+					console.log(res);
+				});
+			} else {
+				// close status -> open status
+				$scope.job.jobStatus = 0;
+				JobService.updateJob($scope.job).then(function(res) {
+					console.log(res);
+				});
+			}
 		}
 	}]);
