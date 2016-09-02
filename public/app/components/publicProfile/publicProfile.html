@@ -1,0 +1,59 @@
+<main-header></main-header>
+
+<div class="company-profile">
+    <div>
+        <div class="company-profile-header">
+            <div class="company-profile-header-content wrapper-lg">
+                <div class="row margin-top">
+                    <div class="col-sm-7">
+                        <div class="company-profile-photo pull-left">
+                            <img src="https://graph.facebook.com/v2.7/{{user.id}}/picture?type=large" />
+                        </div>
+                        <div class="company-profile-txt">
+                            <div class="person-name">
+                                <span class="h3 font-light">{{ user.name }}</span>
+                            </div>
+                            <a href="#" class="btn btn-sm profile-facebook-butoon font-light">Facebook</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+						<!-- TODO: something can be written here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wrapper company-profile-navbar">
+            <ul class="nav nav-pills nav-sm font-light">
+                <li class="personalInfo-button">Personal Info</li>
+            </ul>
+        </div>
+
+		<div class="personalInfo padder">
+			<div class="panel hbox hbox-auto-xs no-border personalInfo-wrapper margin-top">
+				<div class="col wrapper">
+					<span class="font-light font-xl personalInfo-title"><i class="fa fa-barcode" aria-hidden="true"></i>&nbsp;Personal Information</span>
+					<div class="row wrapper"  style="margin-top: 30px;">
+						<div class="col-sm-3 personalInfo-headers">
+							<p style="padding-top: 5px;">Name</p>
+							<p>Address</p>
+							<p>Phone</p>
+							<p>Email</p>
+							<p>Resume</p>
+							<p>Description</p>
+						</div>
+						<form name="updateUser-form" ng-submit="updateUserProfile()" class="col-sm-9 personalInfo-details">
+							<p style="padding-top: 5px;">{{ user.name }}&nbsp;</p>
+							<p>{{ user.address }}&nbsp;</p>
+							<p>{{ user.phone }}&nbsp;</p>
+							<p>{{ user.email }}&nbsp;</p>
+							<p>
+							    <a href="{{user.resume}}">Link to CV&nbsp;</a>
+							</p>
+							<p>{{ user.description }}&nbsp;</p>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+</div>

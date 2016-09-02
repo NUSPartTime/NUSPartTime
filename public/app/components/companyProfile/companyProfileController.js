@@ -62,6 +62,7 @@ angular.module("nusPartimeApp").controller("companyProfileController",
 						}
 					}
 				});
+				$(".company-profile").fadeIn(500);
 			});
 
 			UserService.getUserProfile(Session.userId).then(function(res){
@@ -92,6 +93,7 @@ angular.module("nusPartimeApp").controller("companyProfileController",
 		}
 
 		$scope.updateUserProfile = function() {
+			swal("Success", "Personal Info Updated!", "success");
             UserService.updateUserProfile($scope.user).then(function(res){
                 console.log(res);
 				$scope.editStatus = "0";

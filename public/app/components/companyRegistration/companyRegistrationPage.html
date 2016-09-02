@@ -1,30 +1,32 @@
-<div class="company-sign-up">
-    <div class="container wide-screen sign-up-wrapper">
-        <a class="navbar-brand block sign-up-logo">
-            <div><img src="/images/logo.png"></div>
-        </a>
-        <div class="signup-info-wrapper">
-            <div class="wrapper signup-title"><strong>Register a new company/project to post jobs</strong></div>
-            <form name="new-company-form" ng-submit="register()" class="form-validation">
-                <div class="alert alert-danger signup-warning hidden"><span></span></div>
-                <div class="list-group">
-                    <div class="list-group-item signup-input-field">
-                        <input type="text" name="name" ng-model="name" placeholder="Company/Project name" class="form-control signup-input name" required="true">
+<div class="app-header-fixed">
+    <div class="company-sign-up margin-top">
+        <div class="container wide-screen sign-up-wrapper">
+            <a class="navbar-brand block sign-up-logo">
+                <div><img src="/images/logo.png"></div>
+            </a>
+            <div class="signup-info-wrapper">
+                <div class="wrapper signup-title"><strong>Register a new company/project to post jobs</strong></div>
+                <form name="new-company-form" ng-submit="register()" class="form-validation">
+                    <div class="alert alert-danger signup-warning hidden"><span></span></div>
+                    <div class="list-group">
+                        <div class="list-group-item signup-input-field">
+                            <input type="text" name="name" ng-model="name" placeholder="Company/Project name" class="form-control signup-input name" required="true">
+                        </div>
+                        <div class="list-group-item signup-input-field">
+                            <input type="text" name="contact" ng-model="contact" placeholder="Contact number" class="form-control signup-input contact">
+                        </div>
+                        <div class="list-group-item signup-input-field">
+                            <input type="email" name="email" ng-model="email" placeholder="Contact email" class="form-control signup-input email" required="true">
+                        </div>
                     </div>
-                    <div class="list-group-item signup-input-field">
-                        <input type="text" name="contact" ng-model="contact" placeholder="Contact number" class="form-control signup-input contact">
+                    <button type="submit" class="btn btn-lg btn-primary btn-block signup-button" ng-click="new-company-form.$valid">Register!</button>
+                    <div class="margin-top">
+                        <a href="#/company">
+                            <button type="button" class="btn btn-lg btn-primary btn-block signup-back-button">Cancel</button>
+                        </a>
                     </div>
-                    <div class="list-group-item signup-input-field">
-                        <input type="email" name="email" ng-model="email" placeholder="Contact email" class="form-control signup-input email" required="true">
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-lg btn-primary btn-block signup-button" ng-click="new-company-form.$valid">Register!</button>
-                <div class="margin-top">
-                    <a href="#/company">
-                        <button type="button" class="btn btn-lg btn-primary btn-block signup-back-button">Cancel</button>
-                    </a>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </div>

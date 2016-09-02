@@ -33,51 +33,97 @@ router.get("/allJobs", function(req, res) {
 });
 
 
-/* GET job with certain ID */
-router.get("/getJob/:jobId/user/:userId", function(req, res) {
-    console.log(req.params);
+/* POST to  */
+router.post("/getJob", function(req, res) {
+    var jobId = req.body.jobId;
+    var userId = req.body.userId;
     models.sequelize.Promise.all([
-        models.StudentJob.findAll({
-            where: {
-                jobId: req.params.jobId,
-                studentId: req.params.userId,
-            }
-        }),
         models.Job.findAll({
             where: {
-                id: req.params.jobId
+                id: jobId
+            }
+        }),
+        models.StudentJob.findAll({
+            where: {
+                jobId: jobId
             },
-            include: [models.Company]
+        }),
+        models.CompanyContact.findAll({
+            where: {
+                employerId: userId
+            }
+        }),
+        models.User.findOne({
+            where: {
+                id: userId
+            }
         })
-    ]).spread(function(allStudentJobs, allJobs) {
+    ]).spread(function(allJobs, allStudentJobs, allCompanyContacts, user) {
         if (typeof(allJobs[0]) != "undefined") {
             var job = allJobs[0];
         } else {
             res.send({
-                status: "error"
+                status: "error",
+                error: "Job does not exists",
             });
         }
 
-        if (typeof(allStudentJobs[0]) != "undefined") {
-            var applicationStatus = allStudentJobs[0].status;
-        } else {
-            var applicationStatus = -1;
+        var companyId = job.companyId;
+        var isOwner = false;
+        for (var companyContact of allCompanyContacts) {
+            if (companyContact.companyId == companyId) {
+                if (companyContact.employerId == userId) {
+                    isOwner = true;
+                } else {
+                    var employerId = companyContact.employerId
+                }
+                break;
+            }
         }
 
-        res.send({
-            job: job,
-            applicationStatus: applicationStatus
-        });
+        if (isOwner) {
+            var applicants = [];
+            for (var studentJob of allStudentJobs) {
+                applicants.push({
+                    id: studentJob.studentId
+                });
+            }
+            res.send({
+                status: "success",
+                job: job,
+                isOwner: isOwner,
+                applicants: applicants
+            });
+        } else {
+            var applicationStatus = -1;
+            for (var studentJob of allStudentJobs) {
+                if (studentJob.studentId == userId) {
+                    applicationStatus = studentJob.status;
+                    break;
+                }
+            }
+            res.send({
+                status: "success",
+                job: job,
+                isOwner: isOwner,
+                applicationStatus: applicationStatus,
+                employer: {
+                    id: user.id,
+                    name: user.name,
+                    email: user.email,
+                    phone: user.phone
+                }
+            });
+        }
     });
 });
 
 /* GET job with certain ID */
-router.get("/getUserJobs/:userId", function(req, res) {
-    console.log(req.params);
+router.post("/getUserJobs/:userId", function(req, res) {
     models.sequelize.Promise.all([
         models.StudentJob.findAll({
             where: {
-                studentId: req.params.userId,
+                studentId: req.body.userId,
             },
             include: [models.Job]
         }),
@@ -86,7 +132,8 @@ router.get("/getUserJobs/:userId", function(req, res) {
         for (var studentJob of allStudentJobs) {
             jobArray.push({
                 id: studentJob.Job.id,
-                title: studentJob.Job.title
+                title: studentJob.Job.title,
+                status: studentJob.Job.status
             });
         }
         console.log(jobArray);
@@ -277,7 +324,7 @@ router.post('/updateJob', function(req, res){
         }),
         models.StudentJob.findAll({
             where: {
-                jobId: req.params.job_id    
+                jobId: req.params.job_id
             }
         })
     ]).spread(function(allJobs, all_studentJobs) {
@@ -317,100 +364,4 @@ router.post('/updateJob', function(req, res){
     });
 });
 
-            // /* This is for company to view job status */
-            // router.get('/:job_id/view', function(req, res, next) {
-            //   var sess = req.session;
-
-            //   if(!sess.is_employer){
-            //     res.redirect('../'+req.params.job_id+'/details');
-            //   }
-
-            //   var userId = sess.user_id;
-            //   models.sequelize.Promise.all([
-            //     models.StudentJob.findAll({
-            //       where: {
-
-            //         // Use job id to find the join tables.
-            //         jobId: req.params.job_id
-            //       },
-            //       include: [models.Student]
-            //     }),
-            //     models.Job.findAll({
-            //       where: {
-
-            //         // Also use job id to find the particular job
-            //         id: req.params.job_id
-            //       },
-            //       include: [models.Company]
-            //     }),
-            //     models.CompanyContact.findAll({
-            //       where: {
-            //         employerId: userId
-            //       },
-            //       include: [models.Company]
-            //     }),
-
-            //   ]).spread(function(all_studentJobs, all_jobs, allCompanyContacts) {
-
-            //     if (typeof(all_jobs[0]) != "undefined") {
-            //       var job = all_jobs[0];
-            //       var all_students = [];
-            //       var companies = [];
-            //       for(var studentJob of all_studentJobs) {
-            //         if(studentJob.status !== 0) {
-            //           all_students.push(studentJob.Student);
-            //         }
-            //       }
-
-            //       // fetch all companies
-            //       for(var companyContact of allCompanyContacts) {
-            //         var company = companyContact.Company;
-            //         companies[company.id] = company.name;
-            //       }
-
-            //       res.render('edit_job', {
-            //         job: job,
-            //         students: all_students,
-            //         title: "Applicants",
-            //         companies: companies
-            //       });
-            //     } else {
-            //       res.render('user_error', {
-            //         message: "The job requested doesn't exist."
-            //       });
-            //     }
-
-            //     // we create an array to store all the students who have successfully apppied for this job
-
-            //   });
-            // });
-
-            // /* This is for companies to update a job */
-            // router.post('/:job_id/edit', function(req, res) {
-            //   var sess = req.session;
-            //   models.sequelize.Promise.all([
-            //     models.Job.findAll({
-            //       where: {
-            //         // Also use job id to find the particular job
-            //         id: req.params.job_id
-            //       },
-            //     })
-            //   ]).spread(function(all_jobs) {
-            //     if(typeof(all_jobs[0]) != "undefined") {
-            //       job = all_jobs[0];
-            //       job.update({
-            //         companyId: req.body.companyId,
-            //         title: req.body.title,
-            //         status: req.body.status,
-            //         salary: req.body.salary,
-            //         description: req.body.description,
-            //         applicationDeadline: req.body.application_deadline,
-            //         deadline: req.body.deadline
-            //       }).then(function(){
-            //         res.redirect('/jobs/' + req.params.job_id + '/view');
-            //       });
-            //     }
-            //   });
-            // });
-
-            module.exports = router;
+module.exports = router;

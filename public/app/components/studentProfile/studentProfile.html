@@ -1,11 +1,7 @@
-<!-- header -->
 <student-header></student-header>
-<!-- header end here -->
 
-<!-- body -->
-<!-- profile header -->
-<div class="company-profile">
-    <div class="col">
+<div class="company-profile" style="display: none;">
+    <div>
         <div class="company-profile-header">
             <div class="company-profile-header-content wrapper-lg">
                 <div class="row margin-top">
@@ -17,6 +13,7 @@
                             <div class="person-name">
                                 <span class="h3 font-light">{{ user.name }}</span>
                             </div>
+                            <a href="#" class="btn btn-sm profile-facebook-butoon font-light">Facebook</a>
                         </div>
                     </div>
                     <div class="col-sm-5">
@@ -27,16 +24,17 @@
         </div>
         <div class="wrapper company-profile-navbar">
             <ul class="nav nav-pills nav-sm font-light">
-                <li class="personalInfo-button">Personal Info</li>
+                <li class="personalInfo-button"><a href ng-click="showPersonalInfo()">Personal Info</a></li>
+                <li class="jobInfo-button"><a href ng-click="showJobInfo()">My Career Info</a></li>
             </ul>
         </div>
 
 		<div class="personalInfo padder">
-			<a ng-click="editUser()" class="panel hbox hbox-auto-xs no-border personalInfo-wrapper margin-top">
+			<div class="panel hbox hbox-auto-xs no-border personalInfo-wrapper margin-top">
 				<div class="col wrapper">
 					<span class="font-light font-xl personalInfo-title"><i class="fa fa-barcode" aria-hidden="true"></i>&nbsp;My Personal Information</span>
-					<i class="fa fa-circle-o m-r-sm pull-right" style=" color: #23b7e5;"></i><br>
-					<span class="font-not-important font-light font-sm" style="padding-left: 10px;">You can click this card to edit.</span>
+					<i class="fa fa-circle-o m-r-sm pull-right" ng-click="editUser()" style="cursor: pointer; color: #23b7e5;"></i><br>
+					<span class="font-not-important font-light font-sm" style="padding-left: 10px;" >You can click the blue circle to edit.</span>
 					<div class="row wrapper"  style="margin-top: 30px;">
 						<div class="col-sm-3 personalInfo-headers">
 							<p style="padding-top: 5px;">Name</p>
@@ -46,7 +44,7 @@
 							<p>Resume</p>
 							<p>Description</p>
 						</div>
-						<form name="updatejob-form" ng-submit="updateUserProfile()" class="col-sm-9 personalInfo-details">
+						<form name="updateUser-form" ng-submit="updateUserProfile()" class="col-sm-9 personalInfo-details">
 							<div ng-switch on="editStatus">
 								<div ng-switch-when="0">
 									<p style="padding-top: 5px;">{{ user.name }}&nbsp;</p>
@@ -56,17 +54,19 @@
 									<!--
 									<p><a ng-href="//{{user.resume}}">{{ user.resume }}</a></p>
 									-->
-									<p>{{ user.resume }}&nbsp;</p>
+									<p>
+									    <a href="{{user.resume}}">Link to CV&nbsp;</a>
+									</p>
 									<p>{{ user.description }}&nbsp;</p>
 								</div>
 								<div ng-switch-when="1">
-									<input type="text" ng-model="user.name" class="form-control newjob-title newjob-input font-light">
+									<input type="text" ng-model="user.name" class="form-control newjob-title newjob-input font-light" required="true">
 									<input type="text" ng-model="user.address" class="form-control newjob-title newjob-input font-light">
 									<input type="text" ng-model="user.phone" class="form-control newjob-title newjob-input font-light">
 									<input type="text" ng-model="user.email" class="form-control newjob-title newjob-input font-light">
-									<input type="text" ng-model="user.resume" class="form-control newjob-title newjob-input font-light">
+									<input type="text" ng-model="user.resume" class="form-control newjob-title newjob-input font-light" required="true">
 									<textarea type="text" ng-model="user.description" class="form-control newjob-title newjob-input font-light"></textarea>
-									<button ng-click="updateUserProfile()" class="btn btn-sm btn-warning btn-addon job-details-edit-button"><i class="fa fa-pencil"></i>Update</button>
+									<button ng-click="updateUserProfile(); updateUser-form.$valid" class="btn btn-sm btn-warning btn-addon job-details-edit-button"><i class="fa fa-pencil"></i>Update</button>
 									<button ng-click="cancelEdit(); $event.stopPropagation();" class="btn btn-sm" style="color: #fff; margin-top: -15px;">Cancel</button>
 								</div>
 							</div>
@@ -78,19 +78,28 @@
 					<div class="pull-right">
 						<i class="fa fa-caret-down" style="margin-left:10px; color: #fad733;" ></i>
 					</div>
-					<div style="padding-top:10%;">
-						<h1 style="text-align: center; color:#fff; font-weight:300;">Applied Jobs</h1>
-					</div>
-					<div class="list-group list-group-lg no-radius m-b-none m-t-n-xxs font-light">
-						<div ng-repeat="job in jobArray" class="list-group-item category-job b-l-3x">
-							{{ job.title }}
+                    <div style="padding-top:30%;">
+						<h1 style="text-align: center; color:#fff; font-weight:300;">{{jobArray.length}}</h1>
+						<div style="text-align: center; color:#dcf2f8;">
+							<span class="font-light">Applied jobs</span>
 						</div>
 					</div>
 				</div>
-			</a>
+			</div>
 		</div>
+        <div class="jobInfo padder hidden">
+            <h3 class="font-light companyInfo-title"><i class="fa  fa-briefcase" aria-hidden="true"></i>&nbsp;&nbsp;My Applied Jobs</h3>
+            <div class="list-group list-group-lg list-group-sp">
+                <a href="#/job/{{job.id}}" ng-repeat="job in jobArray" class="list-group-item clearfix jobInfo-wrapper">
+                    <div class="col wrapper jobinfo-tag" ng-class="{0:'jobinfo-open'}[job.status]">
+                        <div ng-switch on="job.status">
+                            <span ng-switch-when="0">Open</span>
+                            <span ng-switch-when="1">Closed</span>
+                        </div>
+                    </div>
+                    <h4 class="jobinfo-title font-light">{{job.title}}</h4>
+                </a>
+            </div>
+        </div>
     </div>
 </div>
-<!-- <div ng-repeat="company in companies">{{company.name}}
-<a href ng-click="editCompanyProfile(company)">Edit</a>
-</div> -->

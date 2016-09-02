@@ -1,6 +1,37 @@
-<main-header></main-header>
+<div class="app-header-fixed">
+	<div class="company-sign-up margin-top">
+	    <div class="container wide-screen sign-up-wrapper">
+	        <a class="navbar-brand block sign-up-logo">
+	            <div><img src="/images/logo.png"></div>
+	        </a>
+	        <div class="signup-info-wrapper">
+	            <div class="wrapper signup-title"><strong>Please help us verify your student identity</strong></div>
+	            <form ng-submit="register()">
+	                <!-- <div class="alert alert-danger signup-warning hidden"><span></span></div> -->
+					<div class="alert alert-danger" role="alert" ng-if="isError">
+						<span class="sr-only">Error:</span>
+						Your User ID or Password is wrong.
+					</div>
+	                <div class="list-group">
+	                    <div class="list-group-item signup-input-field">
+	                        <input type="text" name="matricNumber" ng-model="matricNumber" placeholder="NUS NET id" class="form-control signup-input name" required="true">
+	                    </div>
+	                    <div class="list-group-item signup-input-field">
+							<input type="password" name="pwd" ng-model="pwd" class="form-control" placeholder="Password" required>
+	                    </div>
+	                    <div class="list-group-item signup-input-field">
+	                        <input type="text" name="resume" ng-model="resume" class="form-control" placeholder="Your CV link (e.g. Dropbox link)" required>
+	                    </div>
+	                </div>
+	                <button type="submit" class="btn btn-lg btn-primary btn-block signup-button" ng-click="new-company-form.$valid">Verify</button>
+	            </form>
+	        </div>
+	    </div>
+	</div>
+</div>
 
-<div class="panel panel-default">
+
+<!-- <div class="panel panel-default">
 	<div class="panel-heading">
 		<h4>Please help us to verify your identity</h4>
 	</div>
@@ -16,7 +47,7 @@
 			</div>
 			<div>
 				<label>Password:</label>
-				<input type="password" name="pwd" ng-model="pwd" class="form-control" required>
+
 			</div>
 			<button type="submit" class="btn btn-primary">
 				Register
@@ -27,4 +58,4 @@
 			</div>
 		</form>
 	</div>
-</div>
+</div> -->

@@ -69,6 +69,8 @@ angular.module("nusPartimeApp").controller("companyMainController",
 					      	}
 					    }
 					});
+
+					$(".company-index-body").fadeIn(500);
 				});
 			}
 		});

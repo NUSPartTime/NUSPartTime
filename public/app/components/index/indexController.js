@@ -90,6 +90,7 @@ angular.module("nusPartimeApp").controller("indexController",
 												// $scope.$apply();
 											// }
 										}
+										swal("Logged In", "Welcome to NUS PARTIME!", "success");
 									});
 							} else {
 								//user hit cancel button
