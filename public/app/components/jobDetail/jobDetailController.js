@@ -13,10 +13,11 @@ angular.module("nusPartimeApp").controller("jobDetailController",
 					$scope.job = res.job;
 					$scope.error = res.error;
 					console.log($scope.job.description);
-					if ($scope.job.description == null)
+					if ($scope.job.description == null || $scope.job.description == "")
 						$scope.description = $sce.trustAsHtml(NO_DESC);
 					else
-						$scope.description = $sce.trustAsHtml($scope.job.description);
+						$scope.description = $sce.trustAsHtml($scope.job.description.replace(/\n/g, "<br />"));
+
 				});
 			}
 		});
