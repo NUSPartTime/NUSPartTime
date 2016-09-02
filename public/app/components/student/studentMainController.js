@@ -6,6 +6,9 @@ angular.module("nusPartimeApp").controller("studentMainController",
 		$scope.catJobsArray = [];
 		$scope.allJobsArray = [];
 		$scope.displayedJobs = [];
+		$scope.pageJobs = [];
+		$scope.pageLimit = 5;
+		$scope.currentIndex = 0;
 
 		AuthService.autoLogin().then(function(res) {
 			if (!!res && res.isRegistered && !Session.isStudent) {
@@ -69,16 +72,44 @@ angular.module("nusPartimeApp").controller("studentMainController",
 		});
 
 		$scope.showAllContent = function($event) {
+			//console.log("showAllContent");
 			if($event !== undefined) {
 				$(".nav-side-bar li").removeClass('active');
 				$($event.target).parent().addClass('active');
 			}
 			$scope.displayedJobs = $scope.allJobsArray;
+			$scope.showPageContent();
 		}
 
 		$scope.showContent = function(index, $event) {
+			//console.log("showContent");
+			$scope.currentIndex = 0;
 			$(".nav-side-bar li").removeClass('active');
 			$($event.target).parent().addClass('active');
 			$scope.displayedJobs = $scope.catJobsArray[index].jobs;
+			$scope.showPageContent();
+		}
+
+		$scope.showPageContent = function() {
+			//console.log("showPageContent");
+			$scope.pageJobs = $scope.displayedJobs.slice($scope.currentIndex, $scope.currentIndex+$scope.pageLimit);
+		}
+
+		$scope.pageUp = function() {
+			$scope.currentIndex += $scope.pageLimit;
+			if ($scope.currentIndex >= $scope.displayedJobs.length) {
+				$scope.currentIndex = 0;
+			}
+			//console.log($scope.currentIndex);
+			$scope.showPageContent();
+		}
+
+		$scope.pageDown = function() {
+			$scope.currentIndex -= $scope.pageLimit;
+			if ($scope.currentIndex < 0) {
+				$scope.currentIndex = $scope.displayedJobs.length - ($scope.displayedJobs.length % $scope.pageLimit);
+			}
+			//console.log($scope.currentIndex);
+			$scope.showPageContent();
 		}
 	}]);
