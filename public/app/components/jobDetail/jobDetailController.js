@@ -1,13 +1,13 @@
 "use strict";
 
 angular.module("nusPartimeApp").controller("jobDetailController",
-	["$scope", "$sce", "JobService", "Session", "AuthService", "jobId",
-	function($scope, $sce, JobService, Session, AuthService, jobId) {
+	["$scope","$location", "$sce", "JobService", "Session", "AuthService", "jobId",
+	function($scope, $location ,$sce, JobService, Session, AuthService, jobId) {
 		AuthService.autoLogin().then(function(res) {
 
 			console.log(Session);
-			if (res.isRegistered && !Session.isStudent) {
-				$location.path("/studentRegister");
+			if (!res.isRegistered) {
+				$location.path("/");
 			} else {
 				$scope.identity = Session.isEmployer ? 'employer' : 'student';
 				JobService.getJob(jobId, Session.userId).then(function(res) {
