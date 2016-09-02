@@ -48,17 +48,14 @@ router.post("/getJob", function(req, res) {
                 jobId: jobId
             },
         }),
-        models.CompanyContact.findAll({
-            where: {
-                employerId: userId
-            }
-        }),
+        models.CompanyContact.findAll(),
         models.User.findOne({
             where: {
                 id: userId
             }
-        })
-    ]).spread(function(allJobs, allStudentJobs, allCompanyContacts, user) {
+        }),
+        models.User.findAll()
+    ]).spread(function(allJobs, allStudentJobs, allCompanyContacts, user, allUsers) {
         if (typeof(allJobs[0]) != "undefined") {
             var job = allJobs[0];
         } else {
@@ -75,7 +72,7 @@ router.post("/getJob", function(req, res) {
                 if (companyContact.employerId == userId) {
                     isOwner = true;
                 } else {
-                    var employerId = companyContact.employerId
+                    var employerId = companyContact.employerId;
                 }
                 break;
             }
@@ -102,16 +99,27 @@ router.post("/getJob", function(req, res) {
                     break;
                 }
             }
+            var employerName = "";
+            var employerEmail = "";
+            var employerPhone = "";
+            for (var user of allUsers) {
+                if (user.id == employerId) {
+                    employerName = user.name;
+                    employerEmail = user.email;
+                    employerPhone = user.phone;
+                    break;
+                }
+            }
             res.send({
                 status: "success",
                 job: job,
                 isOwner: isOwner,
                 applicationStatus: applicationStatus,
                 employer: {
-                    id: user.id,
-                    name: user.name,
-                    email: user.email,
-                    phone: user.phone
+                    id: employerId,
+                    name: employerName,
+                    email: employerEmail,
+                    phone: employerPhone
                 }
             });
         }
@@ -119,7 +127,7 @@ router.post("/getJob", function(req, res) {
 });
 
 /* GET job with certain ID */
-router.post("/getUserJobs/:userId", function(req, res) {
+router.post("/getUserJobs", function(req, res) {
     models.sequelize.Promise.all([
         models.StudentJob.findAll({
             where: {
