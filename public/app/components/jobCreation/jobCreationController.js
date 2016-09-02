@@ -15,7 +15,6 @@ angular.module("nusPartimeApp").controller("jobCreationController",
         });
 
         $scope.create = function(){
-			console.log($scope);
             var postParam = {
                 userId: Session.userId,
                 companyId: $scope.companyId,
@@ -29,6 +28,8 @@ angular.module("nusPartimeApp").controller("jobCreationController",
             };
 
             JobService.createJob(postParam).then(function(res){
+				var successMessage = $scope.title + " has been successfully posted!";
+				swal("Success", successMessage, "success");
                 $location.path("/company");
             });
         };

@@ -62,6 +62,7 @@ angular.module("nusPartimeApp").controller("companyProfileController",
 						}
 					}
 				});
+				$(".company-profile").fadeIn(500);
 			});
 
 			UserService.getUserProfile(Session.userId).then(function(res){

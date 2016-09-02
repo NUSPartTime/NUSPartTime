@@ -10,6 +10,8 @@ angular.module("nusPartimeApp").controller("companyRegistrationController",
 				stub
 			*/
 			// then register
+			var newCompanyMessage = $scope.name + " has been successfully created!";
+			swal("Success", newCompanyMessage, "success")
 			RegistrationService.registerCompany(Session.userId, $scope.name, $scope.contact, $scope.email);
 		};
 	}]);
