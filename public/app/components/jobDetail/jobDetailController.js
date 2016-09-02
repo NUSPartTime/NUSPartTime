@@ -9,7 +9,7 @@ angular.module("nusPartimeApp").controller("jobDetailController",
 			if (!res.isRegistered) {
 				$location.path("/");
 			} else {
-				$scope.identity = Session.isEmployer ? 'employer' : 'student';
+				$scope.identity = !Session.isEmployer;
 				JobService.getJob(jobId, Session.userId).then(function(res) {
 					var NO_DESC = "<strong>Oops!</strong> Currently there is no description. <br /> Please contact the company/project manager for more details."
 					$scope.applicationStatus = res.applicationStatus;
