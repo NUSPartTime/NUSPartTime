@@ -83,7 +83,7 @@
 				</div>
 			</div>
 			<div class="col-sm-4">
-				<div class="panel job-contact-person margin-top">
+				<div class="panel job-contact-person margin-top hidden">
 					<div class="panel-heading wrapper">
 						<h4 class="font-light"><i class="fa fa-phone-square" aria-hidden="true"></i>&nbsp;&nbsp;Contact Person</h4>
 					</div>
@@ -117,7 +117,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="panel job-contact-person margin-top hidden">
+				<div class="panel job-contact-person margin-top">
 					<div class="panel-heading wrapper">
 						<h4 class="font-light"><i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;Applicants</h4>
 					</div>
@@ -129,6 +129,16 @@
 							<a style="padding-left: 20px;" class="font-light">Yang Zhuohan</a>
 						</li>
 					</ul>
+				</div>
+				<div class="job-details-status">
+
+				</div>
+				<div class="btn-toolbar pull-right job-details-button">
+
+					<a href ng-click="editJob(job)"><button class="btn btn-sm btn-warning btn-addon job-details-edit-button"><i class="fa fa-pencil"></i>Edit</button></a>
+					<button class="btn btn-sm btn-danger btn-addon job-details-delete-button"><i class="fa fa-trash"></i>Delete</button>
+					<button class="btn btn-sm btn-addon">Open/Close</button>
+					<!-- 如果是open就显示close，如果是close就显示open -->
 				</div>
 			</div>
 		</div>

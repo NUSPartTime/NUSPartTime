@@ -20,6 +20,7 @@ angular.module("nusPartimeApp").controller("jobDetailController",
 						$scope.description = $sce.trustAsHtml(NO_DESC);
 					else
 						$scope.description = $sce.trustAsHtml($scope.job.description.replace(/\n/g, "<br />"));
+					$("[name='my-checkbox']").bootstrapSwitch();
 
 				});
 			}
@@ -53,5 +54,11 @@ angular.module("nusPartimeApp").controller("jobDetailController",
 					console.log(res.error);
 				}
 			});
+		}
+
+		$scope.editJob = function(job){
+			JobService.setJob(job);
+			// should return to job view
+			$location.path("/jobEdit");
 		}
 	}]);
