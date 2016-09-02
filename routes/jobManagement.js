@@ -104,8 +104,8 @@ router.post("/getJob", function(req, res) {
             }
             res.send({
                 status: "success",
-                job: job
-                isOwner: isOwner
+                job: job,
+                isOwner: isOwner,
                 applicationStatus: applicationStatus,
                 employer: {
                     id: user.id,
