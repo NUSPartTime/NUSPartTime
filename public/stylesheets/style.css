@@ -328,10 +328,6 @@ body {
   padding-left: 5px;
 }
 
-.notification-button {
-  display: inline-block;
-}
-
 .company-new-button {
   padding-left: 70px;
 }
@@ -1005,4 +1001,34 @@ body {
   font-family: Consolas;
   font-size: 20px;
   text-decoration: none;
+}
+
+.notification-wrapper {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    padding: 0!important;
+}
+
+.notification-wrapper h4 {
+    padding-left: 100px;
+    padding-top: 7px;
+}
+
+.notification-tag {
+    display: table-cell;
+    position: absolute;
+    width: 60px;
+    background-color: #23b7e5;
+    color: #fff!important;
+    font-size: 20px;
+    text-align: center;
+}
+
+.notification-tag i {
+    padding-top: 30px;
+}
+
+.notification-button {
+    padding-top: 10px;
 }
