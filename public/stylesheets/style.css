@@ -789,6 +789,39 @@ body {
     font-size: 16px;
     color: #58666e;
 }
+
+.jobInfo-wrapper {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    border-color: #e7ecee;
+    padding: 0!important;
+    height: 70px;
+}
+
+.jobinfo-tag {
+    width: 70px;
+    position: absolute;
+    left: 0;
+    background-color: #e4eaec;
+    color: #58666e;
+    text-align: center;
+}
+
+.jobinfo-tag div {
+    padding-top: 10px;
+}
+
+.jobinfo-open {
+    background-color: #7266ba;
+    color: #fff!important;
+}
+
+.jobinfo-title {
+    padding-left: 100px;
+    padding-top: 15px;
+}
+
 /*end of company profile*/
 
 /*end of job details*/
@@ -803,7 +836,7 @@ body {
     background-size:cover;
 }
 
-.index-wrapper .col {
+.col {
     display: table-cell;
     float: none;
     height: 100%;

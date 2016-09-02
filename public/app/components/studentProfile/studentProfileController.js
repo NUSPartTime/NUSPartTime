@@ -70,6 +70,7 @@ angular.module("nusPartimeApp").controller("studentProfileController",
             UserService.getUserProfile(Session.userId).then(function(res){
                 $scope.user = res;
                 console.log($scope.user);
+				$(".personalInfo-button").addClass("active");
             });
         });
 
@@ -81,10 +82,24 @@ angular.module("nusPartimeApp").controller("studentProfileController",
             UserService.updateUserProfile($scope.user).then(function(res){
                 console.log(res);
             });
-
+			$scope.editStatus = "0";
         }
 
         $scope.cancelEdit = function() {
             $scope.editStatus = "0";
         }
+
+		$scope.showPersonalInfo = function() {
+			$(".personalInfo-button").addClass("active");
+			$(".jobInfo-button").removeClass("active");
+			$(".personalInfo").removeClass("hidden");
+			$(".jobInfo").addClass("hidden");
+		}
+
+		$scope.showJobInfo = function() {
+			$(".personalInfo-button").removeClass("active");
+			$(".jobInfo-button").addClass("active");
+			$(".personalInfo").addClass("hidden");
+			$(".jobInfo").removeClass("hidden");
+		}
 	}]);

@@ -3,7 +3,7 @@
 <!-- body -->
 <!-- profile header -->
 <div class="company-profile">
-    <div class="col">
+    <div>
         <div class="company-profile-header">
             <div class="company-profile-header-content wrapper-lg">
                 <div class="row margin-top">
@@ -32,10 +32,10 @@
         </div>
 
 		<div class="personalInfo padder">
-			<a ng-click="editUser()" class="panel hbox hbox-auto-xs no-border personalInfo-wrapper margin-top">
+			<div class="panel hbox hbox-auto-xs no-border personalInfo-wrapper margin-top">
 				<div class="col wrapper">
 					<span class="font-light font-xl personalInfo-title"><i class="fa fa-barcode" aria-hidden="true"></i>&nbsp;My Personal Information</span>
-					<i class="fa fa-circle-o m-r-sm pull-right" style=" color: #23b7e5;"></i><br>
+					<i class="fa fa-circle-o m-r-sm pull-right" ng-click="editUser()" style="cursor: pointer; color: #23b7e5;"></i><br>
 					<span class="font-not-important font-light font-sm" style="padding-left: 10px;">You can click this card to edit.</span>
 					<div class="row wrapper"  style="margin-top: 30px;">
 						<div class="col-sm-3 personalInfo-headers">
@@ -48,19 +48,19 @@
 						<form name="updatejob-form" ng-submit="updateUserProfile()" class="col-sm-9 personalInfo-details">
 							<div ng-switch on="editStatus">
 								<div ng-switch-when="0">
-									<p style="padding-top: 5px;">{{ user.name }}</p>
-									<p>{{ user.address }}</p>
-									<p>{{ user.phone }}</p>
-									<p>{{ user.email }}</p>
-									<p>{{ user.description }}</p>
+									<p style="padding-top: 5px;">{{ user.name }}&nbsp;</p>
+									<p>{{ user.address }}&nbsp;</p>
+									<p>{{ user.phone }}&nbsp;</p>
+									<p>{{ user.email }}&nbsp;</p>
+									<p>{{ user.description }}&nbsp;</p>
 								</div>
 								<div ng-switch-when="1">
-									<input type="text" ng-model="user.name" class="form-control newjob-title newjob-input font-light">
+									<input type="text" ng-model="user.name" class="form-control newjob-title newjob-input font-light" required="true">
 									<input type="text" ng-model="user.address" class="form-control newjob-title newjob-input font-light">
 									<input type="text" ng-model="user.phone" class="form-control newjob-title newjob-input font-light">
 									<input type="text" ng-model="user.email" class="form-control newjob-title newjob-input font-light">
 									<textarea type="text" ng-model="user.description" class="form-control newjob-title newjob-input font-light"></textarea>
-									<button ng-click="updateUserProfile()" class="btn btn-sm btn-warning btn-addon job-details-edit-button"><i class="fa fa-pencil"></i>Update</button>
+									<button ng-click="updateUserProfile(); updatejob-form.$valid" class="btn btn-sm btn-warning btn-addon job-details-edit-button"><i class="fa fa-pencil"></i>Update</button>
 									<button ng-click="cancelEdit(); $event.stopPropagation();" class="btn btn-sm" style="color: #fff; margin-top: -15px;">Cancel</button>
 								</div>
 							</div>
@@ -79,7 +79,7 @@
 						</div>
 					</div>
 				</div>
-			</a>
+			</div>
 		</div>
 
         <div class="companyInfo padder hidden">

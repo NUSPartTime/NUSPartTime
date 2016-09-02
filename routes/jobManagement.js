@@ -86,7 +86,8 @@ router.get("/getUserJobs/:userId", function(req, res) {
         for (var studentJob of allStudentJobs) {
             jobArray.push({
                 id: studentJob.Job.id,
-                title: studentJob.Job.title
+                title: studentJob.Job.title,
+                status: studentJob.Job.status
             });
         }
         console.log(jobArray);
@@ -277,7 +278,7 @@ router.post('/updateJob', function(req, res){
         }),
         models.StudentJob.findAll({
             where: {
-                jobId: req.params.job_id    
+                jobId: req.params.job_id
             }
         })
     ]).spread(function(allJobs, all_studentJobs) {
