@@ -91,6 +91,13 @@ angular.module("nusPartimeApp").controller("companyProfileController",
 			$(".personalInfo-button").removeClass("active");
 		}
 
+		$scope.updateUserProfile = function() {
+            UserService.updateUserProfile($scope.user).then(function(res){
+                console.log(res);
+            });
+
+        }
+
 		$scope.editUser = function() {
 			$scope.editStatus = "1";
 		}
