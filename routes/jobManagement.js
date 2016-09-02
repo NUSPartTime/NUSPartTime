@@ -83,7 +83,7 @@ router.post("/getJob", function(req, res) {
 
         if (isOwner) {
             var applicants = [];
-            for (var studentJob of studentJobs) {
+            for (var studentJob of allStudentJobs) {
                 applicants.push({
                     id: studentJob.studentId
                 });
@@ -96,7 +96,7 @@ router.post("/getJob", function(req, res) {
             });
         } else {
             var applicationStatus = -1;
-            for (var studentJob of studentJobs) {
+            for (var studentJob of allStudentJobs) {
                 if (studentJob.studentId) {
                     applicationStatus = studentJob.status;
                     break;
@@ -104,8 +104,8 @@ router.post("/getJob", function(req, res) {
             }
             res.send({
                 status: "success",
-                job: job
-                isOwner: isOwner
+                job: job,
+                isOwner: isOwner,
                 applicationStatus: applicationStatus,
                 employer: {
                     id: user.id,
