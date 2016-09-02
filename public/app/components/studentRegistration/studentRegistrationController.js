@@ -12,7 +12,7 @@ angular.module("nusPartimeApp").controller("studentRegistrationController",
 					if (res.isAuthentified) {
 						console.log("Student is authentified.");
 						$scope.isError = false;
-						RegistrationService.registerStudent(Session.userId, $scope.matricNumber);
+						RegistrationService.registerStudent(Session.userId, $scope.matricNumber, $scope.resume);
 					} else {
 						console.log("Student is not authentified.");
 						$scope.isError = true;
