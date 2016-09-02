@@ -2,15 +2,15 @@
 
 insert into Users values
 -- id, name, address, phone, email, description
-(1, "Test User 001", "Clementi", "90785634", "abc@testing.com", "I'm a good test player.", "2016-08-18", "2016-08-18"), 
-(2, "Test User 002", "Clementi", "12345678", "xyz@testing.com", "I'm a good test player too.", "2016-08-18", "2016-08-18"), 
+(1, "Test User 001", "Clementi", "90785634", "abc@testing.com", "I'm a good test player.", "2016-08-18", "2016-08-18"),
+(2, "Test User 002", "Clementi", "12345678", "xyz@testing.com", "I'm a good test player too.", "2016-08-18", "2016-08-18"),
 (4, "Test User 004", "", "", "", "", "2016-08-18", "2016-08-18")
 ;
 
 insert into Students values
 -- id, matric
-(1, "A0123456B", "2016-08-18", "2016-08-18"),
-(4, "A0134567C", "2016-08-18", "2016-08-18")
+(1, "A0123456B","", "2016-08-18", "2016-08-18"),
+(4, "A0134567C","", "2016-08-18", "2016-08-18")
 ;
 
 insert into Employers values
