@@ -106,7 +106,6 @@ nusPartime.run(["$rootScope", "$window", "$location", "AuthService",
 					var loginStatus = AuthService.isAuthenticated();
 					if (!loginStatus) {
 						AuthService.login(userID).then(function(param) {
-							// redirect if needed
 							$location.path(param);
 						});
 					}
