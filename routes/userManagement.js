@@ -174,6 +174,7 @@ router.post("/createNewUser", function(req, res) {
 	});
 });
 
+
 router.post("/updateUserProfile", function(req, res){
 		models.User.findOne({
 			where: {

@@ -696,6 +696,7 @@ body {
 .company-profile-photo img {
     border-radius: 50%;
     max-width: 100%;
+    width: 96px;
 }
 
 .company-profile-txt {
