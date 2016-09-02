@@ -97,7 +97,7 @@ router.post("/getJob", function(req, res) {
         } else {
             var applicationStatus = -1;
             for (var studentJob of allStudentJobs) {
-                if (studentJob.studentId) {
+                if (studentJob.studentId == userId) {
                     applicationStatus = studentJob.status;
                     break;
                 }

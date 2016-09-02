@@ -4,13 +4,9 @@ angular.module("nusPartimeApp").controller("jobDetailController",
 	["$scope","$location", "$sce", "JobService", "Session", "AuthService", "jobId",
 	function($scope, $location ,$sce, JobService, Session, AuthService, jobId) {
 		AuthService.autoLogin().then(function(res) {
-			$scope.isOwner = true;
-			console.log(Session);
 			if (!res.isRegistered) {
 				$location.path("/");
 			} else {
-				$scope.identity = !Session.isEmployer;
-
 				JobService.getJob(jobId, Session.userId).then(function(res) {
 					var NO_DESC = "<strong>Oops!</strong> Currently there is no description. <br /> Please contact the company/project manager for more details."
 					$scope.job = res.job;
@@ -26,7 +22,6 @@ angular.module("nusPartimeApp").controller("jobDetailController",
 						$scope.employerInfo = res.employer;
 					}
 
-					console.log($scope.job.description);
 					if ($scope.job.description == null || $scope.job.description == "")
 						$scope.description = $sce.trustAsHtml(NO_DESC);
 					else
@@ -48,6 +43,7 @@ angular.module("nusPartimeApp").controller("jobDetailController",
 
 		$scope.reapplyJob = function() {
 			JobService.reapplyJob(jobId, Session.userId).then(function(res) {
+				console.log(res);
 				if (!res.error) {
 					$scope.applicationStatus = res.applicationStatus;
 				} else {
@@ -78,17 +74,15 @@ angular.module("nusPartimeApp").controller("jobDetailController",
 		}
 
 		$scope.toggleJobStatus = function() {
-			if ($scope.job.jobStatus === 0) {
+			if ($scope.job.status === 0) {
 				// open status -> close status
-				$scope.job.jobStatus = 1;
+				$scope.job.status = 1;
 				JobService.updateJob($scope.job).then(function(res) {
-					console.log(res);
 				});
 			} else {
 				// close status -> open status
-				$scope.job.jobStatus = 0;
+				$scope.job.status = 0;
 				JobService.updateJob($scope.job).then(function(res) {
-					console.log(res);
 				});
 			}
 		}
