@@ -175,7 +175,6 @@ router.post("/createNewUser", function(req, res) {
 });
 
 router.post("/updateUserProfile", function(req, res){
-
 		models.User.findOne({
 			where: {
 				id: req.body.id
@@ -190,8 +189,12 @@ router.post("/updateUserProfile", function(req, res){
 				description: req.body.description
 			}).then(function(){
 				res.send({
-					redirect: "/"
+					status: "success"
 				});
+			});
+		} else {
+			res.send({
+				status: "error"
 			});
 		}
 	});
