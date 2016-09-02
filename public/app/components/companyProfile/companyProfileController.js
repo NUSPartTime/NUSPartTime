@@ -7,7 +7,7 @@ angular.module("nusPartimeApp").controller("companyProfileController",
 			$scope.catJobsArray = [];
 			$scope.allJobsArray = [];
 			$scope.displayedJobs = [];
-
+			console.log(Session);
 			CompanyService.getAllCompanies(Session.userId).then(function(res){
                 $scope.companies = res;
 				$(".personalInfo-button").addClass("active");
@@ -45,7 +45,7 @@ angular.module("nusPartimeApp").controller("companyProfileController",
 					};
 				};
 
-				$(".profile-search").typeahead({
+				$(".typeahead").typeahead({
 					hint: true,
 					highlight: false,
 					minLength: 1
@@ -94,6 +94,7 @@ angular.module("nusPartimeApp").controller("companyProfileController",
 		$scope.updateUserProfile = function() {
             UserService.updateUserProfile($scope.user).then(function(res){
                 console.log(res);
+				$scope.editStatus = "0";
             });
 
         }

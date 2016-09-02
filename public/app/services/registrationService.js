@@ -28,10 +28,11 @@ angular.module("nusPartimeApp").factory("RegistrationService", ["$http", "$locat
 						});
 		}
 
-		registrationService.registerStudent = function(userId, matricNumber) {
+		registrationService.registerStudent = function(userId, matricNumber, resume) {
 			var postParam = {
 				userId: userId,
-				matricNumber: matricNumber
+				matricNumber: matricNumber,
+				resume: resume
 			};
 			return $http.post("/userManagement/createNewStudent", postParam)
 						.then(function(res) {

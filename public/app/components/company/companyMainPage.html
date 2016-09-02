@@ -29,8 +29,8 @@
 
 			<!-- for different pages of jobs -->
 			<div class="btn-group pull-right">
-				<button type="button" class="btn btn-sm btn-bg btn-default" name="button"><i class="fa fa-chevron-left"></i></button>
-				<button type="button" class="btn btn-sm btn-bg btn-default" name="button"><i class="fa fa-chevron-right"></i></button>
+				<button ng-click="pageDown()" class="btn btn-sm btn-bg btn-default" name="button"><i class="fa fa-chevron-left"></i></button>
+				<button ng-click="pageUp()" class="btn btn-sm btn-bg btn-default" name="button"><i class="fa fa-chevron-right"></i></button>
 			</div>
 
 			<div class="btn-toolbar">
@@ -43,7 +43,7 @@
 
 		<!-- body -->
 		<ul class="list-group list-group-lg no-radius m-b-none m-t-n-xxs font-light">
-			<li ng-repeat="job in displayedJobs" ng-class="{0:'b-l-primary'}[job.status]" class="list-group-item category-job b-l-3x">
+			<li ng-repeat="job in pageJobs" ng-class="{0:'b-l-primary'}[job.status]" class="list-group-item category-job b-l-3x">
 				<h4 class="list-group-item-heading font-light">{{ job.title }}</h4>
 				<a ng-href="#/job/{{job.id}}">Details&nbsp;&nbsp;</a>
 				<a href ng-click="editJob(job)">Edit</a>

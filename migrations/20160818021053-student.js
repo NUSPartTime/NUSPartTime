@@ -13,6 +13,9 @@ module.exports = {
       matric: {
         type: Sequelize.STRING
       },
+      resume: {
+        type: Sequelize.STRING
+    },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
