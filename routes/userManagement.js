@@ -123,9 +123,11 @@ router.post("/authenticateStudent", function(req, res) {
 router.post("/createNewStudent", function(req, res) {
 	var userId = req.body.userId;
 	var matricNumber = req.body.matricNumber;
+	var resume = req.body.resume;
 	models.Student.create({
 		id: userId,
-		matric: matricNumber
+		matric: matricNumber,
+		resume: resume
 	}).then(function() {
 		console.log("Student created with id: " + userId + " and matricNumber: " + matricNumber);
 		res.send({
@@ -175,12 +177,27 @@ router.post("/createNewUser", function(req, res) {
 });
 
 router.post("/updateUserProfile", function(req, res){
+	var userId = req.body.id;
+	console.log(req.body);
+	console.log(req.params);
+	models.sequelize.Promise.all([
 		models.User.findOne({
 			where: {
-				id: req.body.id
+				id: userId
 			}
-		}).then(function(user){
+		}),
+		models.Student.findOne({
+			where: {
+				id: userId
+			}
+		}),
+	]).spread(function(user, student) {
 		if(typeof(user) != null){
+			if (typeof(student) != null) {
+				student.update({
+					resume: req.body.resume
+				});
+			}
 			user.update({
 				name: req.body.name,
 				address: req.body.address,
@@ -201,12 +218,32 @@ router.post("/updateUserProfile", function(req, res){
 });
 
 router.post("/getUserProfile", function(req, res){
-	models.User.findOne({
-		where: {
-			id: req.body.id
+	var userId = req.body.id;
+	models.sequelize.Promise.all([
+		models.User.findOne({
+			where: {
+				id: userId
+			}
+		}),
+		models.Student.findOne({
+			where: {
+				id: userId
+			}
+		}),
+	]).spread(function(user, student) {
+		if (typeof(student) != null) {
+			res.send({
+				id: user.id,
+				name: user.name,
+				address: user.address,
+				phone: user.phone,
+				email: user.email,
+				resume: student.resume,
+				description: user.description
+			});
+		} else {
+			res.send(user);
 		}
-	}).then(function(user){
-		res.send(user);
 	});
 })
 
