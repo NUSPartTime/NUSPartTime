@@ -113,7 +113,7 @@
 								<p>{{ employerInfo.email }}</p>
 							</div>
 						</div>
-						<div ng-switch on="applicationStatus" style="margin-top: 30px;">
+						<div ng-switch on="applicationStatus" ng-if="identity" style="margin-top: 30px;">
 							<form ng-switch-when="-1" ng-submit="applyJob()">
 								<button type="submit" class="btn btn-primary btn-sm button-addon apply-button"><i class="fa fa-paper-plane"></i>Apply</button>
 							</form>

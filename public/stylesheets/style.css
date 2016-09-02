@@ -1007,6 +1007,7 @@ body {
     display: table;
     table-layout: fixed;
     width: 100%;
+    min-height: 60px;
     padding: 0!important;
 }
 
@@ -1026,7 +1027,7 @@ body {
 }
 
 .notification-tag i {
-    padding-top: 30px;
+    padding-top: 30%;
 }
 
 .notification-button {
