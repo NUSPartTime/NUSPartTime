@@ -23,7 +23,10 @@ angular.module("nusPartimeApp").controller("studentProfileController",
         }
 
         $scope.updateUserProfile = function() {
-            console.log("update user profile");
+            UserService.updateUserProfile($scope.user).then(function(res){
+                console.log(res);
+            });
+
         }
 
         $scope.cancelEdit = function() {
