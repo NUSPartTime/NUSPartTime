@@ -35,7 +35,7 @@
                     <lable class="col-sm-3 newjob-input-label font-light">Salary</lable>
                     <div class="col-sm-9">
                         <div class="input-group"><span class="input-group-addon">$</span>
-                            <input type="text" ng-model="salary" class="form-control newjob-salary font-light" required><span class="input-group-addon">.00</span></div><span class="help-block font-light">Notice: the salary should be hourly salary.</span></div>
+                            <input type="number" ng-model="salary" class="form-control newjob-salary font-light" min="0" max="9999" required><span class="input-group-addon">.00</span></div><span class="help-block font-light">Notice: the salary should be hourly salary.</span></div>
                 </div>
                 <div class="line-dashed"></div>
                 <div class="form-group">
