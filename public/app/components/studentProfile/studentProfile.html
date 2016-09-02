@@ -49,15 +49,15 @@
 						<form name="updatejob-form" ng-submit="updateUserProfile()" class="col-sm-9 personalInfo-details">
 							<div ng-switch on="editStatus">
 								<div ng-switch-when="0">
-									<p style="padding-top: 5px;">{{ user.name }}</p>
-									<p>{{ user.address }}</p>
-									<p>{{ user.phone }}</p>
-									<p>{{ user.email }}</p>
+									<p style="padding-top: 5px;">{{ user.name }}&nbsp;</p>
+									<p>{{ user.address }}&nbsp;</p>
+									<p>{{ user.phone }}&nbsp;</p>
+									<p>{{ user.email }}&nbsp;</p>
 									<!--
 									<p><a ng-href="//{{user.resume}}">{{ user.resume }}</a></p>
 									-->
-									<p>{{ user.resume }}</p>
-									<p>{{ user.description }}</p>
+									<p>{{ user.resume }}&nbsp;</p>
+									<p>{{ user.description }}&nbsp;</p>
 								</div>
 								<div ng-switch-when="1">
 									<input type="text" ng-model="user.name" class="form-control newjob-title newjob-input font-light">

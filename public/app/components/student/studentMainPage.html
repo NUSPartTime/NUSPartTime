@@ -20,12 +20,12 @@
 		</div>
 	</div>
 	<!-- end of side bar -->
-	
+
 	<!-- all jobs -->
 	<div class="studnet-index-info">
 		<!-- body -->
-		<ul class="list-group list-group-lg no-radius m-b-none m-t-n-xxs font-light">
-			<li ng-repeat="job in displayedJobs" ng-class="{0:'b-l-success'}[job.status]" class="list-group-item category-job b-l-3x">
+		<ul class="list-group list-group-lg no-radius m-b-none font-light">
+			<li ng-repeat="job in displayedJobs" ng-class="{0:'b-l-primary'}[job.status]" class="list-group-item category-job b-l-3x">
 				<h4 class="list-group-item-heading font-light">{{ job.title }}</h4>
 				<a ng-href="#/job/{{job.id}}">Details</a>
 				<div class="fb-like" data-href="http://www.nuspartime.com/#/job/{{job.id}}" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>

@@ -4,6 +4,7 @@ angular.module("nusPartimeApp").controller("jobDetailController",
 	["$scope", "$sce", "JobService", "Session", "AuthService", "jobId",
 	function($scope, $sce, JobService, Session, AuthService, jobId) {
 		AuthService.autoLogin().then(function(res) {
+			console.log(Session);
 			if (res.isRegistered && !Session.isStudent) {
 				$location.path("/studentRegister");
 			} else {
