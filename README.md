@@ -8,9 +8,7 @@ It is hosted on http://nuspartime.com
 ## Group Members:
 * Wang Yanhao (A0113742N)
 
-    + **Roles:**
-
-    *Back-end development and front-end Development*
+    + **Roles:** *Back-end development and front-end Development*
 
     + **Description:**
 
@@ -19,9 +17,7 @@ It is hosted on http://nuspartime.com
 
 * Yang Zhuohan (A0147995H)
 
-    + **Roles:**
-
-    *Front-end Development and UI/UX Designer*
+    + **Roles:** *Front-end Development and UI/UX Designer*
 
     + **Description:**
 
@@ -29,18 +25,14 @@ It is hosted on http://nuspartime.com
 
 * Huang Bohan (A0133907E)
 
-    + **Roles:**
-
-    *Database Management and Back-end Development*
+    + **Roles:** *Database Management and Back-end Development*
 
     + **Description:**
 
     *Designed database schema and manage the structure of database. Implemented Sequelize.js ORM to handle MySQL relational database. Designed student main page. Implemented notification system.*
 
 * Zhang Hanming (A0121658E)
-    + **Roles:**
-
-     *Back-end Development and Testing*
+    + **Roles:** *Back-end Development and Testing*
 
     + **Description:**  
 
