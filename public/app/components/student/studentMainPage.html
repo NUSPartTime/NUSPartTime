@@ -11,10 +11,10 @@
 		<div class="wrapper">
 			<ul class="nav nav-pills nav-stacked nav-side-bar font-mid">
 				<li role="presentation" class="all-jobs-button">
-					<a ng-click="showAllContent()">All</a>
+					<a ng-click="showAllContent($event)">All</a>
 				</li>
 				<li ng-repeat="catJobs in catJobsArray">
-					<a ng-click="showContent($index)">{{ catJobs.category }}</a>
+					<a ng-click="showContent($index, $event)">{{ catJobs.category }}</a>
 				</li>
 			</ul>
 		</div>

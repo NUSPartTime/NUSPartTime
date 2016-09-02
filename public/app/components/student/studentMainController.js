@@ -16,8 +16,8 @@ angular.module("nusPartimeApp").controller("studentMainController",
 					for (var catJobs of res) {
 						$scope.allJobsArray = $scope.allJobsArray.concat(catJobs.jobs);
 					}
-					$scope.showAllContent();
 
+					$scope.showAllContent();
 					$(".all-jobs-button").addClass("active");
 
 					// for search
@@ -68,11 +68,17 @@ angular.module("nusPartimeApp").controller("studentMainController",
 			}
 		});
 
-		$scope.showAllContent = function() {
+		$scope.showAllContent = function($event) {
+			if($event !== undefined) {
+				$(".nav-side-bar li").removeClass('active');
+				$($event.target).parent().addClass('active');
+			}
 			$scope.displayedJobs = $scope.allJobsArray;
 		}
 
-		$scope.showContent = function(index) {
+		$scope.showContent = function(index, $event) {
+			$(".nav-side-bar li").removeClass('active');
+			$($event.target).parent().addClass('active');
 			$scope.displayedJobs = $scope.catJobsArray[index].jobs;
 		}
 	}]);
