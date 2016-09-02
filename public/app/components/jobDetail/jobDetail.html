@@ -82,7 +82,8 @@
 					<p style="color: #dcf2f8;" ng-bind-html="description"></p>
 				</div>
 			</div>
-			<div class="col-sm-4">
+
+			<div class="col-sm-4" ng-if="!isOwner">
 				<div class="panel job-contact-person margin-top">
 					<div class="panel-heading wrapper">
 						<h4 class="font-light"><i class="fa fa-phone-square" aria-hidden="true"></i>&nbsp;&nbsp;Contact Person</h4>
@@ -93,7 +94,15 @@
 								<span>Name</span>
 							</div>
 							<div class="col-sm-7">
-								<!-- TODO: add contact person name -->
+								<p>{{ employerInfo.name }}</p>
+							</div>
+						</div>
+						<div class="row font-light margin-top">
+							<div class="col-sm-5">
+								<span>Phone</span>
+							</div>
+							<div class="col-sm-7">
+								<p>{{ employerInfo.phone }}</p>
 							</div>
 						</div>
 						<div class="row font-light margin-top">
@@ -101,10 +110,10 @@
 								<span>Email</span>
 							</div>
 							<div class="col-sm-7">
-								<!-- TODO: add contact person name -->
+								<p>{{ employerInfo.email }}</p>
 							</div>
 						</div>
-						<div ng-switch on="applicationStatus" style="margin-top: 30px;">
+						<div ng-switch on="applicationStatus" ng-if="identity" style="margin-top: 30px;">
 							<form ng-switch-when="-1" ng-submit="applyJob()">
 								<button type="submit" class="btn btn-primary btn-sm button-addon apply-button"><i class="fa fa-paper-plane"></i>Apply</button>
 							</form>
@@ -117,16 +126,19 @@
 						</div>
 					</div>
 				</div>
-				<div class="panel job-contact-person margin-top hidden">
+			</div>
+			
+			<div class="col-sm-4" ng-if="isOwner">
+				<div class="panel job-contact-person margin-top">
 					<div class="panel-heading wrapper">
 						<h4 class="font-light"><i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;Applicants</h4>
 					</div>
 					<ul class="list-group list-group-lg list-of-applicants">
-						<li class="list-group-item">
+						<li class="list-group-item" ng-repeat="applicant in applicantList">
 							<div class="avatar">
-								<img src="../images/logo.jpg" />
+								<img src="https://graph.facebook.com/v2.7/{{applicant.id}}/picture?type=small" />
 							</div>
-							<a style="padding-left: 20px;" class="font-light">Yang Zhuohan</a>
+							<a style="padding-left: 20px;" class="font-light" href="" ng-click="directToApplicant({{applicant.id}})">{{ applicant.name }}</a>
 						</li>
 					</ul>
 				</div>
@@ -136,7 +148,7 @@
 				<div class="btn-toolbar pull-right job-details-button">
 
 					<a href ng-click="editJob(job)"><button class="btn btn-sm btn-warning btn-addon job-details-edit-button"><i class="fa fa-pencil"></i>Edit</button></a>
-					<button class="btn btn-sm btn-danger btn-addon job-details-delete-button"><i class="fa fa-trash"></i>Delete</button>
+					<!-- <button class="btn btn-sm btn-danger btn-addon job-details-delete-button"><i class="fa fa-trash"></i>Delete</button> -->
 					<button class="btn btn-sm btn-addon">Open/Close</button>
 					<!-- 如果是open就显示close，如果是close就显示open -->
 				</div>
