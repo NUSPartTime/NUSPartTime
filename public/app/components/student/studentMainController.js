@@ -107,7 +107,11 @@ angular.module("nusPartimeApp").controller("studentMainController",
 		$scope.pageDown = function() {
 			$scope.currentIndex -= $scope.pageLimit;
 			if ($scope.currentIndex < 0) {
-				$scope.currentIndex = $scope.displayedJobs.length - ($scope.displayedJobs.length % $scope.pageLimit);
+				if (($scope.displayedJobs.length % $scope.pageLimit) == 0) {
+					$scope.currentIndex = $scope.displayedJobs.length - $scope.pageLimit;
+				} else {
+					$scope.currentIndex = $scope.displayedJobs.length - ($scope.displayedJobs.length % $scope.pageLimit);
+				}
 			}
 			//console.log($scope.currentIndex);
 			$scope.showPageContent();
