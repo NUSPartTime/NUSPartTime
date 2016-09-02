@@ -66,7 +66,7 @@ angular.module("nusPartimeApp").controller("studentMainController",
 					      	}
 					    }
 					});
-
+					$(".student-index-body").fadeIn(500);
 				});
 			}
 		});

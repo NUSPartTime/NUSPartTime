@@ -69,7 +69,7 @@ angular.module("nusPartimeApp").controller("studentProfileController",
 
             UserService.getUserProfile(Session.userId).then(function(res){
                 $scope.user = res;
-                console.log($scope.user);
+				$(".company-profile").fadeIn(500);
 				$(".personalInfo-button").addClass("active");
             });
         });
@@ -80,7 +80,7 @@ angular.module("nusPartimeApp").controller("studentProfileController",
 
         $scope.updateUserProfile = function() {
             UserService.updateUserProfile($scope.user).then(function(res){
-                console.log(res);
+                swal("Success", "Personal profile updated!", "success");
             });
 			$scope.editStatus = "0";
         }
