@@ -43,6 +43,7 @@
 							<p>Address</p>
 							<p>Phone</p>
 							<p>Email</p>
+							<p>Resume</p>
 							<p>Description</p>
 						</div>
 						<form name="updatejob-form" ng-submit="updateUserProfile()" class="col-sm-9 personalInfo-details">
@@ -52,6 +53,10 @@
 									<p>{{ user.address }}</p>
 									<p>{{ user.phone }}</p>
 									<p>{{ user.email }}</p>
+									<!--
+									<p><a ng-href="//{{user.resume}}">{{ user.resume }}</a></p>
+									-->
+									<p>{{ user.resume }}</p>
 									<p>{{ user.description }}</p>
 								</div>
 								<div ng-switch-when="1">
@@ -59,6 +64,7 @@
 									<input type="text" ng-model="user.address" class="form-control newjob-title newjob-input font-light">
 									<input type="text" ng-model="user.phone" class="form-control newjob-title newjob-input font-light">
 									<input type="text" ng-model="user.email" class="form-control newjob-title newjob-input font-light">
+									<input type="text" ng-model="user.resume" class="form-control newjob-title newjob-input font-light">
 									<textarea type="text" ng-model="user.description" class="form-control newjob-title newjob-input font-light"></textarea>
 									<button ng-click="updateUserProfile()" class="btn btn-sm btn-warning btn-addon job-details-edit-button"><i class="fa fa-pencil"></i>Update</button>
 									<button ng-click="cancelEdit(); $event.stopPropagation();" class="btn btn-sm" style="color: #fff; margin-top: -15px;">Cancel</button>
